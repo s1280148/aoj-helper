@@ -1,6 +1,6 @@
 // 選択可能なプログラミング言語
 export const selectableLanguages = [
-  "C", 
+  "C",
   "C++",
   "JAVA",
   "C++11",
@@ -18,5 +18,5 @@ export const selectableLanguages = [
   "Haskell",
   "OCaml",
   "PHP",
-  "Kotlin"
+  "Kotlin",
 ];

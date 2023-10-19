@@ -11,7 +11,7 @@ export const enum SubmissionStatus {
   STATE_OUTPUTLIMIT = 6,
   STATE_RUNTIMEERROR = 7,
   STATE_PRESENTATIONERROR = 8,
-  STATE_RUNNING = 9
+  STATE_RUNNING = 9,
 }
 
 /**
@@ -38,4 +38,4 @@ export const getSubmissionStatusMessage = (submissionStatus: SubmissionStatus) =
     case SubmissionStatus.STATE_PRESENTATIONERROR:
       return "Presentation Error";
   }
-}
+};

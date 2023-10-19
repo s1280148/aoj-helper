@@ -1,7 +1,7 @@
 /**
  * 提出ステータス
  */
- export const enum SubmissionStatus {
+export const enum SubmissionStatus {
   STATE_COMPILEERROR = 0,
   STATE_WRONGANSWER = 1,
   STATE_TIMELIMIT = 2,
@@ -11,7 +11,7 @@
   STATE_OUTPUTLIMIT = 6,
   STATE_RUNTIMEERROR = 7,
   STATE_PRESENTATIONERROR = 8,
-  STATE_RUNNING = 9
+  STATE_RUNNING = 9,
 }
 
 /**
@@ -38,6 +38,6 @@ export const getShortStatusNameFromSubmitStatus = (submissionStatus: SubmissionS
     case SubmissionStatus.STATE_PRESENTATIONERROR:
       return "PE";
     default:
-      return "？"
+      return "？";
   }
-}
+};

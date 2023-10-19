@@ -1,12 +1,11 @@
-import { WebSocket } from 'ws';
-import { SubmissionStatus } from '../../public-src/SubmissionStatus';
-import aojApiClient from './AOJApiClient';
+import { WebSocket } from "ws";
+import { SubmissionStatus } from "../../public-src/SubmissionStatus";
+import aojApiClient from "./AOJApiClient";
 
 /**
  * 提出マネージャー
  */
 class SubmissionManager {
-
   /** ウェブソケット */
   private webSocket = new WebSocket("wss://dlab.u-aizu.ac.jp/status");
 
@@ -44,13 +43,13 @@ class SubmissionManager {
 
     this.webSocket.onmessage = (e) => {
       const submissionInformation: SubmissionInformation = JSON.parse(e.data.toString());
-      
-			// 提出のtokenと受信したデータのtokenが一致する場合にジャッジIDと現在の提出ステータスを設定
+
+      // 提出のtokenと受信したデータのtokenが一致する場合にジャッジIDと現在の提出ステータスを設定
       if (submissionInformation.token === this.submitToken) {
         this.judgeId = submissionInformation.runID;
         this.submissionStatus = submissionInformation.status;
       }
-    }
+    };
   }
 
   /**
@@ -66,15 +65,19 @@ class SubmissionManager {
       this.webSocket.close();
     }
   }
-  
+
   /**
    * 提出結果を取得できるまで待機します。
    */
   async waitForSubmissionResult() {
-    const wait = (millisecond: number) => new Promise(resolve => setTimeout(resolve, millisecond));
+    const wait = (millisecond: number) => new Promise((resolve) => setTimeout(resolve, millisecond));
 
     // 1秒毎に提出結果が確定しているかを確認する
-    while (!this.submissionStatus || this.submissionStatus === SubmissionStatus.STATE_WAITING || this.submissionStatus === SubmissionStatus.STATE_RUNNING) {
+    while (
+      !this.submissionStatus ||
+      this.submissionStatus === SubmissionStatus.STATE_WAITING ||
+      this.submissionStatus === SubmissionStatus.STATE_RUNNING
+    ) {
       await wait(1000);
     }
 
@@ -107,9 +110,9 @@ class SubmissionManager {
 
 // 提出の情報の型
 interface SubmissionInformation {
-  runID: string,
-  status: SubmissionStatus,
-  token: string
+  runID: string;
+  status: SubmissionStatus;
+  token: string;
 }
 
 export default SubmissionManager;

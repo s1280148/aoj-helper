@@ -7,7 +7,6 @@ import aojApiClient from "./AOJApiClient";
  * （シングルトン）
  */
 class AOJSessionManager {
-
   /** Cookieを保存するためのキー */
   private static readonly key = "AOJ Session Information";
 
@@ -16,7 +15,7 @@ class AOJSessionManager {
 
   /** インスタンス */
   private static _instance: AOJSessionManager;
-  
+
   /**
    * コンストラクタ
    * @param secretStrage シークレットストレージ
@@ -63,14 +62,13 @@ class AOJSessionManager {
       // Cookieが存在しない場合はログイン画面を表示
       const aojViewProvider: AOJViewProvider = AOJViewProvider.getInstance();
       aojViewProvider.showLoginView();
-    };
+    }
   }
 
   /**
    * セッションを作成します。
    */
   async createSession(id: string, password: string) {
-
     // ログインを行う
     const response = await aojApiClient.login(id, password);
 
@@ -80,7 +78,9 @@ class AOJSessionManager {
     }
 
     // レスポンスからCookieの値を取得する
-    const cookie: string = response.headers["set-cookie"] ? response.headers["set-cookie"][0] : response.config.headers!["Cookie"] as string;
+    const cookie: string = response.headers["set-cookie"]
+      ? response.headers["set-cookie"][0]
+      : (response.config.headers!["Cookie"] as string);
 
     // Cookieの値をSecretStrageに保存
     this.secretStrage.store(AOJSessionManager.key, cookie);
