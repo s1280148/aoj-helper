@@ -2,7 +2,7 @@ import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "re
 import { ProblemDescription } from "../../../public-src/ApiResponseType";
 
 type Props = {
-	children: React.ReactNode;
+  children: React.ReactNode;
 };
 
 type ProblemInfoContextType = {
