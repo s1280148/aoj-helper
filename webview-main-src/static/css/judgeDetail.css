@@ -5,12 +5,12 @@
 
 .text-reject {
   --text-opacity: 1;
-  color: rgba(236, 105, 65,var(--text-opacity));
+  color: rgba(236, 105, 65, var(--text-opacity));
 }
 
 .bg-accept {
   --bg-opacity: 1;
-  background-color: rgba(22, 160 ,133, var(--bg-opacity));
+  background-color: rgba(22, 160, 133, var(--bg-opacity));
 }
 
 .bg-reject {
@@ -18,7 +18,8 @@
   background-color: rgba(236, 105, 65, var(--bg-opacity));
 }
 
-.left-border:before, .right-border:after {
+.left-border:before,
+.right-border:after {
   content: "";
   position: absolute;
   width: calc(50% - 0.9rem);

@@ -1,9 +1,9 @@
-import { Routes, Route } from 'react-router-dom';
-import React from 'react';
-import Layout from './Layout';
-import ProblemPage from './ProblemPage';
-import PreCommentaryPage from './PreCommentaryPage';
-import PostCommentaryPage from './PostCommentaryPage';
+import { Routes, Route } from "react-router-dom";
+import React from "react";
+import Layout from "./Layout";
+import ProblemPage from "./ProblemPage";
+import PreCommentaryPage from "./PreCommentaryPage";
+import PostCommentaryPage from "./PostCommentaryPage";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +17,6 @@ const App: React.FC = () => {
       </Routes>
     </div>
   );
-}
+};
 
 export default App;

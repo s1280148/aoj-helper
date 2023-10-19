@@ -6,7 +6,6 @@ import AOJViewProvider from "./AOJViewProvider";
  * AOJのAPIクライアント
  */
 class AOJApiClient {
-
   /** judgeApiのクライアント */
   private readonly judgeApiClient: AxiosInstance;
 
@@ -25,40 +24,43 @@ class AOJApiClient {
     const config: AxiosRequestConfig = {
       baseURL: "https://judgeapi.u-aizu.ac.jp",
       headers: {
-        "Cookie": ""
-      }
+        Cookie: "",
+      },
     };
 
     const judgeApiClient = axios.create(config);
 
     // インターセプターを定義
-    judgeApiClient.interceptors.response.use((response) => {
-      return response;
-    }, (error) => {
-      // エラーコードを取得
-      const code: number = error.response.data[0].id;
+    judgeApiClient.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        // エラーコードを取得
+        const code: number = error.response.data[0].id;
 
-      // viewProviderのインスタンスを取得
-      const aojViewProvider= AOJViewProvider.getInstance();
+        // viewProviderのインスタンスを取得
+        const aojViewProvider = AOJViewProvider.getInstance();
 
-      // エラーコードによって処理を分岐する
-      switch (code) {
-        case ApiErrorCode.USER_NOT_FOUND_ERROR:
-          // 入力内容に該当するユーザーが見つからなかった場合、ログイン画面にエラーを表示
-          aojViewProvider.showLoginError();
-          break;
-        
-        case ApiErrorCode.INVALID_ACCESS_TOKEN_ERROR:
-          // 無効なアクセストークンが送信された場合、ログイン画面を表示
-          aojViewProvider.showLoginView();
-          break;
+        // エラーコードによって処理を分岐する
+        switch (code) {
+          case ApiErrorCode.USER_NOT_FOUND_ERROR:
+            // 入力内容に該当するユーザーが見つからなかった場合、ログイン画面にエラーを表示
+            aojViewProvider.showLoginError();
+            break;
 
-        case ApiErrorCode.INVALID_REFRESH_TOKEN_ERROR:
-          // 無効なリフレッシュトークンが送信された場合、ログイン画面を表示
-          aojViewProvider.showLoginView();
-          break;
-      }
-    });
+          case ApiErrorCode.INVALID_ACCESS_TOKEN_ERROR:
+            // 無効なアクセストークンが送信された場合、ログイン画面を表示
+            aojViewProvider.showLoginView();
+            break;
+
+          case ApiErrorCode.INVALID_REFRESH_TOKEN_ERROR:
+            // 無効なリフレッシュトークンが送信された場合、ログイン画面を表示
+            aojViewProvider.showLoginView();
+            break;
+        }
+      },
+    );
 
     return judgeApiClient;
   }
@@ -70,11 +72,11 @@ class AOJApiClient {
   applySession = (cookie: string) => {
     // judgeApiのクライアントにセッション情報を適用
     this.judgeApiClient.interceptors.request.clear();
-    this.judgeApiClient.interceptors.request.use(config => {
+    this.judgeApiClient.interceptors.request.use((config) => {
       config.headers!["Cookie"] = cookie;
       return config;
     });
-  }
+  };
 
   /**
    * セッション情報を削除します。
@@ -82,11 +84,11 @@ class AOJApiClient {
   removeSession = () => {
     // judgeApiのクライアントからセッション情報を削除
     this.judgeApiClient.interceptors.request.clear();
-    this.judgeApiClient.interceptors.request.use(config => {
+    this.judgeApiClient.interceptors.request.use((config) => {
       config.headers!["Cookie"] = "";
       return config;
     });
-  }
+  };
 
   /**
    * ログインを行います。
@@ -97,11 +99,11 @@ class AOJApiClient {
   login = async (id: string, password: string) => {
     const requestBody = {
       id: id,
-      password: password
+      password: password,
     };
 
     return this.judgeApiClient.post("/session", requestBody);
-  }
+  };
 
   /**
    * ログアウトを行います。
@@ -109,7 +111,7 @@ class AOJApiClient {
    */
   logout = async () => {
     return this.judgeApiClient.delete("/session");
-  }
+  };
 
   /**
    * セッション情報を取得します。
@@ -117,7 +119,7 @@ class AOJApiClient {
    */
   session = async () => {
     return this.judgeApiClient.get("/self");
-  }
+  };
 
   /**
    * 言語と問題IDから問題の情報を取得します。
@@ -127,7 +129,7 @@ class AOJApiClient {
    */
   findByProblemIdDescription = async (lang: string, problemId: string) => {
     return this.judgeApiClient.get(`/resources/descriptions/${lang}/${problemId}`);
-  }
+  };
 
   /**
    * ジャッジIDからジャッジの詳細を取得します。
@@ -136,7 +138,7 @@ class AOJApiClient {
    */
   findByJudgeIdVerdict = async (judgeId: string) => {
     return this.judgeApiClient.get(`/verdicts/${judgeId}`);
-  }
+  };
 
   /**
    * キューにある提出記録一覧を取得します。
@@ -157,19 +159,25 @@ class AOJApiClient {
     const requestBody = {
       problemId: problemId,
       language: language,
-      sourceCode: sourceCode
+      sourceCode: sourceCode,
     };
 
     return this.judgeApiClient.post("/submissions", requestBody);
   };
 
-  findHtmlByLanguageAndProblemIdAndPatternAndTypeAndFilter = async (dlang: string, problemId: string, pattern: string, type: string, filter: string) => {
+  findHtmlByLanguageAndProblemIdAndPatternAndTypeAndFilter = async (
+    dlang: string,
+    problemId: string,
+    pattern: string,
+    type: string,
+    filter: string,
+  ) => {
     return this.judgeApiClient.get(`/resources/commentaries/${dlang}/${problemId}/${pattern}/${type}/${filter}`);
-  }
+  };
 
   findAvailableFilters = async (language: string, problemId: string) => {
     return this.judgeApiClient.get(`/resources/commentaries/filters/${language}/${problemId}`);
-  }
+  };
 }
 
 const aojApiClient = new AOJApiClient();

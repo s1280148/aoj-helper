@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import Dialog from '@mui/material/Dialog';
+import Dialog from "@mui/material/Dialog";
 import { Alert, Button, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
 
 /**
@@ -7,7 +7,6 @@ import { Alert, Button, DialogContent, DialogTitle, Grid, TextField } from "@mui
  * @returns ログイン画面のモーダル
  */
 const LoginModal = () => {
-
   /** モーダルの開閉のstate */
   const [open, setOpen] = useState<boolean>(false);
 
@@ -16,15 +15,15 @@ const LoginModal = () => {
    */
   const openLoginModal = () => {
     setOpen(true);
-  }
+  };
 
   /**
    * ログインモーダルを閉じます。
    */
   const closeLoginModal = () => {
-    setOpen(false)
+    setOpen(false);
     cleanupLoginModal();
-  }
+  };
 
   /**
    * ログインモーダルのクリーンアップを行います。
@@ -33,7 +32,7 @@ const LoginModal = () => {
     hideIdError();
     hidePasswordError();
     hideAlert();
-  }
+  };
 
   /** IDとパスワードのエラーのstate */
   const [idError, setIdError] = useState<boolean>(false);
@@ -44,28 +43,28 @@ const LoginModal = () => {
    */
   const showIdError = () => {
     setIdError(true);
-  }
+  };
 
   /**
    * IDのエラーを非表示にします。
    */
   const hideIdError = () => {
     setIdError(false);
-  }
+  };
 
   /**
    * パスワードのエラーを表示します。
    */
   const showPasswordError = () => {
     setPasswordError(true);
-  }
+  };
 
   /**
    * パスワードのエラーを非表示にします。
    */
   const hidePasswordError = () => {
     setPasswordError(false);
-  }
+  };
 
   /** アラートのstate */
   const [alert, setAlert] = useState<boolean>(false);
@@ -75,14 +74,14 @@ const LoginModal = () => {
    */
   const showAlert = () => {
     setAlert(true);
-  }
+  };
 
   /**
    * アラートを非表示にします。
    */
   const hideAlert = () => {
     setAlert(false);
-  }
+  };
 
   /** IDとパスワードのref */
   const idRef = useRef<HTMLInputElement>(null);
@@ -112,10 +111,10 @@ const LoginModal = () => {
       type: "login",
       contents: {
         id: id,
-        password: password
-      }
+        password: password,
+      },
     });
-  }
+  };
 
   /**
    * 入力された内容をチェックします。
@@ -140,12 +139,12 @@ const LoginModal = () => {
     }
 
     return isInputValid;
-  }
+  };
 
   // 拡張機能からメッセージを受け取る
-  window.addEventListener("message", event => {
+  window.addEventListener("message", (event) => {
     const message = event.data;
-    
+
     switch (message.type) {
       case "login":
         switch (message.command) {
@@ -166,46 +165,44 @@ const LoginModal = () => {
   return (
     <Dialog open={open}>
       <DialogTitle>ログイン</DialogTitle>
-        <DialogContent>
-          <form onSubmit={login}>          
-            <Alert 
-              severity="error" 
-              className="m-2" 
-              sx={{ display: alert ? "" : "none" }}
-            >
+      <DialogContent>
+        <form onSubmit={login}>
+          <Alert severity="error" className="m-2" sx={{ display: alert ? "" : "none" }}>
             ログインに失敗しました。
-            </Alert>
-            <TextField
-              id="id"
-              label="ID"
-              type="text"
-              margin="dense"
-              fullWidth
-              variant="outlined"
-              className="m-1"
-              inputRef={idRef}
-              error={idError}
-              helperText={idError ? "入力してください" : ""}
-            />
-            <TextField
-              id="password"
-              label="パスワード"
-              type="password"
-              margin="dense"
-              fullWidth
-              variant="outlined"
-              className="m-1"
-              inputRef={passwordRef}
-              error={passwordError}
-              helperText={passwordError ? "入力してください" : ""}
-            />
-            <Grid container justifyContent="flex-end" className="mt-2">
-              <Button variant="contained" type="submit">ログイン</Button>
-            </Grid>
-          </form>
-        </DialogContent>
+          </Alert>
+          <TextField
+            id="id"
+            label="ID"
+            type="text"
+            margin="dense"
+            fullWidth
+            variant="outlined"
+            className="m-1"
+            inputRef={idRef}
+            error={idError}
+            helperText={idError ? "入力してください" : ""}
+          />
+          <TextField
+            id="password"
+            label="パスワード"
+            type="password"
+            margin="dense"
+            fullWidth
+            variant="outlined"
+            className="m-1"
+            inputRef={passwordRef}
+            error={passwordError}
+            helperText={passwordError ? "入力してください" : ""}
+          />
+          <Grid container justifyContent="flex-end" className="mt-2">
+            <Button variant="contained" type="submit">
+              ログイン
+            </Button>
+          </Grid>
+        </form>
+      </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
 export default LoginModal;

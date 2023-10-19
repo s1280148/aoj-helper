@@ -18,7 +18,7 @@ const Layout: React.FC = () => {
         <Outlet />
       </Box>
     </>
-  )
-}
+  );
+};
 
 export default Layout;

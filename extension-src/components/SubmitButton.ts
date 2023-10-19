@@ -1,4 +1,4 @@
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 
 // 提出ボタン
 export const submitButton = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);

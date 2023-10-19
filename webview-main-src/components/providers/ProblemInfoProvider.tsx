@@ -6,22 +6,16 @@ type Props = {
 };
 
 type ProblemInfoContextType = {
-  problemInfo: null | ProblemDescription,
+  problemInfo: null | ProblemDescription;
   setProblemInfo: Dispatch<SetStateAction<null | ProblemDescription>>;
-}
+};
 
-export const ProblemInfoContext = createContext(
-  {} as ProblemInfoContextType
-);
+export const ProblemInfoContext = createContext({} as ProblemInfoContextType);
 
 export const ProblemInfoProvider: React.FC<Props> = (props) => {
   const { children } = props;
 
   const [problemInfo, setProblemInfo] = useState<null | ProblemDescription>(null);
 
-  return (
-    <ProblemInfoContext.Provider value={{ problemInfo, setProblemInfo }}>
-      {children}
-    </ProblemInfoContext.Provider>
-  )
-}
+  return <ProblemInfoContext.Provider value={{ problemInfo, setProblemInfo }}>{children}</ProblemInfoContext.Provider>;
+};

@@ -10,19 +10,21 @@ import ProblemMenu from "./ProblemMenu";
 const Header: React.FC = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static"
+      <AppBar
+        position="static"
         color="default"
         sx={{
           borderBottom: 4,
-          borderColor: '#19bcbc'
-        }}>
+          borderColor: "#19bcbc",
+        }}
+      >
         <Toolbar variant="dense">
           <Box>
             <ProblemMenu />
           </Box>
           <Box sx={{ flexGrow: 1 }}></Box>
           <Box className="mr-4">
-             <ProblemSearchBar />
+            <ProblemSearchBar />
           </Box>
           <Box>
             <AccountMenu />
@@ -30,7 +32,7 @@ const Header: React.FC = () => {
         </Toolbar>
       </AppBar>
     </Box>
-  )
-}
+  );
+};
 
 export default Header;

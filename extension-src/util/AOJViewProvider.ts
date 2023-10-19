@@ -1,17 +1,16 @@
-import { submitButton } from '../components/SubmitButton';
+import { submitButton } from "../components/SubmitButton";
 import * as path from "path";
-import * as vscode from 'vscode';
-import AOJSessionManager from './AOJSessionManager';
-import aojApiClient from './AOJApiClient';
+import * as vscode from "vscode";
+import AOJSessionManager from "./AOJSessionManager";
+import aojApiClient from "./AOJApiClient";
 
 /**
  * AOJViewProvider
  * （シングルトン）
  */
 class AOJViewProvider implements vscode.WebviewViewProvider {
-
   /** viewType */
-  public static readonly viewType = 'AOJ.AOJView';
+  public static readonly viewType = "AOJ.AOJView";
 
   /** view */
   private _view?: vscode.WebviewView;
@@ -42,7 +41,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
     this._instance = new AOJViewProvider(extensionUri);
     return this._instance;
   }
-  
+
   /**
    * インスタンスを取得します。
    * @returns インスタンス
@@ -52,8 +51,8 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
     if (!this._instance) {
       throw new Error("Could not create an instance of AOJViewProvider.");
     }
-  
-      return this._instance;
+
+    return this._instance;
   }
 
   /**
@@ -71,10 +70,10 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
    * @param _token トークン
    */
   public resolveWebviewView(
-		webviewView: vscode.WebviewView,
-		context: vscode.WebviewViewResolveContext,
-		_token: vscode.CancellationToken,
-	) {
+    webviewView: vscode.WebviewView,
+    context: vscode.WebviewViewResolveContext,
+    _token: vscode.CancellationToken,
+  ) {
     this._view = webviewView;
 
     this._view.webview.options = {
@@ -99,11 +98,15 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
    */
   private _getHtmlForWebview(webview: vscode.Webview) {
     const cssFileName = "webview-main.css";
-		const scriptFileName = "webView-main.js";
+    const scriptFileName = "webView-main.js";
 
     // webViewのUriに変換
-    const cssUri = this._view?.webview.asWebviewUri(vscode.Uri.file(path.join(this._extensionUri.path, "dist", "webview-main-src", cssFileName)));
-		const scriptUri = this._view?.webview.asWebviewUri(vscode.Uri.file(path.join(this._extensionUri.path, "dist", "webview-main-src", scriptFileName)));
+    const cssUri = this._view?.webview.asWebviewUri(
+      vscode.Uri.file(path.join(this._extensionUri.path, "dist", "webview-main-src", cssFileName)),
+    );
+    const scriptUri = this._view?.webview.asWebviewUri(
+      vscode.Uri.file(path.join(this._extensionUri.path, "dist", "webview-main-src", scriptFileName)),
+    );
 
     return `
       <!DOCTYPE html>
@@ -139,7 +142,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
    * webviewからのメッセージをハンドリングします
    */
   private handleMessageFromWebView(webview: vscode.Webview) {
-    webview.onDidReceiveMessage(async message => {
+    webview.onDidReceiveMessage(async (message) => {
       const aojSessionManager: AOJSessionManager = AOJSessionManager.getInstance();
       switch (message.type) {
         case "login": {
@@ -166,33 +169,33 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
             this._view?.webview.postMessage({
               type: "findByProblemIdDescription",
               status: "success",
-              response: response.data
+              response: response.data,
             });
 
             this.currentProblemId = problemId;
           } else {
             this._view?.webview.postMessage({
               type: "findByProblemIdDescription",
-              status: "error"
+              status: "error",
             });
           }
           break;
         }
-        case 'findAvailableFilters': {
+        case "findAvailableFilters": {
           const { language, problemId } = message.parameters;
 
           const response = await aojApiClient.findAvailableFilters(language, problemId);
 
           if (response) {
             this._view?.webview.postMessage({
-              type: 'findAvailableFilters',
+              type: "findAvailableFilters",
               status: "success",
-              response: response.data
+              response: response.data,
             });
           } else {
             this._view?.webview.postMessage({
-              type: 'findAvailableFilters',
-              status: "error"
+              type: "findAvailableFilters",
+              status: "error",
             });
           }
           break;
@@ -200,18 +203,24 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
         case "findHtmlByLanguageAndProblemIdAndPatternAndTypeAndFilter": {
           const { dlang, problemId, pattern, type, filter } = message.parameters;
 
-          const response = await aojApiClient.findHtmlByLanguageAndProblemIdAndPatternAndTypeAndFilter(dlang, problemId, pattern, type, filter);
+          const response = await aojApiClient.findHtmlByLanguageAndProblemIdAndPatternAndTypeAndFilter(
+            dlang,
+            problemId,
+            pattern,
+            type,
+            filter,
+          );
 
           if (response) {
             this._view?.webview.postMessage({
               type: "findHtmlByLanguageAndProblemIdAndPatternAndTypeAndFilter",
               status: "success",
-              response: response.data
+              response: response.data,
             });
           } else {
             this._view?.webview.postMessage({
               type: "findHtmlByLanguageAndProblemIdAndPatternAndTypeAndFilter",
-              status: "error"
+              status: "error",
             });
           }
           break;
@@ -224,7 +233,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
    * webviewViewの表示状態が変化した時の処理を定義します。
    */
   private defineOnDidChangeVisibility() {
-    this._view?.onDidChangeVisibility(e => {
+    this._view?.onDidChangeVisibility((e) => {
       // webviewViewが表示状態の時に提出ボタンを表示
       this._view?.visible ? submitButton.show() : submitButton.hide();
     });
@@ -244,7 +253,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
   public showLoginView() {
     this._view?.webview.postMessage({
       type: "login",
-      command: "show"
+      command: "show",
     });
   }
 
@@ -254,8 +263,8 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
   public showLoginError() {
     this._view?.webview.postMessage({
       type: "login",
-      command: "error"
-    })
+      command: "error",
+    });
   }
 
   /**
@@ -264,8 +273,8 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
   public closeLoginView() {
     this._view?.webview.postMessage({
       type: "login",
-      command: "close"
-    })
+      command: "close",
+    });
   }
 
   /**
@@ -275,8 +284,8 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
     this._view?.webview.postMessage({
       type: "judgeDetail",
       command: "show",
-      contents: judgeDetail
-    })
+      contents: judgeDetail,
+    });
   }
 }
 

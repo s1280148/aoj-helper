@@ -1,18 +1,17 @@
-import * as React from 'react';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import Logout from '@mui/icons-material/Logout';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import * as React from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Logout from "@mui/icons-material/Logout";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 
 /**
  * アカウントメニュー
  * @returns アカウントメニュー
  */
 const AccountMenu: React.FC = () => {
-
   // メニュー表示対象のHTML要素
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -42,15 +41,12 @@ const AccountMenu: React.FC = () => {
     vscode.postMessage({
       type: "logout",
     });
-  }
+  };
 
   return (
     <>
       <Tooltip title="メニュー">
-        <IconButton
-          onClick={openMenu}
-          color="inherit"
-        >
+        <IconButton onClick={openMenu} color="inherit">
           <AccountCircle />
         </IconButton>
       </Tooltip>
@@ -62,31 +58,31 @@ const AccountMenu: React.FC = () => {
         PaperProps={{
           elevation: 0,
           sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            overflow: "visible",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
-            '& .MuiAvatar-root': {
+            "& .MuiAvatar-root": {
               width: 32,
               height: 32,
               ml: -0.5,
               mr: 1,
             },
-            '&:before': {
+            "&:before": {
               content: '""',
-              display: 'block',
-              position: 'absolute',
+              display: "block",
+              position: "absolute",
               top: 0,
               right: 14,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
               zIndex: 0,
             },
           },
         }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={logout} dense>
           <ListItemIcon>
@@ -95,8 +91,8 @@ const AccountMenu: React.FC = () => {
           ログアウト
         </MenuItem>
       </Menu>
-      </>
+    </>
   );
-}
+};
 
 export default AccountMenu;

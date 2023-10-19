@@ -2,7 +2,6 @@
  * APIエラーコード
  */
 const enum ApiErrorCode {
-
   // 無効なアクセストークンが送信された
   INVALID_ACCESS_TOKEN_ERROR = 1101,
 
@@ -46,7 +45,7 @@ const enum ApiErrorCode {
   INVALID_MANAGEMENT_ERROR = 4003,
 
   // 不明なエラー
-  UNKNOWN_ERROR = 9999
+  UNKNOWN_ERROR = 9999,
 }
 
 export default ApiErrorCode;
