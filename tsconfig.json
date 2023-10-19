@@ -1,0 +1,5 @@
+// VSCodeが"tsconfig.json"と名前が付いているファイルしか検知しないのでこのファイルがないとエラーが出る
+
+{
+  "extends": "./tsconfig.webview.json"
+}

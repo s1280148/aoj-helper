@@ -1,0 +1,12 @@
+.vscode/
+public-src/
+extension-src/
+webview-main-src/
+node_modules/
+.gitignore
+postcss.config.js
+tailwind.config.js
+tsconfig.extension.json
+tsconfig.webview.json
+webpack.config.extension.js
+webpack.config.webview-main.js
