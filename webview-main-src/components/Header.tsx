@@ -2,6 +2,7 @@ import { AppBar, Box, Toolbar } from "@mui/material";
 import AccountMenu from "./AccountMenu";
 import ProblemSearchBar from "./ProblemSearchBar";
 import ProblemMenu from "./ProblemMenu";
+import ProblemListButton from "./ProblemListButton";
 
 /**
  * ヘッダー
@@ -21,6 +22,9 @@ const Header: React.FC = () => {
         <Toolbar variant="dense">
           <Box>
             <ProblemMenu />
+          </Box>
+          <Box>
+            <ProblemListButton />
           </Box>
           <Box sx={{ flexGrow: 1 }}></Box>
           <Box className="mr-4">
