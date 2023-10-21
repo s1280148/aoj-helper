@@ -125,7 +125,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
 
             // セッションを取得
             vscode.postMessage({
-              type: "session"
+              type: "getSession"
             });
           </script>
 
@@ -156,9 +156,26 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           aojSessionManager.removeSession();
           break;
         }
-        case "session": {
+        case "getSession": {
           // セッションを取得する
           aojSessionManager.getSession();
+          break;
+        }
+        case "session": {
+          const response = await aojApiClient.session();
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "session",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "session",
+              status: "error",
+            });
+          }
           break;
         }
         case "findByProblemIdDescription": {
@@ -294,6 +311,25 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           } else {
             this._view?.webview.postMessage({
               type: "findByLargeCLAndMiddleCLPage",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByUserIdBookMarkDetail": {
+          const { userId } = message.parameters;
+
+          const response = await aojApiClient.findByUserIdBookMarkDetail(userId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByUserIdBookMarkDetail",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByUserIdBookMarkDetail",
               status: "error",
             });
           }

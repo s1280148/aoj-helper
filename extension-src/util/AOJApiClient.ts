@@ -194,6 +194,10 @@ class AOJApiClient {
   findByLargeCLAndMiddleCLPage = async (largeCl: string, middleCl: string) => {
     return this.judgeApiClient.get(`/challenges/cl/${largeCl}/${middleCl}`);
   };
+
+  findByUserIdBookMarkDetail = async (userId: string) => {
+    return this.judgeApiClient.get(`/problems/bookmarks/users/${userId}`);
+  };
 }
 
 const aojApiClient = new AOJApiClient();

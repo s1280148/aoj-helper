@@ -1,3 +1,29 @@
+export interface SessionInfo {
+  id: string;
+  name: string;
+  affiliation: string;
+  registerDate: number;
+  lastSubmitDate: number;
+  policy: string;
+  country: string;
+  birthYear: number;
+  displayLanguage: string;
+  defaultProgrammingLanguage: string;
+  status: SubmissionStatus;
+}
+
+export interface SubmissionStatus {
+  submissions: number;
+  solved: number;
+  accepted: number;
+  wrongAnswer: number;
+  timeLimit: number;
+  memoryLimit: number;
+  outputLimit: number;
+  compileError: number;
+  runtimeError: number;
+}
+
 // 解説の情報
 export interface CommentaryInfo {
   type: string;
@@ -125,6 +151,13 @@ export interface ChallengeDayInfo {
   day: number;
   title: string;
   progress: 0.0;
+  numberOfProblems: number;
+  numberOfSolved: number;
+  problems: ProblemInfo[];
+}
+
+export interface BookmarkInfo {
+  progress: number;
   numberOfProblems: number;
   numberOfSolved: number;
   problems: ProblemInfo[];
