@@ -21,7 +21,7 @@ const ProblemListButton: React.FC = () => {
 
   return (
     <Tooltip title="問題集">
-      <IconButton onClick={handleProblemListButton} color="inherit">
+      <IconButton onClick={handleProblemListButton} sx={{ color: isPageOpen ? "#1ABCBC" : "inherit" }}>
         <QuizOutlinedIcon />
       </IconButton>
     </Tooltip>

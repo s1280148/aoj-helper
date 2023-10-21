@@ -27,7 +27,7 @@ const BookmarkListPage: React.FC = () => {
   return (
     <>
       <Box className="mt-4 border-2 rounded">
-        <h2 className="text-2xl font-bold mb-2 border pl-4 py-2 bg-gray-200">ブックマークリスト</h2>
+        <h2 className="text-xl font-bold mb-2 border pl-4 py-2 bg-gray-200">ブックマークリスト</h2>
         <p className="p-1 pl-4 my-2">ブックマークに追加した問題に挑戦</p>
       </Box>
       <Box className="mt-4">

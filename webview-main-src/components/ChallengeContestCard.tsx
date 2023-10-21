@@ -25,7 +25,7 @@ const ChallengeContestCard: React.FC<Props> = (props: Props) => {
         <Box className="flex items-center mr-3">{isProblemOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}</Box>
         <Box className="flex-1">
           <Box className="text-lg">
-            <span className="text-2xl font-bold mr-2">{contestInfo.abbr}</span>
+            <span className="text-lg font-bold mr-2">{contestInfo.abbr}</span>
             <span className="text-base text-gray-500">{`${contestInfo.numberOfProblems} problems`}</span>
           </Box>
           <BorderLinearProgressWithLabel barColor="#777EF2" progress={contestInfo.progress} />

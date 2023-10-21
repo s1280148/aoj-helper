@@ -34,7 +34,7 @@ const ChallengeDetailPage: React.FC = () => {
     challengeDetail && (
       <Box>
         <Box className="mt-4 border-2 rounded">
-          <h2 className="text-2xl font-bold mb-2 border pl-4 py-2 bg-gray-200">{challengeDetail.largeCl.title}</h2>
+          <h2 className="text-xl font-bold border pl-4 py-2 bg-gray-200">{challengeDetail.largeCl.title}</h2>
         </Box>
         {challengeDetail.contests.map((contest) => {
           return (

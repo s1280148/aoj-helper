@@ -41,6 +41,9 @@ const ProblemListPage: React.FC = () => {
         value={currentTab}
         onChange={handleTabChange}
         sx={{
+          ".MuiTab-root": {
+            minHeight: "",
+          },
           ".Mui-selected": {
             color: `${getCurrentTabColor(currentTab)}!important`,
           },

@@ -30,7 +30,7 @@ const CourseDetailPage: React.FC = () => {
     courseDetail && (
       <Box>
         <Box className="mt-4 border-2 rounded">
-          <h2 className="text-2xl font-bold mb-2 border pl-4 py-2 bg-gray-200">{courseDetail.name}</h2>
+          <h2 className="text-xl font-bold mb-2 border pl-4 py-2 bg-gray-200">{courseDetail.name}</h2>
           <p className="p-1 pl-4">{courseDetail.description}</p>
           <Box className="px-4">
             <BorderLinearProgressWithLabel barColor="#1abcbc" progress={courseDetail.progress} />

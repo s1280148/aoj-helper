@@ -33,7 +33,7 @@ const CourseCard: React.FC<Props> = (props: Props) => {
         <Box className="border rounded px-1 text-course border-course">{courseInfo.type}</Box>
         <Box className="ml-3 text-gray-800">{courseInfo.shortName}</Box>
       </Box>
-      <Box className="text-base font-bold mt-2 text-gray-800">{courseInfo.name}</Box>
+      <Box className="text-sm font-bold mt-2 text-gray-800">{courseInfo.name}</Box>
       <BorderLinearProgressWithLabel barColor="#1abcbc" progress={courseInfo.progress} />
     </Box>
   );
