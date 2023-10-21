@@ -24,8 +24,8 @@ const BorderLinearProgressWithLabel: React.FC<Props> = (props: Props) => {
   }));
 
   return (
-    <Box className="w-5/6 text-xs flex items-center text-gray-600">
-      <span className="m-2">{progressPar}%</span>
+    <Box className="text-xs flex items-center text-gray-600">
+      <span className="mr-2 my-3">{progressPar}%</span>
       <Box className="w-full">
         <BorderLinearProgress variant="determinate" value={progressPar} />
       </Box>

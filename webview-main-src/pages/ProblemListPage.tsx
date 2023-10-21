@@ -1,5 +1,5 @@
 import { Box, Tab, Tabs } from "@mui/material";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import MapIcon from "@mui/icons-material/Map";
 import InboxIcon from "@mui/icons-material/Inbox";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
@@ -14,8 +14,25 @@ const enum TabType {
 const ProblemListPage: React.FC = () => {
   const [currentTab, setCurrentTab] = useState(TabType.COURSE);
 
+  const navigate = useNavigate();
+
   const handleTabChange = (event: React.SyntheticEvent<Element, Event>, newTab: TabType) => {
     setCurrentTab(newTab);
+
+    switch (newTab) {
+      case TabType.COURSE: {
+        navigate("/problem/list/course/list");
+        break;
+      }
+      case TabType.CHALLENGE: {
+        navigate("/problem/list/challenge/list");
+        break;
+      }
+      case TabType.BOOKMARK: {
+        navigate("/problem/list/bookmark/list");
+        break;
+      }
+    }
   };
 
   return (
@@ -35,30 +52,9 @@ const ProblemListPage: React.FC = () => {
           },
         }}
       >
-        <Tab
-          icon={<MapIcon />}
-          component={NavLink}
-          to="/problem/list/course/list"
-          iconPosition="start"
-          label="コース"
-          value={TabType.COURSE}
-        />
-        <Tab
-          icon={<InboxIcon />}
-          iconPosition="start"
-          component={NavLink}
-          to="/problem/list/challenge/list"
-          label="チャレンジ"
-          value={TabType.CHALLENGE}
-        />
-        <Tab
-          icon={<BookmarkIcon />}
-          iconPosition="start"
-          component={NavLink}
-          to="/problem/list/bookmark/list"
-          label="ブックマーク"
-          value={TabType.BOOKMARK}
-        />
+        <Tab icon={<MapIcon />} iconPosition="start" label="コース" value={TabType.COURSE} />
+        <Tab icon={<InboxIcon />} iconPosition="start" label="チャレンジ" value={TabType.CHALLENGE} />
+        <Tab icon={<BookmarkIcon />} iconPosition="start" label="ブックマーク" value={TabType.BOOKMARK} />
       </Tabs>
       <Outlet />
     </Box>

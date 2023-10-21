@@ -42,3 +42,51 @@ export interface CourseInfo {
   image: string;
   description: string;
 }
+
+export interface CourseDetail {
+  id: 2;
+  serial: 1;
+  shortName: "ITP1";
+  name: "プログラミング入門";
+  type: "lesson";
+  userScore: 0;
+  maxScore: 4400;
+  progress: 0.0;
+  image: "";
+  numberOfTopics: 11;
+  topics: TopicInfo[];
+  description: string;
+}
+
+export interface TopicInfo {
+  id: number;
+  serial: number;
+  name: string;
+  shortName: string;
+  maxScore: number;
+  numberOfProblems: number;
+  userScore: number;
+  progress: number;
+  courseId: number;
+  problems: ProblemInfo[];
+  description: string;
+}
+
+export interface ProblemInfo {
+  id: string;
+  available: number;
+  doctype: number;
+  name: string;
+  problemTimeLimit: number;
+  problemMemoryLimit: number;
+  maxScore: number;
+  solvedUser: number;
+  submissions: number;
+  recommendations: number;
+  isSolved: boolean;
+  bookmark: boolean;
+  recommend: boolean;
+  successRate: number;
+  score: number;
+  userScore: number;
+}

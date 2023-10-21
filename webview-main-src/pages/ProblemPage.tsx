@@ -1,6 +1,6 @@
 import { Alert, Box, Snackbar } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { ScrollRestoration, useLocation, useNavigate, useParams } from "react-router-dom";
 import { MathJaxContext, MathJax } from "better-react-mathjax";
 import mathJaxConfig from "../util/MathJaxConfig";
 import "../static/css/description.css";

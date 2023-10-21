@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, ScrollRestoration } from "react-router-dom";
 import React from "react";
 import Layout from "./Layout";
 import ProblemPage from "./ProblemPage";
@@ -8,6 +8,7 @@ import ProblemListPage from "./ProblemListPage";
 import CourseListPage from "./CourseListPage";
 import ChallengeListPage from "./ChallengeListPage";
 import BookmarkListPage from "./BookmarkListPage";
+import CourseDetailPage from "./CourseDetailPage";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Layout />}>
           <Route path="/problem/list" element={<ProblemListPage />}>
             <Route path="course/list" element={<CourseListPage />} />
+            <Route path="course/:courseId" element={<CourseDetailPage />} />
             <Route path="challenge/list" element={<ChallengeListPage />} />
             <Route path="bookmark/list" element={<BookmarkListPage />} />
           </Route>

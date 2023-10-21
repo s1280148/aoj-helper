@@ -4,7 +4,7 @@ import { CourseInfo, CourseInfoList } from "../../public-src/ApiResponseType";
 import CourseCard from "../components/CourseCard";
 import { callApi } from "../../webview-public-src/ApiUtil";
 
-const CourseListPage = () => {
+const CourseListPage: React.FC = () => {
   const [courseInfoList, setCourseInfoList] = useState<null | CourseInfo[]>(null);
 
   useEffect(() => {

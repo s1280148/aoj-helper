@@ -182,6 +182,10 @@ class AOJApiClient {
   findAllCoursesPage = async (lang: string) => {
     return this.judgeApiClient.get(`/courses?lang=${lang}`);
   };
+
+  findByCourseIdPage = async (courseId: string, lang: string) => {
+    return this.judgeApiClient.get(`/courses/${courseId}?lang=${lang}`);
+  };
 }
 
 const aojApiClient = new AOJApiClient();

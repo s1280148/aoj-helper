@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import BorderLinearProgressWithLabel from "./BorderLinearProgressWithLabel";
 import { CourseInfo } from "../../public-src/ApiResponseType";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   courseInfo: CourseInfo;
@@ -8,6 +9,12 @@ type Props = {
 
 const CourseCard: React.FC<Props> = (props: Props) => {
   const { courseInfo } = props;
+
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/problem/list/course/${courseInfo.id}`);
+  };
 
   return (
     <Box
@@ -20,6 +27,7 @@ const CourseCard: React.FC<Props> = (props: Props) => {
       transition-shadow
       duration-200
       hover:border-course text-gray-900"
+      onClick={handleCardClick}
     >
       <Box className="text-sm flex items-center">
         <Box className="border rounded px-1 text-course border-course">{courseInfo.type}</Box>
