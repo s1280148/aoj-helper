@@ -44,16 +44,16 @@ export interface CourseInfo {
 }
 
 export interface CourseDetail {
-  id: 2;
-  serial: 1;
-  shortName: "ITP1";
-  name: "プログラミング入門";
-  type: "lesson";
-  userScore: 0;
-  maxScore: 4400;
-  progress: 0.0;
-  image: "";
-  numberOfTopics: 11;
+  id: number;
+  serial: number;
+  shortName: string;
+  name: string;
+  type: string;
+  userScore: number;
+  maxScore: number;
+  progress: number;
+  image: string;
+  numberOfTopics: number;
   topics: TopicInfo[];
   description: string;
 }
@@ -89,4 +89,43 @@ export interface ProblemInfo {
   successRate: number;
   score: number;
   userScore: number;
+}
+
+export interface LargeChallenge {
+  id: string;
+  title: string;
+  middleCls: MiddleChallenge[];
+}
+
+export interface MiddleChallenge {
+  id: string;
+  numberOfProblems: number;
+  numberOfSolved: number;
+  progress: number;
+}
+
+export interface ChallengeDetail {
+  largeCl: LargeChallenge;
+  contests: ChallengeContestInfo[];
+}
+
+export interface ChallengeContestInfo {
+  abbr: string;
+  largeCl: string;
+  middleCl: string;
+  year: number;
+  progress: number;
+  numberOfProblems: number;
+  numberOfSolved: number;
+  days: ChallengeDayInfo[];
+}
+
+export interface ChallengeDayInfo {
+  id: string;
+  day: number;
+  title: string;
+  progress: 0.0;
+  numberOfProblems: number;
+  numberOfSolved: number;
+  problems: ProblemInfo[];
 }

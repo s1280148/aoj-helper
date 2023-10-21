@@ -9,6 +9,7 @@ import CourseListPage from "./CourseListPage";
 import ChallengeListPage from "./ChallengeListPage";
 import BookmarkListPage from "./BookmarkListPage";
 import CourseDetailPage from "./CourseDetailPage";
+import ChallengeDetailPage from "./ChallengeDetailPage";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
             <Route path="course/list" element={<CourseListPage />} />
             <Route path="course/:courseId" element={<CourseDetailPage />} />
             <Route path="challenge/list" element={<ChallengeListPage />} />
+            <Route path="challenge/:largeChallengeId/:middleChallengeId" element={<ChallengeDetailPage />} />
             <Route path="bookmark/list" element={<BookmarkListPage />} />
           </Route>
           <Route path="/problem/:problemId/commentary/pre" element={<PreCommentaryPage />} />

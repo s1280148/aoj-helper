@@ -263,6 +263,42 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           }
           break;
         }
+        case "findTopPage": {
+          const response = await aojApiClient.findTopPage();
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findTopPage",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findTopPage",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByLargeCLAndMiddleCLPage": {
+          const { largeCl, middleCl } = message.parameters;
+
+          const response = await aojApiClient.findByLargeCLAndMiddleCLPage(largeCl, middleCl);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByLargeCLAndMiddleCLPage",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByLargeCLAndMiddleCLPage",
+              status: "error",
+            });
+          }
+          break;
+        }
       }
     });
   }

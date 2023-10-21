@@ -186,6 +186,14 @@ class AOJApiClient {
   findByCourseIdPage = async (courseId: string, lang: string) => {
     return this.judgeApiClient.get(`/courses/${courseId}?lang=${lang}`);
   };
+
+  findTopPage = async () => {
+    return this.judgeApiClient.get("/challenges");
+  };
+
+  findByLargeCLAndMiddleCLPage = async (largeCl: string, middleCl: string) => {
+    return this.judgeApiClient.get(`/challenges/cl/${largeCl}/${middleCl}`);
+  };
 }
 
 const aojApiClient = new AOJApiClient();
