@@ -178,6 +178,10 @@ class AOJApiClient {
   findAvailableFilters = async (language: string, problemId: string) => {
     return this.judgeApiClient.get(`/resources/commentaries/filters/${language}/${problemId}`);
   };
+
+  findAllCoursesPage = async (lang: string) => {
+    return this.judgeApiClient.get(`/courses?lang=${lang}`);
+  };
 }
 
 const aojApiClient = new AOJApiClient();

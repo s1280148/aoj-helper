@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 
-const ProblemListButton = () => {
+const ProblemListButton: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 

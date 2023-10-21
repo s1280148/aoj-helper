@@ -24,3 +24,21 @@ export interface CommentaryDetail {
   problem_id: string;
   created_at: number;
 }
+
+export interface CourseInfoList {
+  filter: null | string;
+  courses: CourseInfo[];
+}
+
+export interface CourseInfo {
+  id: number;
+  serial: number;
+  shortName: string;
+  name: string;
+  type: string;
+  userScore: number;
+  maxScore: number;
+  progress: number;
+  image: string;
+  description: string;
+}

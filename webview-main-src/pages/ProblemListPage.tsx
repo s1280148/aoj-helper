@@ -11,7 +11,7 @@ const enum TabType {
   BOOKMARK,
 }
 
-const ProblemListPage = () => {
+const ProblemListPage: React.FC = () => {
   const [currentTab, setCurrentTab] = useState(TabType.COURSE);
 
   const handleTabChange = (event: React.SyntheticEvent<Element, Event>, newTab: TabType) => {
