@@ -1,51 +1,17 @@
 import { Box, Dialog } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
-import { getShortStatusNameFromSubmitStatus, SubmissionStatus } from "../util/SubmissionStatus";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import "../static/css/judgeDetail.css";
-
-// ジャッジ詳細
-interface JudgeDetail {
-  judgeId: number;
-  compileError: string;
-  runtimeError: string;
-  userOutput: string;
-  caseVerdicts: CaseVerdict[];
-  submissionRecord: SubmissionRecord;
-}
-
-// 判定結果
-interface CaseVerdict {
-  serial: number;
-  status: string;
-  label: string;
-  cpuTime: number | null;
-  memory: number | null;
-  caseName: string;
-  inputSize: number;
-  outputSize: number;
-}
-
-// 提出記録
-interface SubmissionRecord {
-  judgeId: number;
-  judgeType: number;
-  userId: string;
-  problemId: string;
-  submissionDate: number;
-  language: string;
-  status: number;
-  cpuTime: number;
-  memory: number;
-  codeSize: number;
-  accuracy: string;
-  judgeDate: number;
-  score: number;
-  problemTitle: string | null;
-  token: string | null;
-}
+import {
+  SubmissionStatus,
+  getClassNameFromShortStatusName,
+  getClassNameFromSubmissionStatus,
+  getShortStatusNameFromSubmissionStatus,
+  getSubmissionProgressFromSubmissionStatus,
+} from "../../public-src/util/JudgeInfoUtil";
+import { JudgeDetail } from "../../public-src/ApiResponseType";
 
 /**
  * ジャッジ詳細モーダル
@@ -103,7 +69,7 @@ const JudgeDetailModal: React.FC = () => {
                     judgeDetail.submissionRecord.status,
                   )} text-white text-xs w-6 h-6 rounded flex items-center justify-center`}
                 >
-                  {getShortStatusNameFromSubmitStatus(judgeDetail.submissionRecord.status)}
+                  {getShortStatusNameFromSubmissionStatus(judgeDetail.submissionRecord.status)}
                 </p>
               </Box>
               <Box className="border-b border-gray-300">
@@ -208,80 +174,12 @@ const JudgeDetailModal: React.FC = () => {
 };
 
 /**
- * 提出ステータスからクラス名を取得します。
- * @returns クラス名
- */
-const getClassNameFromSubmissionStatus = (submissionStatus: number) => {
-  if (submissionStatus === SubmissionStatus.STATE_ACCEPTED) {
-    return "bg-accept";
-  } else {
-    return "bg-reject";
-  }
-};
-
-/**
- * 提出ステータスの省略名からクラス名を取得します。
- * @returns クラス名
- */
-const getClassNameFromShortStatusName = (submissionStatusShortName: string) => {
-  if (submissionStatusShortName === getShortStatusNameFromSubmitStatus(SubmissionStatus.STATE_ACCEPTED)) {
-    return "bg-accept";
-  } else {
-    return "bg-reject";
-  }
-};
-
-/**
- * 提出の進行状況
- */
-enum SubmissionProgress {
-  SUBMITTED = 0,
-  SENT_TO_JUDGE = 1,
-  BUILD = 2,
-  RUN = 3,
-  RESOURCE_LIMIT_CHECK = 4,
-  RESULT_CHECK = 5,
-  PRESENTATION_CHECK = 6,
-  ACCEPTED = 7,
-}
-
-/**
  * 提出ステータスから進行状況のアイコンの要素を取得します。
  * @param submissionStatus - 提出ステータス
  * @returns 進行状況のアイコンの要素
  */
 const getSubmissionProgressIconElementsFromSubmitStatus = (submissionStatus: SubmissionStatus) => {
-  let submissionProgress: number;
-
-  switch (submissionStatus) {
-    case SubmissionStatus.STATE_COMPILEERROR:
-      submissionProgress = SubmissionProgress.BUILD;
-      break;
-    case SubmissionStatus.STATE_WRONGANSWER:
-      submissionProgress = SubmissionProgress.RESULT_CHECK;
-      break;
-    case SubmissionStatus.STATE_TIMELIMIT:
-      submissionProgress = SubmissionProgress.RUN;
-      break;
-    case SubmissionStatus.STATE_MEMORYLIMIT:
-      submissionProgress = SubmissionProgress.RESOURCE_LIMIT_CHECK;
-      break;
-    case SubmissionStatus.STATE_ACCEPTED:
-      submissionProgress = SubmissionProgress.ACCEPTED;
-      break;
-    case SubmissionStatus.STATE_OUTPUTLIMIT:
-      submissionProgress = SubmissionProgress.RESOURCE_LIMIT_CHECK;
-      break;
-    case SubmissionStatus.STATE_RUNTIMEERROR:
-      submissionProgress = SubmissionProgress.RUN;
-      break;
-    case SubmissionStatus.STATE_PRESENTATIONERROR:
-      submissionProgress = SubmissionProgress.PRESENTATION_CHECK;
-      break;
-    default:
-      submissionProgress = SubmissionProgress.SUBMITTED;
-      break;
-  }
+  let submissionProgress = getSubmissionProgressFromSubmissionStatus(submissionStatus);
 
   const elements: ReactElement[] = [];
 

@@ -1,6 +1,6 @@
 import { WebSocket } from "ws";
-import { SubmissionStatus } from "../../public-src/SubmissionStatus";
 import aojApiClient from "./AOJApiClient";
+import { SubmissionStatus } from "../../public-src/util/JudgeInfoUtil";
 
 /**
  * 提出マネージャー

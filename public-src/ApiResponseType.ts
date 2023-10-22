@@ -9,10 +9,10 @@ export interface SessionInfo {
   birthYear: number;
   displayLanguage: string;
   defaultProgrammingLanguage: string;
-  status: SubmissionStatus;
+  status: SubmissionStatusInfo;
 }
 
-export interface SubmissionStatus {
+export interface SubmissionStatusInfo {
   submissions: number;
   solved: number;
   accepted: number;
@@ -161,4 +161,45 @@ export interface BookmarkInfo {
   numberOfProblems: number;
   numberOfSolved: number;
   problems: ProblemInfo[];
+}
+
+// ジャッジ詳細
+export interface JudgeDetail {
+  judgeId: number;
+  compileError: string;
+  runtimeError: string;
+  userOutput: string;
+  caseVerdicts: CaseVerdict[];
+  submissionRecord: SubmissionRecord;
+}
+
+// 判定結果
+export interface CaseVerdict {
+  serial: number;
+  status: string;
+  label: string;
+  cpuTime: number | null;
+  memory: number | null;
+  caseName: string;
+  inputSize: number;
+  outputSize: number;
+}
+
+// 提出記録
+export interface SubmissionRecord {
+  judgeId: number;
+  judgeType: number;
+  userId: string;
+  problemId: string;
+  submissionDate: number;
+  language: string;
+  status: number;
+  cpuTime: number;
+  memory: number;
+  codeSize: number;
+  accuracy: string;
+  judgeDate: number;
+  score: number;
+  problemTitle: string | null;
+  token: string | null;
 }

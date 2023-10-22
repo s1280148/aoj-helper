@@ -1,6 +1,6 @@
+import { SubmissionStatus, getSubmissionStatusMessage } from "./../../public-src/util/JudgeInfoUtil";
 import * as vscode from "vscode";
 import { selectableLanguages } from "../../public-src/LanguageInfo";
-import { SubmissionStatus, getSubmissionStatusMessage } from "../../public-src/SubmissionStatus";
 import AOJViewProvider from "../util/AOJViewProvider";
 import SubmissionManager from "../util/SubmissionManager";
 import aojApiClient from "../util/AOJApiClient";
