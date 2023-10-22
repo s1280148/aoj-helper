@@ -198,6 +198,16 @@ class AOJApiClient {
   findByUserIdBookMarkDetail = async (userId: string) => {
     return this.judgeApiClient.get(`/problems/bookmarks/users/${userId}`);
   };
+
+  findByUserIdAndProblemIdSubmissionRecords = async (userId: string, problemId: string, page: number, size: number) => {
+    return this.judgeApiClient.get(
+      `/submission_records/users/${userId}/problems/${problemId}?page=${page}&size=${size}`,
+    );
+  };
+
+  findByJudgeIdReivew = async (judgeId: number) => {
+    return this.judgeApiClient.get(`/reviews/${judgeId}`);
+  };
 }
 
 const aojApiClient = new AOJApiClient();

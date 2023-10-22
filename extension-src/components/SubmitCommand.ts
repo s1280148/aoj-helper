@@ -1,6 +1,6 @@
+import { ProgrammingLanguage } from "./../../public-src/util/LanguageUtil";
+import { SubmissionStatus, getSubmissionStatusMessage } from "./../../public-src/util/JudgeInfoUtil";
 import * as vscode from "vscode";
-import { selectableLanguages } from "../../public-src/LanguageInfo";
-import { SubmissionStatus, getSubmissionStatusMessage } from "../../public-src/SubmissionStatus";
 import AOJViewProvider from "../util/AOJViewProvider";
 import SubmissionManager from "../util/SubmissionManager";
 import aojApiClient from "../util/AOJApiClient";
@@ -15,7 +15,7 @@ export const createSubmitCommand = () => {
     "AOJ.submit",
     async (textEditor: vscode.TextEditor) => {
       // 言語の選択肢を作成
-      const languageItems: vscode.QuickPickItem[] = selectableLanguages.map((language) => {
+      const languageItems: vscode.QuickPickItem[] = Object.values(ProgrammingLanguage).map((language) => {
         return {
           label: language,
         };
