@@ -178,6 +178,26 @@ class AOJApiClient {
   findAvailableFilters = async (language: string, problemId: string) => {
     return this.judgeApiClient.get(`/resources/commentaries/filters/${language}/${problemId}`);
   };
+
+  findAllCoursesPage = async (lang: string) => {
+    return this.judgeApiClient.get(`/courses?lang=${lang}`);
+  };
+
+  findByCourseIdPage = async (courseId: string, lang: string) => {
+    return this.judgeApiClient.get(`/courses/${courseId}?lang=${lang}`);
+  };
+
+  findTopPage = async () => {
+    return this.judgeApiClient.get("/challenges");
+  };
+
+  findByLargeCLAndMiddleCLPage = async (largeCl: string, middleCl: string) => {
+    return this.judgeApiClient.get(`/challenges/cl/${largeCl}/${middleCl}`);
+  };
+
+  findByUserIdBookMarkDetail = async (userId: string) => {
+    return this.judgeApiClient.get(`/problems/bookmarks/users/${userId}`);
+  };
 }
 
 const aojApiClient = new AOJApiClient();

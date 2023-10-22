@@ -125,7 +125,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
 
             // セッションを取得
             vscode.postMessage({
-              type: "session"
+              type: "getSession"
             });
           </script>
 
@@ -156,9 +156,26 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           aojSessionManager.removeSession();
           break;
         }
-        case "session": {
+        case "getSession": {
           // セッションを取得する
           aojSessionManager.getSession();
+          break;
+        }
+        case "session": {
+          const response = await aojApiClient.session();
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "session",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "session",
+              status: "error",
+            });
+          }
           break;
         }
         case "findByProblemIdDescription": {
@@ -220,6 +237,99 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           } else {
             this._view?.webview.postMessage({
               type: "findHtmlByLanguageAndProblemIdAndPatternAndTypeAndFilter",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findAllCoursesPage": {
+          const { lang } = message.parameters;
+
+          const response = await aojApiClient.findAllCoursesPage(lang);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findAllCoursesPage",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findAllCoursesPage",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByCourseIdPage": {
+          const { courseId, lang } = message.parameters;
+
+          const response = await aojApiClient.findByCourseIdPage(courseId, lang);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByCourseIdPage",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByCourseIdPage",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findTopPage": {
+          const response = await aojApiClient.findTopPage();
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findTopPage",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findTopPage",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByLargeCLAndMiddleCLPage": {
+          const { largeCl, middleCl } = message.parameters;
+
+          const response = await aojApiClient.findByLargeCLAndMiddleCLPage(largeCl, middleCl);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByLargeCLAndMiddleCLPage",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByLargeCLAndMiddleCLPage",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByUserIdBookMarkDetail": {
+          const { userId } = message.parameters;
+
+          const response = await aojApiClient.findByUserIdBookMarkDetail(userId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByUserIdBookMarkDetail",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByUserIdBookMarkDetail",
               status: "error",
             });
           }
