@@ -40,6 +40,14 @@ export const getClassNameFromSubmissionStatus = (submissionStatus: SubmissionSta
   }
 };
 
+export const getStatusFromSubmissionStatus = (submissionStatus: SubmissionStatus) => {
+  if (submissionStatus === SubmissionStatus.STATE_ACCEPTED) {
+    return "accept";
+  } else {
+    return "reject";
+  }
+};
+
 /**
  * 提出ステータスの省略名からクラス名を取得します。
  * @returns クラス名

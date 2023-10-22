@@ -203,3 +203,16 @@ export interface SubmissionRecord {
   problemTitle: string | null;
   token: string | null;
 }
+
+export interface ReviewInfo {
+  judgeId: number;
+  userId: string;
+  problemId: string;
+  language: string;
+  cpuTime: number;
+  memory: number;
+  submissionDate: number;
+  policy: string;
+  sourceCode: string;
+  reviewed: number;
+}

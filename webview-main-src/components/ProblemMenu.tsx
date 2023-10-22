@@ -6,6 +6,7 @@ import Drawer from "@mui/material/Drawer";
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import DescriptionIcon from "@mui/icons-material/Description";
 import FeedbackIcon from "@mui/icons-material/Feedback";
+import HistoryIcon from "@mui/icons-material/History";
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { ProblemInfoContext } from "./providers/ProblemInfoProvider";
 import "../static/css/problemMenu.css";
@@ -15,6 +16,7 @@ const enum Page {
   PRE_COMMENTARY,
   PROBLEM,
   POST_COMMENTARY,
+  SUBMISSION_RECORD,
   OTHER,
 }
 
@@ -73,6 +75,10 @@ const ProblemMenu: React.FC = () => {
         navigate(`/problem/${problemId}/commentary/post`);
         break;
       }
+      case Page.SUBMISSION_RECORD: {
+        navigate(`/problem/${problemId}/submission-record`);
+        break;
+      }
     }
 
     closeMenu();
@@ -83,17 +89,21 @@ const ProblemMenu: React.FC = () => {
   useEffect(() => {
     const pathname = location.pathname;
 
-    switch (pathname) {
-      case `/problem/${problemId}/commentary/pre`: {
+    switch (true) {
+      case /^\/problem\/.*\/commentary\/pre$/.test(pathname): {
         setCurrentPage(Page.PRE_COMMENTARY);
         break;
       }
-      case `/problem/${problemId}/description`: {
+      case /^\/problem\/.*\/description$/.test(pathname): {
         setCurrentPage(Page.PROBLEM);
         break;
       }
-      case `/problem/${problemId}/commentary/post`: {
+      case /^\/problem\/.*\/commentary\/post$/.test(pathname): {
         setCurrentPage(Page.POST_COMMENTARY);
+        break;
+      }
+      case /^\/problem\/.*\/submission-record$/.test(pathname): {
+        setCurrentPage(Page.SUBMISSION_RECORD);
         break;
       }
       default: {
@@ -101,7 +111,7 @@ const ProblemMenu: React.FC = () => {
         break;
       }
     }
-  }, [location, problemInfo]);
+  }, [location]);
 
   return (
     <>
@@ -140,6 +150,17 @@ const ProblemMenu: React.FC = () => {
                 <ListItemText
                   primary="解説（後）"
                   sx={{ color: currentPage === Page.POST_COMMENTARY ? "#19bcbc" : "inherit" }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => handlePageSelect(Page.SUBMISSION_RECORD)}>
+                <ListItemIcon sx={{ color: currentPage === Page.SUBMISSION_RECORD ? "#19bcbc" : "inherit" }}>
+                  <HistoryIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="提出履歴"
+                  sx={{ color: currentPage === Page.SUBMISSION_RECORD ? "#19bcbc" : "inherit" }}
                 />
               </ListItemButton>
             </ListItem>
