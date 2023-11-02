@@ -11,7 +11,6 @@ const CourseDetailPage: React.FC = () => {
 
   const [courseDetail, setCourseDetail] = useState<null | CourseDetail>(null);
   useEffect(() => {
-    console.log("call");
     const findByCourseIdPage = async () => {
       const parameters = {
         courseId: courseId,

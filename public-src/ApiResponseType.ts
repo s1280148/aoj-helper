@@ -216,3 +216,19 @@ export interface ReviewInfo {
   sourceCode: string;
   reviewed: number;
 }
+
+export interface ModelAnswerInfo {
+  judgeId: number;
+  userId: string;
+  problemId: string;
+  language: string;
+  version: string;
+  submissionDate: number;
+  cpuTime: number;
+  memory: number;
+  codeSize: number;
+  server: number;
+  policy: "public" | "private";
+  rating: number;
+  review: number;
+}

@@ -3,6 +3,8 @@ import * as path from "path";
 import * as vscode from "vscode";
 import AOJSessionManager from "./AOJSessionManager";
 import aojApiClient from "./AOJApiClient";
+import { EXTENSION_SCHEME } from "./extensionInfo";
+import SimpleDocumentContentProvider from "./SimpleTextDocumentContentProvider";
 
 /**
  * AOJViewProvider
@@ -169,6 +171,25 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
         case "getSession": {
           // セッションを取得する
           aojSessionManager.getSession();
+          break;
+        }
+        case "showDiff": {
+          const content: string = message.content;
+
+          const activeTextEditor = vscode.window.activeTextEditor;
+
+          if (!activeTextEditor) {
+            return;
+          }
+
+          vscode.commands.executeCommand(
+            "vscode.diff",
+            activeTextEditor.document.uri,
+            vscode.Uri.parse(
+              `${EXTENSION_SCHEME}:text/${content}${SimpleDocumentContentProvider.suffix}=${Math.random()}`,
+            ),
+            "模範解答との比較",
+          );
           break;
         }
         case "session": {
@@ -378,6 +399,25 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           } else {
             this._view?.webview.postMessage({
               type: "findByJudgeIdReivew",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByProblemIdAndLanguageModelAnswers": {
+          const { problemId, lang, page, size } = message.parameters;
+
+          const response = await aojApiClient.findByProblemIdAndLanguageModelAnswers(problemId, lang, page, size);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByProblemIdAndLanguageModelAnswers",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByProblemIdAndLanguageModelAnswers",
               status: "error",
             });
           }
