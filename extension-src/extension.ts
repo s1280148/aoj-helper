@@ -3,6 +3,8 @@ import * as vscode from "vscode";
 import AOJSessionManager from "./util/AOJSessionManager";
 import AOJViewProvider from "./util/AOJViewProvider";
 import { createSubmitCommand } from "./components/SubmitCommand";
+import SimpleDocumentContentProvider from "./util/SimpleTextDocumentContentProvider";
+import { EXTENSION_SCHEME } from "./util/extensionInfo";
 
 /**
  * 拡張機能をactivateします。
@@ -23,4 +25,7 @@ export const activate = (context: vscode.ExtensionContext) => {
   // 提出ボタンを作成し表示
   context.subscriptions.push(submitButton);
   submitButton.show();
+
+  const simpleDocumentContentProvider = new SimpleDocumentContentProvider();
+  vscode.workspace.registerTextDocumentContentProvider(EXTENSION_SCHEME, simpleDocumentContentProvider);
 };

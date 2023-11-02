@@ -208,6 +208,10 @@ class AOJApiClient {
   findByJudgeIdReivew = async (judgeId: number) => {
     return this.judgeApiClient.get(`/reviews/${judgeId}`);
   };
+
+  findByProblemIdAndLanguageModelAnswers = async (problemId: string, lang: string, page: number, size: number) => {
+    return this.judgeApiClient.get(`/solutions/problems/${problemId}/lang/${lang}/rating?page=${page}&size=${size}`);
+  };
 }
 
 const aojApiClient = new AOJApiClient();

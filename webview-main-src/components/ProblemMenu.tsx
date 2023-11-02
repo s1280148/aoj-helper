@@ -7,6 +7,7 @@ import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import DescriptionIcon from "@mui/icons-material/Description";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import HistoryIcon from "@mui/icons-material/History";
+import GroupIcon from "@mui/icons-material/Group";
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { ProblemInfoContext } from "./providers/ProblemInfoProvider";
 import "../static/css/problemMenu.css";
@@ -17,6 +18,7 @@ const enum Page {
   PROBLEM,
   POST_COMMENTARY,
   SUBMISSION_RECORD,
+  MODEL_ANSWER,
   OTHER,
 }
 
@@ -79,6 +81,9 @@ const ProblemMenu: React.FC = () => {
         navigate(`/problem/${problemId}/submission-record`);
         break;
       }
+      case Page.MODEL_ANSWER: {
+        navigate(`/problem/${problemId}/model-answer`);
+      }
     }
 
     closeMenu();
@@ -104,6 +109,10 @@ const ProblemMenu: React.FC = () => {
       }
       case /^\/problem\/.*\/submission-record$/.test(pathname): {
         setCurrentPage(Page.SUBMISSION_RECORD);
+        break;
+      }
+      case /^\/problem\/.*\/model-answer$/.test(pathname): {
+        setCurrentPage(Page.MODEL_ANSWER);
         break;
       }
       default: {
@@ -161,6 +170,17 @@ const ProblemMenu: React.FC = () => {
                 <ListItemText
                   primary="提出履歴"
                   sx={{ color: currentPage === Page.SUBMISSION_RECORD ? "#19bcbc" : "inherit" }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => handlePageSelect(Page.MODEL_ANSWER)}>
+                <ListItemIcon sx={{ color: currentPage === Page.MODEL_ANSWER ? "#19bcbc" : "inherit" }}>
+                  <GroupIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="模範解答"
+                  sx={{ color: currentPage === Page.MODEL_ANSWER ? "#19bcbc" : "inherit" }}
                 />
               </ListItemButton>
             </ListItem>

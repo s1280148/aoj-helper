@@ -11,6 +11,7 @@ import BookmarkListPage from "./BookmarkListPage";
 import CourseDetailPage from "./CourseDetailPage";
 import ChallengeDetailPage from "./ChallengeDetailPage";
 import SubmissionRecordPage from "./SubmissionRecordPage";
+import ModelAnswerPage from "./ModelAnswerPage";
 
 const App: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ const App: React.FC = () => {
           <Route path="/problem/:problemId/description" element={<ProblemPage />} />
           <Route path="/problem/:problemId/commentary/post" element={<PostCommentaryPage />} />
           <Route path="/problem/:problemId/submission-record" element={<SubmissionRecordPage />} />
+          <Route path="/problem/:problemId/model-answer" element={<ModelAnswerPage />} />
         </Route>
       </Routes>
     </div>
