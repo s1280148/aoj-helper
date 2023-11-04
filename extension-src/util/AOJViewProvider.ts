@@ -130,6 +130,9 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
             ::-webkit-scrollbar {
               width: 0;
             }
+            code {
+              color: black;
+            }
           </style>
           <noscript>You need to enable JavaScript to run this app.</noscript>
           <script>
