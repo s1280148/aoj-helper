@@ -19,7 +19,12 @@ const Header: React.FC = () => {
           borderColor: "#19bcbc",
         }}
       >
-        <Toolbar variant="dense">
+        <Toolbar
+          variant="dense"
+          sx={{
+            paddingX: "10px !important",
+          }}
+        >
           <Box>
             <ProblemMenu />
           </Box>
@@ -27,7 +32,7 @@ const Header: React.FC = () => {
             <ProblemListButton />
           </Box>
           <Box sx={{ flexGrow: 1 }}></Box>
-          <Box className="mr-4">
+          <Box>
             <ProblemSearchBar />
           </Box>
           <Box>

@@ -49,7 +49,13 @@ const ProblemSearchBar: React.FC = () => {
 
   return (
     <>
-      <OutlinedInput size="small" className="my-2" placeholder="問題IDを入力" inputRef={problemIdRef} />
+      <OutlinedInput
+        size="small"
+        className="my-2"
+        placeholder="問題IDを入力"
+        inputRef={problemIdRef}
+        sx={{ width: "130px" }}
+      />
       <Button onClick={showProblemPage}>検索</Button>
       <Snackbar
         open={errorToastOpen}
