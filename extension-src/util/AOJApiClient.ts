@@ -212,6 +212,24 @@ class AOJApiClient {
   findByProblemIdAndLanguageModelAnswers = async (problemId: string, lang: string, page: number, size: number) => {
     return this.judgeApiClient.get(`/solutions/problems/${problemId}/lang/${lang}/rating?page=${page}&size=${size}`);
   };
+
+  saveBookmark = async (userId: string, problemId: string) => {
+    const requestBody = {
+      userId: userId,
+      problemId: problemId,
+    };
+
+    return this.judgeApiClient.post("/bookmarks", requestBody);
+  };
+
+  deleteBookmark = async (userId: string, problemId: string) => {
+    const requestBody = {
+      userId: userId,
+      problemId: problemId,
+    };
+
+    return this.judgeApiClient.delete("/bookmarks", { data: requestBody });
+  };
 }
 
 const aojApiClient = new AOJApiClient();

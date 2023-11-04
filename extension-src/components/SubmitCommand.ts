@@ -79,6 +79,11 @@ export const createSubmitCommand = () => {
           vscode.window
             .showInformationMessage(submissionStatusMessage, "結果を表示")
             .then((message) => handleMessageBtnSelection(message, judgeId));
+
+          // 現在表示中の問題がACになった場合、拡張機能にメッセージを送信
+          if (aojViewProvider.getCurrentProblemId() === currentProblemId) {
+            aojViewProvider.changeCurrentProblemToSolved();
+          }
         } else {
           // 提出ステータスがAC以外の場合、エラーメッセージを表示
           vscode.window

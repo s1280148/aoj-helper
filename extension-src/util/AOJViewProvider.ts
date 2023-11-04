@@ -426,6 +426,44 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           }
           break;
         }
+        case "saveBookmark": {
+          const { userId, problemId } = message.parameters;
+
+          const response = await aojApiClient.saveBookmark(userId, problemId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "saveBookmark",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "saveBookmark",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "deleteBookmark": {
+          const { userId, problemId } = message.parameters;
+
+          const response = await aojApiClient.deleteBookmark(userId, problemId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "deleteBookmark",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "deleteBookmark",
+              status: "error",
+            });
+          }
+          break;
+        }
       }
     });
   }
@@ -486,6 +524,12 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
       type: "judgeDetail",
       command: "show",
       contents: judgeDetail,
+    });
+  }
+
+  public changeCurrentProblemToSolved() {
+    this._view?.webview.postMessage({
+      type: "changeCurrentProblemToSolved",
     });
   }
 }

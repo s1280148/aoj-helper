@@ -39,6 +39,15 @@ export interface ProblemDescription {
   time_limit: number;
   memory_limit: number;
   problem_id: string;
+  solvedUser: number;
+  successRate: number;
+  score: number;
+  recommend: boolean;
+  recommendations: number;
+  bookmarks: null | string[];
+  isSolved: boolean;
+  created_at: number;
+  server_time: number;
 }
 
 export interface CommentaryDetail {
@@ -231,4 +240,11 @@ export interface ModelAnswerInfo {
   policy: "public" | "private";
   rating: number;
   review: number;
+}
+
+export interface BookmarkSaveInfo {
+  userId: string;
+  problemId: string;
+  tag: string;
+  createTime: number;
 }
