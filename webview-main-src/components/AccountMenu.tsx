@@ -1,4 +1,3 @@
-import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -6,6 +5,8 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { useContext, useState } from "react";
+import { ThemeInfoContext } from "../providers/ThemeInfoProvider";
 
 /**
  * アカウントメニュー
@@ -13,7 +14,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
  */
 const AccountMenu: React.FC = () => {
   // メニュー表示対象のHTML要素
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   // メニューの開閉状態
   const open = Boolean(anchorEl);
@@ -43,10 +44,16 @@ const AccountMenu: React.FC = () => {
     });
   };
 
+  const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
+
+  const handleToggleButtonClick = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
     <>
       <Tooltip title="メニュー">
-        <IconButton onClick={openMenu} color="inherit">
+        <IconButton onClick={openMenu} className="text-black dark:text-darkMode-text">
           <AccountCircle />
         </IconButton>
       </Tooltip>
@@ -89,6 +96,9 @@ const AccountMenu: React.FC = () => {
             <Logout fontSize="small" />
           </ListItemIcon>
           ログアウト
+        </MenuItem>
+        <MenuItem onClick={handleToggleButtonClick} dense>
+          テーマ変更ボタン（仮）
         </MenuItem>
       </Menu>
     </>

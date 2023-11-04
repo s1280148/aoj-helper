@@ -4,7 +4,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import { ProblemInfoContext } from "./providers/ProblemInfoProvider";
+import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
 import { callApi } from "../../webview-public-src/ApiUtil";
 import { BookmarkSaveInfo, SessionInfo } from "../../public-src/ApiResponseType";
 
@@ -64,15 +64,18 @@ const ProblemInfoPanel: React.FC = () => {
   return (
     <>
       {problemInfo && (
-        <Box className="flex items-center px-3 py-1 bg-course border-course" sx={{ borderRadius: "2rem" }}>
-          <Box className="flex items-center text-2xl rounded-full text-white">
+        <Box
+          className="flex items-center px-3 py-1 bg-course border-course dark:bg-course-dark dark:border-course-dark"
+          sx={{ borderRadius: "2rem" }}
+        >
+          <Box className="flex items-center text-2xl rounded-full text-white dark:text-darkMode-text">
             {problemInfo.isSolved ? <CheckCircleIcon /> : <RemoveCircleOutlineIcon />}
           </Box>
-          <span className="text-xl inline-block px-3 whitespace-no-wrap text-white">{problemInfo.problem_id}</span>
+          <span className="text-xl inline-block px-3 whitespace-no-wrap text-white dark:text-darkMode-text">
+            {problemInfo.problem_id}
+          </span>
           <button
-            style={{
-              color: isBookmark ? "#f7c327" : "#ffffff",
-            }}
+            className={isBookmark ? "text-bookmark-lighter" : "text-white dark:text-darkMode-text"}
             onClick={handleBookmarkButtonClick}
           >
             {isBookmark ? <BookmarkIcon /> : <BookmarkBorderIcon />}

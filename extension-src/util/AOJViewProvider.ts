@@ -120,18 +120,10 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           <link rel="stylesheet" href=${cssUri}>
           <title>React App</title>
         </head>
-        <body>
+        <body class="p-0 bg-white dark:bg-darkMode-bg text-black">
           <style>
-            body {
-              padding: 0;
-              background-color: white;
-              color: black;
-            }
             ::-webkit-scrollbar {
               width: 0;
-            }
-            code {
-              color: black;
             }
           </style>
           <noscript>You need to enable JavaScript to run this app.</noscript>

@@ -1,5 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "react";
-import { ProblemDescription } from "../../../public-src/ApiResponseType";
+import { ProblemDescription } from "../../public-src/ApiResponseType";
 
 type Props = {
   children: React.ReactNode;

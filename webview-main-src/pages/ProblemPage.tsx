@@ -4,7 +4,7 @@ import { ScrollRestoration, useLocation, useNavigate, useParams } from "react-ro
 import { MathJaxContext, MathJax } from "better-react-mathjax";
 import mathJaxConfig from "../util/MathJaxConfig";
 import "../static/css/description.css";
-import { ProblemInfoContext } from "../components/providers/ProblemInfoProvider";
+import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
 import { ProblemDescription } from "../../public-src/ApiResponseType";
 import { callApi } from "../../webview-public-src/ApiUtil";
 
@@ -28,7 +28,7 @@ const ProblemPage: React.FC = () => {
       try {
         const response = await callApi("findByProblemIdDescription", parameters);
         setProblemInfo(response as ProblemDescription);
-        vscode.setState({ problemId: problemId });
+        vscode.setState({ ...vscode.getState(), problemId: problemId });
       } catch (e) {
         showErrorToast();
 

@@ -9,7 +9,7 @@ import FeedbackIcon from "@mui/icons-material/Feedback";
 import HistoryIcon from "@mui/icons-material/History";
 import GroupIcon from "@mui/icons-material/Group";
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { ProblemInfoContext } from "./providers/ProblemInfoProvider";
+import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
 import "../static/css/problemMenu.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -125,62 +125,122 @@ const ProblemMenu: React.FC = () => {
   return (
     <>
       <Tooltip title="問題メニュー">
-        <IconButton color="inherit" onClick={openMenu}>
+        <IconButton className="text-black dark:text-darkMode-text" onClick={openMenu}>
           <MenuIcon />
         </IconButton>
       </Tooltip>
-      <Drawer open={open} onClose={closeMenu} anchor="left">
+      <Drawer
+        open={open}
+        onClose={closeMenu}
+        anchor="left"
+        PaperProps={{
+          className: "h-full dark:bg-darkMode-darkest",
+        }}
+      >
         <Box>
           <List>
             <ListItem disablePadding>
               <ListItemButton disabled={!hasPreCommentary} onClick={() => handlePageSelect(Page.PRE_COMMENTARY)}>
-                <ListItemIcon sx={{ color: currentPage === Page.PRE_COMMENTARY ? "#19bcbc" : "inherit" }}>
+                <ListItemIcon
+                  className={
+                    currentPage === Page.PRE_COMMENTARY
+                      ? "text-course dark:text-course-dark"
+                      : "text-inherit dark:text-darkMode-lightest"
+                  }
+                >
                   <LiveHelpIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="解説（前）"
-                  sx={{ color: currentPage === Page.PRE_COMMENTARY ? "#19bcbc" : "inherit" }}
+                  className={
+                    currentPage === Page.PRE_COMMENTARY
+                      ? "text-course dark:text-course-dark"
+                      : "text-inherit dark:text-darkMode-lightest"
+                  }
                 />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton onClick={() => handlePageSelect(Page.PROBLEM)}>
-                <ListItemIcon sx={{ color: currentPage === Page.PROBLEM ? "#19bcbc" : "inherit" }}>
+                <ListItemIcon
+                  className={
+                    currentPage === Page.PROBLEM
+                      ? "text-course dark:text-course-dark"
+                      : "text-inherit dark:text-darkMode-lightest"
+                  }
+                >
                   <DescriptionIcon />
                 </ListItemIcon>
-                <ListItemText primary="問題文" sx={{ color: currentPage === Page.PROBLEM ? "#19bcbc" : "inherit" }} />
+                <ListItemText
+                  primary="問題文"
+                  className={
+                    currentPage === Page.PROBLEM
+                      ? "text-course dark:text-course-dark"
+                      : "text-inherit dark:text-darkMode-lightest"
+                  }
+                />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton disabled={!hasPostCommentary} onClick={() => handlePageSelect(Page.POST_COMMENTARY)}>
-                <ListItemIcon sx={{ color: currentPage === Page.POST_COMMENTARY ? "#19bcbc" : "inherit" }}>
+                <ListItemIcon
+                  className={
+                    currentPage === Page.POST_COMMENTARY
+                      ? "text-course dark:text-course-dark"
+                      : "text-inherit dark:text-darkMode-lightest"
+                  }
+                >
                   <FeedbackIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="解説（後）"
-                  sx={{ color: currentPage === Page.POST_COMMENTARY ? "#19bcbc" : "inherit" }}
+                  className={
+                    currentPage === Page.POST_COMMENTARY
+                      ? "text-course dark:text-course-dark"
+                      : "text-inherit dark:text-darkMode-lightest"
+                  }
                 />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton onClick={() => handlePageSelect(Page.SUBMISSION_RECORD)}>
-                <ListItemIcon sx={{ color: currentPage === Page.SUBMISSION_RECORD ? "#19bcbc" : "inherit" }}>
+                <ListItemIcon
+                  className={
+                    currentPage === Page.SUBMISSION_RECORD
+                      ? "text-course dark:text-course-dark"
+                      : "text-inherit dark:text-darkMode-lightest"
+                  }
+                >
                   <HistoryIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="提出履歴"
-                  sx={{ color: currentPage === Page.SUBMISSION_RECORD ? "#19bcbc" : "inherit" }}
+                  className={
+                    currentPage === Page.SUBMISSION_RECORD
+                      ? "text-course dark:text-course-dark"
+                      : "text-inherit dark:text-darkMode-lightest"
+                  }
                 />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton onClick={() => handlePageSelect(Page.MODEL_ANSWER)}>
-                <ListItemIcon sx={{ color: currentPage === Page.MODEL_ANSWER ? "#19bcbc" : "inherit" }}>
+                <ListItemIcon
+                  className={
+                    currentPage === Page.MODEL_ANSWER
+                      ? "text-course dark:text-course-dark"
+                      : "text-inherit dark:text-darkMode-lightest"
+                  }
+                >
                   <GroupIcon />
                 </ListItemIcon>
                 <ListItemText
                   primary="模範解答"
-                  sx={{ color: currentPage === Page.MODEL_ANSWER ? "#19bcbc" : "inherit" }}
+                  className={
+                    currentPage === Page.MODEL_ANSWER
+                      ? "text-course dark:text-course-dark"
+                      : "text-inherit dark:text-darkMode-lightest"
+                  }
                 />
               </ListItemButton>
             </ListItem>

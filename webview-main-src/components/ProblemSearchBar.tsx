@@ -51,12 +51,14 @@ const ProblemSearchBar: React.FC = () => {
     <>
       <OutlinedInput
         size="small"
-        className="my-2"
+        className="my-2 focus:outline-none dark:border-darkMode-lighter dark:bg-darkMode-lighter dark:text-darkMode-text"
         placeholder="問題IDを入力"
         inputRef={problemIdRef}
         sx={{ width: "130px" }}
       />
-      <Button onClick={showProblemPage}>検索</Button>
+      <Button className="dark:text-darkMode-text" onClick={showProblemPage}>
+        検索
+      </Button>
       <Snackbar
         open={errorToastOpen}
         anchorOrigin={{ vertical: "top", horizontal: "left" }}
