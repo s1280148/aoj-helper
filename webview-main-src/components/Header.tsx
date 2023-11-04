@@ -3,6 +3,7 @@ import AccountMenu from "./AccountMenu";
 import ProblemSearchBar from "./ProblemSearchBar";
 import ProblemMenu from "./ProblemMenu";
 import ProblemListButton from "./ProblemListButton";
+import ProblemInfoPanel from "./ProblemInfoPanel";
 
 /**
  * ヘッダー
@@ -31,7 +32,9 @@ const Header: React.FC = () => {
           <Box>
             <ProblemListButton />
           </Box>
-          <Box sx={{ flexGrow: 1 }}></Box>
+          <Box className="grow flex items-center justify-center">
+            <ProblemInfoPanel />
+          </Box>
           <Box>
             <ProblemSearchBar />
           </Box>
