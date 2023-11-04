@@ -5,6 +5,7 @@ import { Box, FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/mate
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import "../static/css/description.css";
+import { MathJax } from "better-react-mathjax";
 
 type Props = {
   problemId: string;
@@ -84,7 +85,9 @@ const CommentaryNote: React.FC<Props> = (props: Props) => {
                 </Box>
               </Box>
             </Box>
-            <Box className="description px-3 pb-4" dangerouslySetInnerHTML={{ __html: commentaryDetail.html }}></Box>
+            <MathJax dynamic>
+              <Box className="description px-3 pb-4" dangerouslySetInnerHTML={{ __html: commentaryDetail.html }}></Box>
+            </MathJax>
           </Box>
         </>
       )}

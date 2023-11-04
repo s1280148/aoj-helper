@@ -73,15 +73,9 @@ const ProblemPage: React.FC = () => {
               {problemInfo.memory_limit} KB
             </span>
           </Box>
-          <MathJaxContext config={mathJaxConfig}>
-            <MathJax dynamic>
-              <Box
-                id="description"
-                className="description"
-                dangerouslySetInnerHTML={{ __html: problemInfo.html }}
-              ></Box>
-            </MathJax>
-          </MathJaxContext>
+          <MathJax dynamic>
+            <Box id="description" className="description" dangerouslySetInnerHTML={{ __html: problemInfo.html }}></Box>
+          </MathJax>
         </>
       )}
       <Snackbar
