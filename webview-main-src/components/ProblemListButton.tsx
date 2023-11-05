@@ -1,13 +1,17 @@
 import { IconButton, Tooltip } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
+import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
+import { isChallengeProblem } from "../../public-src/util/ProblemInfoUtil";
 
 const ProblemListButton: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [isPageOpen, setIsPageOpen] = useState(false);
+
+  const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
 
   useEffect(() => {
     setIsPageOpen(/^\/problem\/list\/.*/.test(location.pathname));
@@ -22,7 +26,13 @@ const ProblemListButton: React.FC = () => {
   return (
     <Tooltip title="問題集">
       <IconButton
-        className={isPageOpen ? "text-course dark:text-course-dark" : "text-black dark:text-darkMode-text"}
+        className={
+          isPageOpen
+            ? problemInfo && isChallengeProblem(problemInfo.problem_id)
+              ? "text-challenge dark:text-challenge"
+              : "text-course dark:text-course-dark"
+            : "text-black dark:text-darkMode-text"
+        }
         onClick={handleProblemListButton}
       >
         <QuizOutlinedIcon />
