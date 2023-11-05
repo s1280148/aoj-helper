@@ -145,7 +145,7 @@ const ProblemMenu: React.FC = () => {
                   className={
                     currentPage === Page.PRE_COMMENTARY
                       ? "text-course dark:text-course-dark"
-                      : "text-inherit dark:text-darkMode-lightest"
+                      : "text-inherit dark:text-darkMode-text"
                   }
                 >
                   <LiveHelpIcon />
@@ -155,7 +155,7 @@ const ProblemMenu: React.FC = () => {
                   className={
                     currentPage === Page.PRE_COMMENTARY
                       ? "text-course dark:text-course-dark"
-                      : "text-inherit dark:text-darkMode-lightest"
+                      : "text-inherit dark:text-darkMode-text"
                   }
                 />
               </ListItemButton>
@@ -166,7 +166,7 @@ const ProblemMenu: React.FC = () => {
                   className={
                     currentPage === Page.PROBLEM
                       ? "text-course dark:text-course-dark"
-                      : "text-inherit dark:text-darkMode-lightest"
+                      : "text-inherit dark:text-darkMode-text"
                   }
                 >
                   <DescriptionIcon />
@@ -176,7 +176,7 @@ const ProblemMenu: React.FC = () => {
                   className={
                     currentPage === Page.PROBLEM
                       ? "text-course dark:text-course-dark"
-                      : "text-inherit dark:text-darkMode-lightest"
+                      : "text-inherit dark:text-darkMode-text"
                   }
                 />
               </ListItemButton>
@@ -187,7 +187,7 @@ const ProblemMenu: React.FC = () => {
                   className={
                     currentPage === Page.POST_COMMENTARY
                       ? "text-course dark:text-course-dark"
-                      : "text-inherit dark:text-darkMode-lightest"
+                      : "text-inherit dark:text-darkMode-text"
                   }
                 >
                   <FeedbackIcon />
@@ -197,7 +197,7 @@ const ProblemMenu: React.FC = () => {
                   className={
                     currentPage === Page.POST_COMMENTARY
                       ? "text-course dark:text-course-dark"
-                      : "text-inherit dark:text-darkMode-lightest"
+                      : "text-inherit dark:text-darkMode-text"
                   }
                 />
               </ListItemButton>
@@ -208,7 +208,7 @@ const ProblemMenu: React.FC = () => {
                   className={
                     currentPage === Page.SUBMISSION_RECORD
                       ? "text-course dark:text-course-dark"
-                      : "text-inherit dark:text-darkMode-lightest"
+                      : "text-inherit dark:text-darkMode-text"
                   }
                 >
                   <HistoryIcon />
@@ -218,7 +218,7 @@ const ProblemMenu: React.FC = () => {
                   className={
                     currentPage === Page.SUBMISSION_RECORD
                       ? "text-course dark:text-course-dark"
-                      : "text-inherit dark:text-darkMode-lightest"
+                      : "text-inherit dark:text-darkMode-text"
                   }
                 />
               </ListItemButton>
@@ -229,7 +229,7 @@ const ProblemMenu: React.FC = () => {
                   className={
                     currentPage === Page.MODEL_ANSWER
                       ? "text-course dark:text-course-dark"
-                      : "text-inherit dark:text-darkMode-lightest"
+                      : "text-inherit dark:text-darkMode-text"
                   }
                 >
                   <GroupIcon />
@@ -239,7 +239,7 @@ const ProblemMenu: React.FC = () => {
                   className={
                     currentPage === Page.MODEL_ANSWER
                       ? "text-course dark:text-course-dark"
-                      : "text-inherit dark:text-darkMode-lightest"
+                      : "text-inherit dark:text-darkMode-text"
                   }
                 />
               </ListItemButton>
