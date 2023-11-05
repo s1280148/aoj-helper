@@ -3,104 +3,68 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import Logout from "@mui/icons-material/Logout";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useContext, useState } from "react";
 import { ThemeInfoContext } from "../providers/ThemeInfoProvider";
+import { Box, Button, Dialog, DialogContent, Switch } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 /**
  * アカウントメニュー
  * @returns アカウントメニュー
  */
 const AccountMenu: React.FC = () => {
-  // メニュー表示対象のHTML要素
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [open, setOpen] = useState<boolean>(false);
 
-  // メニューの開閉状態
-  const open = Boolean(anchorEl);
-
-  /**
-   * メニューを開きます。
-   * @param event イベント
-   */
-  const openMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const openAccountMenu = () => {
+    setOpen(true);
   };
 
-  /**
-   * メニューを閉じた時の動作を定義します。
-   */
-  const handleClose = () => {
-    setAnchorEl(null);
+  const closeAccountMenu = () => {
+    setOpen(false);
   };
 
-  /**
-   * ログアウトを行います。
-   */
   const logout = () => {
-    // 拡張機能にログアウトを要求するメッセージを送信
     vscode.postMessage({
       type: "logout",
     });
+
+    closeAccountMenu();
   };
 
   const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
 
-  const handleToggleButtonClick = () => {
-    setIsDarkMode(!isDarkMode);
+  const handleThemeToggleButtonChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsDarkMode(e.target.checked);
   };
 
   return (
     <>
       <Tooltip title="メニュー">
-        <IconButton onClick={openMenu} className="text-black dark:text-darkMode-text">
+        <IconButton onClick={openAccountMenu} className="text-black dark:text-darkMode-text">
           <AccountCircle />
         </IconButton>
       </Tooltip>
-      <Menu
-        anchorEl={anchorEl}
+      <Dialog
         open={open}
-        onClose={handleClose}
-        onClick={handleClose}
+        fullWidth
+        onClose={closeAccountMenu}
         PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
+          className: "dark:bg-darkMode-bg",
         }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={logout} dense>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          ログアウト
-        </MenuItem>
-        <MenuItem onClick={handleToggleButtonClick} dense>
-          テーマ変更ボタン（仮）
-        </MenuItem>
-      </Menu>
+        <DialogContent>
+          <Box>
+            <h1 className="text-xl dark:text-darkMode-text">ダークモード</h1>
+            <Switch checked={isDarkMode} onChange={handleThemeToggleButtonChange} />
+          </Box>
+          <Box className="mt-7">
+            <Button variant={isDarkMode ? "outlined" : "contained"} startIcon={<LogoutIcon />} onClick={logout}>
+              ログアウト
+            </Button>
+          </Box>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
