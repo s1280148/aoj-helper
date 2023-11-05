@@ -40,24 +40,45 @@ const ProblemListPage: React.FC = () => {
       <Tabs
         value={currentTab}
         onChange={handleTabChange}
-        sx={{
-          ".MuiTab-root": {
-            minHeight: "",
-          },
-          ".Mui-selected": {
-            color: `${getCurrentTabColor(currentTab)}!important`,
-          },
-        }}
+        className="min-h-0"
         variant="fullWidth"
         TabIndicatorProps={{
-          sx: {
-            backgroundColor: getCurrentTabColor(currentTab),
-          },
+          className: `bg-${getCurrentTabColorName(currentTab)} dark:bg-${getCurrentTabColorName(currentTab)}-dark`,
         }}
       >
-        <Tab icon={<MapIcon />} iconPosition="start" label="コース" value={TabType.COURSE} />
-        <Tab icon={<InboxIcon />} iconPosition="start" label="チャレンジ" value={TabType.CHALLENGE} />
-        <Tab icon={<BookmarkIcon />} iconPosition="start" label="ブックマーク" value={TabType.BOOKMARK} />
+        <Tab
+          className={`
+          min-h-0
+          py-3
+          ${currentTab === TabType.COURSE ? "text-course dark:text-course-dark" : "dark:text-darkMode-text"}
+          `}
+          icon={<MapIcon />}
+          iconPosition="start"
+          label="コース"
+          value={TabType.COURSE}
+        />
+        <Tab
+          className={`
+          min-h-0
+          py-3
+          ${currentTab === TabType.CHALLENGE ? "text-challenge dark:text-challenge-dark" : "dark:text-darkMode-text"}
+          `}
+          icon={<InboxIcon />}
+          iconPosition="start"
+          label="チャレンジ"
+          value={TabType.CHALLENGE}
+        />
+        <Tab
+          className={`
+          min-h-0
+          py-3
+          ${currentTab === TabType.BOOKMARK ? "text-bookmark dark:text-bookmark-dark" : "dark:text-darkMode-text"}
+          `}
+          icon={<BookmarkIcon />}
+          iconPosition="start"
+          label="ブックマーク"
+          value={TabType.BOOKMARK}
+        />
       </Tabs>
       <Outlet />
     </Box>
@@ -66,19 +87,19 @@ const ProblemListPage: React.FC = () => {
 
 export default ProblemListPage;
 
-const getCurrentTabColor = (currentTab: TabType) => {
+const getCurrentTabColorName = (currentTab: TabType) => {
   switch (currentTab) {
     case TabType.COURSE: {
-      return "#1abcbc";
+      return "course";
     }
     case TabType.CHALLENGE: {
-      return "#777ef2";
+      return "challenge";
     }
     case TabType.BOOKMARK: {
-      return "#c6a57b";
+      return "bookmark";
     }
     default: {
-      return "inherit";
+      return "course";
     }
   }
 };
