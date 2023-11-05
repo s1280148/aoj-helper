@@ -24,8 +24,14 @@ module.exports = {
           DEFAULT: '#2196f3',
           dark: '#0b8ef7',
         },
-        accept: '#16a085',
-        reject: '#ec6941',
+        accept: {
+          DEFAULT: '#16a085',
+          dark: '#2c7a7b'
+        },
+        reject: {
+          DEFAULT: '#ec6941',
+          dark: '#9b2c2c'
+        },
         aoj: {
           DEFAULT: '#232a3b',
           click: '#5b5f72',
@@ -47,6 +53,14 @@ module.exports = {
     'bg-white',
     'dark:bg-darkMode-bg',
     'text-black',
+    'bg-accept',
+    'bg-reject',
+    'border-accept',
+    'border-reject',
+    'dark:bg-accept-dark',
+    'dark:bg-reject-dark',
+    'dark:border-accept-dark',
+    'dark:border-reject-dark',
   ],
   plugins: [],
   darkMode: 'class',

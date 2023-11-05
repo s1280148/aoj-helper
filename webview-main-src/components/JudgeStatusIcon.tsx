@@ -22,7 +22,8 @@ const JudgeStatusIcon: React.FC<Props> = (props: Props) => {
         rounded
         flex
         items-center
-        justify-center`}
+        justify-center
+        dark:text-darkMode-text`}
     >
       {getShortStatusNameFromSubmissionStatus(submissionStatus)}
     </p>

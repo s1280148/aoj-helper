@@ -34,9 +34,9 @@ export const enum SubmissionStatus {
  */
 export const getClassNameFromSubmissionStatus = (submissionStatus: SubmissionStatus) => {
   if (submissionStatus === SubmissionStatus.STATE_ACCEPTED) {
-    return "bg-accept";
+    return "bg-accept dark:bg-accept-dark";
   } else {
-    return "bg-reject";
+    return "bg-reject  dark:bg-rekect-dark";
   }
 };
 
