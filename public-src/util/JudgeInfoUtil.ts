@@ -36,7 +36,7 @@ export const getClassNameFromSubmissionStatus = (submissionStatus: SubmissionSta
   if (submissionStatus === SubmissionStatus.STATE_ACCEPTED) {
     return "bg-accept dark:bg-accept-dark";
   } else {
-    return "bg-reject  dark:bg-rekect-dark";
+    return "bg-reject  dark:bg-reject-dark";
   }
 };
 
