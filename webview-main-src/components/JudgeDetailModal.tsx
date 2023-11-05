@@ -59,93 +59,129 @@ const JudgeDetailModal: React.FC = () => {
   return (
     <>
       {judgeDetail && (
-        <Dialog open={open} onClose={closeJudgeDetailModal} maxWidth="xl" fullWidth>
+        <Dialog
+          open={open}
+          onClose={closeJudgeDetailModal}
+          maxWidth="xl"
+          fullWidth
+          PaperProps={{
+            className: "dark:bg-darkMode-bg",
+          }}
+        >
           <Box className="p-2 w-full h-full">
-            <Box className="border-2 rounded mb-3 border-gray-300 bg-white">
-              <Box className="px-3 py-2 flex bg-gray-200 text-gray-600">
-                <span className="mx-1 flex items-center">結果 :</span>
+            <Box className="border-2 rounded mb-3 border-gray-300 dark:border-darkMode-dark dark:bg-darkMode-darkest">
+              <Box className="px-3 py-2 flex bg-gray-200 text-gray-600 dark:bg-darkMode-dark dark:border-darkMode-dark dark:text-darkMode-text">
+                <span className="mx-1 flex items-center dark:text-darkMode-text">結果 :</span>
                 <p
                   className={`${getClassNameFromSubmissionStatus(
                     judgeDetail.submissionRecord.status,
-                  )} text-white text-xs w-6 h-6 rounded flex items-center justify-center`}
+                  )} text-white text-xs w-6 h-6 rounded flex items-center justify-center dark:text-darkMode-text`}
                 >
                   {getShortStatusNameFromSubmissionStatus(judgeDetail.submissionRecord.status)}
                 </p>
               </Box>
-              <Box className="border-b border-gray-300">
-                <Box className="grid grid-cols-7 gap-y-2 pt-2 justify-self-center bg-white">
+              <Box className="border-b border-gray-300 dark:border-darkMode-dark">
+                <Box className="grid grid-cols-7 gap-y-2 pt-2 justify-self-center dark:bg-darkMode-darkest">
                   <>
                     {getSubmissionProgressIconElementsFromSubmitStatus(judgeDetail.submissionRecord.status)}
                     {getSubmissionProgressTextElements()}
                   </>
                 </Box>
               </Box>
-              <Box className="grid grid-cols-4 border-b h-8 text-base font-bold text-gray-800 bg-white">
-                <Box className="border-r flex justify-center items-center bg-gray-200">言語</Box>
-                <Box className="border-r flex justify-center items-center bg-gray-200">時間</Box>
-                <Box className="border-r flex justify-center items-center bg-gray-200">メモリー</Box>
-                <Box className="border-r flex justify-center items-center bg-gray-200">コード長</Box>
+              <Box className="grid grid-cols-4 border-b h-8 text-base font-bold text-gray-800 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
+                <Box className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
+                  言語
+                </Box>
+                <Box className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
+                  時間
+                </Box>
+                <Box className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
+                  メモリー
+                </Box>
+                <Box className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
+                  コード長
+                </Box>
               </Box>
-              <Box className="grid grid-cols-4 h-8 text-base text-gray-800 bg-white">
-                <Box className="border-r flex justify-center items-center">{judgeDetail.submissionRecord.language}</Box>
-                <Box className="border-r flex justify-center items-center">
+              <Box className="grid grid-cols-4 h-8 text-base text-gray-800 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
+                <Box className="border-r flex justify-center items-center dark:text-darkMode-text dark:border-darkMode-dark">
+                  {judgeDetail.submissionRecord.language}
+                </Box>
+                <Box className="border-r flex justify-center items-center dark:text-darkMode-text dark:border-darkMode-dark">
                   {(judgeDetail.submissionRecord.cpuTime / 100).toFixed(2)} sec
                 </Box>
-                <Box className="border-r flex justify-center items-center">
+                <Box className="border-r flex justify-center items-center dark:text-darkMode-text dark:border-darkMode-dark">
                   {Math.ceil(judgeDetail.submissionRecord.memory / 1000)} KB
                 </Box>
-                <Box className="flex justify-center items-center">{judgeDetail.submissionRecord.codeSize} B</Box>
+                <Box className="flex justify-center items-center dark:text-darkMode-text">
+                  {judgeDetail.submissionRecord.codeSize} B
+                </Box>
               </Box>
             </Box>
             <Box className="rounded">
-              <table className="w-full border rounded text-gray-800 border-gray-300">
-                <thead className="grid w-full border-2 rounded border-gray-300">
+              <table className="w-full border rounded text-gray-800 border-gray-300 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
+                <thead className="grid w-full border-2 rounded border-gray-300 dark:border-darkMode-dark">
                   <tr className="grid grid-cols-7">
-                    <th className="border-r flex justify-center items-center bg-gray-200">ケース</th>
-                    <th className="border-r flex justify-center items-center bg-gray-200">ステータス</th>
-                    <th className="border-r flex justify-center items-center bg-gray-200">時間</th>
-                    <th className="border-r flex justify-center items-center bg-gray-200">メモリー</th>
-                    <th className="border-r flex justify-center items-center bg-gray-200">入力</th>
-                    <th className="border-r flex justify-center items-center bg-gray-200">出力</th>
-                    <th className="flex justify-center items-center bg-gray-200">ケース名</th>
+                    <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
+                      ケース
+                    </th>
+                    <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
+                      ステータス
+                    </th>
+                    <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
+                      時間
+                    </th>
+                    <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
+                      メモリー
+                    </th>
+                    <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
+                      入力
+                    </th>
+                    <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
+                      出力
+                    </th>
+                    <th className="flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
+                      ケース名
+                    </th>
                   </tr>
-                  <tbody className="border-r-2 border-l-2 border-gray-300">
+                  <tbody className="border-r-2 border-l-2 border-gray-300 dark:bg-darkMode-darkest dark:border-darkMode-dark">
                     <span>
                       {judgeDetail.caseVerdicts.map((caseVerDict) => {
                         return (
                           <tr className="grid">
                             <div className="grid grid-cols-7">
-                              <td className="border-r border-b flex items-center justify-center border-gray-200">
-                                <span>{caseVerDict.label}</span>
+                              <td className="border-r border-b flex items-center justify-center border-gray-200 dark:border-darkMode-dark">
+                                <span className="dark:text-darkMode-text">{caseVerDict.label}</span>
                               </td>
-                              <td className="border-r border-b flex justify-center items-center p-1 border-gray-200">
+                              <td className="border-r border-b flex justify-center items-center p-1 border-gray-200 dark:border-darkMode-dark">
                                 {caseVerDict.status ? (
                                   <p
                                     className={`${getClassNameFromShortStatusName(
                                       caseVerDict.status,
-                                    )} text-white text-xs w-6 h-6 rounded flex items-center justify-center`}
+                                    )} text-white text-xs w-6 h-6 rounded flex items-center justify-center dark:text-darkMode-text`}
                                   >
                                     {caseVerDict.status}
                                   </p>
                                 ) : (
-                                  <p className="w-6 h-6 rounded flex items-center justify-center">-</p>
+                                  <p className="w-6 h-6 rounded flex items-center justify-center dark:text-darkMode-text">
+                                    -
+                                  </p>
                                 )}
                               </td>
-                              <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200">
+                              <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200 dark:border-darkMode-dark dark:text-darkMode-text">
                                 {caseVerDict.cpuTime ? `${(caseVerDict.cpuTime / 100).toFixed(2)} sec` : "sec"}
                               </td>
-                              <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200">
+                              <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200 dark:border-darkMode-dark dark:text-darkMode-text">
                                 {caseVerDict.memory ? `${caseVerDict.memory} KB` : "KB"}
                               </td>
-                              <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200">
-                                {`${caseVerDict.inputSize} B`}
+                              <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200 dark:border-darkMode-dark dark:text-darkMode-text">
+                                {caseVerDict.inputSize ? `${caseVerDict.inputSize} B` : "B"}
                               </td>
-                              <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200">
-                                {`${caseVerDict.outputSize} B`}
+                              <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200 dark:border-darkMode-dark dark:text-darkMode-text">
+                                {caseVerDict.outputSize ? `${caseVerDict.outputSize} B` : "B"}
                               </td>
-                              <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200">
+                              <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200 dark:border-darkMode-dark">
                                 <p
-                                  className="mx-2"
+                                  className="mx-2 dark:text-darkMode-text"
                                   style={{
                                     overflow: "hidden",
                                     textOverflow: "ellipsis",
@@ -157,7 +193,7 @@ const JudgeDetailModal: React.FC = () => {
                                 </p>
                               </td>
                             </div>
-                            <div className="border-b border-gray-200"></div>
+                            <div className="border-b border-gray-200 dark:border-darkMode-dark"></div>
                           </tr>
                         );
                       })}
@@ -191,9 +227,9 @@ const getSubmissionProgressIconElementsFromSubmitStatus = (submissionStatus: Sub
         <Box
           className={`relative text-3xl flex justify-center ${i === 0 ? "" : "left-border"} ${
             i === 6 ? "" : "right-border"
-          } text-gray-800`}
+          } text-gray-800 dark:text-darkMode-text`}
         >
-          <CheckCircleIcon fontSize="large" style={{ color: "#16a085" }} />
+          <CheckCircleIcon fontSize="large" className="text-accept dark:text-accept-dark" />
         </Box>
       );
     } else if (i === submissionProgress) {
@@ -201,9 +237,9 @@ const getSubmissionProgressIconElementsFromSubmitStatus = (submissionStatus: Sub
         <Box
           className={`relative text-3xl flex justify-center ${i === 0 ? "" : "left-border"} ${
             i === 6 ? "" : "right-border"
-          } text-gray-800`}
+          } text-gray-800 dark:text-darkMode-text`}
         >
-          <ErrorIcon fontSize="large" style={{ color: "#ec6941" }} />
+          <ErrorIcon fontSize="large" className="text-reject dark:text-reject-dark" />
         </Box>
       );
     } else {
@@ -211,7 +247,7 @@ const getSubmissionProgressIconElementsFromSubmitStatus = (submissionStatus: Sub
         <Box
           className={`relative text-3xl flex justify-center ${i === 0 ? "" : "left-border"} ${
             i === 6 ? "" : "right-border"
-          } text-gray-800`}
+          } text-gray-800 dark:text-darkMode-text`}
         >
           <RadioButtonUncheckedIcon fontSize="large" />
         </Box>
@@ -241,7 +277,7 @@ const getSubmissionProgressTextElements = (): ReactElement[] => {
   return textList.map((text) => {
     return (
       <Box className="flex justify-center pb-2">
-        <Box className="font-bold text-gray-800 text-center mx-1" sx={{ fontSize: "1.5vw" }}>
+        <Box className="font-bold text-gray-800 text-center mx-1 dark:text-darkMode-text" sx={{ fontSize: "1.5vw" }}>
           {text}
         </Box>
       </Box>
