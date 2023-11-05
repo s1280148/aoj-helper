@@ -28,11 +28,13 @@ const CourseDetailPage: React.FC = () => {
   return (
     courseDetail && (
       <Box>
-        <Box className="mt-4 border-2 rounded">
-          <h2 className="text-xl font-bold mb-2 border pl-4 py-2 bg-gray-200">{courseDetail.name}</h2>
-          <p className="p-1 pl-4">{courseDetail.description}</p>
+        <Box className="mt-4 border-2 rounded dark:bg-darkMode-darkest dark:border-darkMode-dark">
+          <h2 className="text-xl font-bold mb-2 border pl-4 py-2 bg-gray-200 dark:bg-darkMode-dark dark:border-darkMode-dark dark:text-darkMode-text">
+            {courseDetail.name}
+          </h2>
+          <p className="p-1 pl-4 dark:text-darkMode-text">{courseDetail.description}</p>
           <Box className="px-4">
-            <BorderLinearProgressWithLabel barColor="#1abcbc" progress={courseDetail.progress} />
+            <BorderLinearProgressWithLabel barClass="bg-course dark:bg-course-dark" progress={courseDetail.progress} />
           </Box>
         </Box>
         {courseDetail.topics.map((topic) => {

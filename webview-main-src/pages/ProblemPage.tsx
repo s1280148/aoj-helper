@@ -4,9 +4,10 @@ import { ScrollRestoration, useLocation, useNavigate, useParams } from "react-ro
 import { MathJaxContext, MathJax } from "better-react-mathjax";
 import mathJaxConfig from "../util/MathJaxConfig";
 import "../static/css/description.css";
-import { ProblemInfoContext } from "../components/providers/ProblemInfoProvider";
+import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
 import { ProblemDescription } from "../../public-src/ApiResponseType";
 import { callApi } from "../../webview-public-src/ApiUtil";
+import { ThemeInfoContext } from "../providers/ThemeInfoProvider";
 
 /**
  * 問題ページ
@@ -28,7 +29,7 @@ const ProblemPage: React.FC = () => {
       try {
         const response = await callApi("findByProblemIdDescription", parameters);
         setProblemInfo(response as ProblemDescription);
-        vscode.setState({ problemId: problemId });
+        vscode.setState({ ...vscode.getState(), problemId: problemId });
       } catch (e) {
         showErrorToast();
 
@@ -61,20 +62,26 @@ const ProblemPage: React.FC = () => {
     setErrorToastOpen(false);
   };
 
+  const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
+
   return (
     <>
       {problemInfo && (
         <>
           <Box className="flex mt-1">
-            <span className="text-xs border inline-block px-1 mr-3 ml-1 my-auto rounded border-red-500 text-red-600 bg-red-200">
+            <span className="text-xs border inline-block px-1 mr-3 ml-1 my-auto rounded border-red-500 text-red-600 bg-red-200 dark:border-red-900 dark:text-darkMode-text dark:bg-red-900">
               {problemInfo.time_limit} sec
             </span>
-            <span className="text-xs border inline-block px-1 my-auto rounded border-red-500 text-red-600 bg-red-200">
+            <span className="text-xs border inline-block px-1 my-auto rounded border-red-500 text-red-600 bg-red-200 dark:border-red-900 dark:text-darkMode-text dark:bg-red-900">
               {problemInfo.memory_limit} KB
             </span>
           </Box>
           <MathJax dynamic>
-            <Box id="description" className="description" dangerouslySetInnerHTML={{ __html: problemInfo.html }}></Box>
+            <Box
+              id="description"
+              className={isDarkMode ? "description-dark" : "description"}
+              dangerouslySetInnerHTML={{ __html: problemInfo.html }}
+            ></Box>
           </MathJax>
         </>
       )}

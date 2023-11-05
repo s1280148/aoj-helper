@@ -11,21 +11,12 @@ import ProblemInfoPanel from "./ProblemInfoPanel";
  */
 const Header: React.FC = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar
         position="static"
-        color="default"
-        sx={{
-          borderBottom: 4,
-          borderColor: "#19bcbc",
-        }}
+        className="border-b-4 border-course dark:border-course-dark bg-white dark:bg-darkMode-bg"
       >
-        <Toolbar
-          variant="dense"
-          sx={{
-            paddingX: "10px !important",
-          }}
-        >
+        <Toolbar variant="dense" className="px-1">
           <Box>
             <ProblemMenu />
           </Box>

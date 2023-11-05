@@ -53,3 +53,74 @@
   --text-opacity: 1;
   color: rgba(66, 153, 225, var(--text--opacity));
 }
+
+.description-dark h1,
+.description-dark h2 {
+  border-bottom-width: 2px;
+  --text-opacity: 1;
+  --border-opacity: 1;
+  color: rgba(223, 223, 223, var(--text-opacity));
+  border-color: rgba(79, 79, 79, var(--border-opacity));
+}
+
+.description-dark h1 {
+  font-size: 1.875rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.description-dark h2 {
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.description-dark h3,
+.description-dark h4,
+.description-dark h5,
+.description-dark h6,
+.description-dark b,
+.description-dark td {
+  --text-opacity: 1;
+  color: rgba(223, 223, 223, var(--text-opacity));
+}
+
+.description-dark p {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  --text-opacity: 1;
+  color: rgba(223, 223, 223, var(--text-opacity));
+}
+
+.description-dark pre,
+.description-dark ul {
+  --text-opacity: 1;
+  color: rgba(223, 223, 223, var(--text-opacity));
+}
+
+.description-dark pre {
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  border-radius: 0.25rem;
+  border-width: 1px;
+  --text-opacity: 1;
+  --border-opacity: 1;
+  --bg-opacity: 1;
+  color: rgba(223, 223, 223, var(--text-opacity));
+  border-color: rgba(79, 79, 79, var(--border-opacity));
+  background-color: rgba(62, 62, 62, var(--bg-opacity));
+  white-space: pre-wrap;
+}
+
+.description-dark ul {
+  list-style-type: disc;
+  padding-left: 3rem;
+  --text-opacity: 1;
+  color: rgba(223, 223, 223, var(--text-opacity));
+}
+
+.description-dark a {
+  text-decoration: underline;
+  color: rgba(66, 153, 225);
+}

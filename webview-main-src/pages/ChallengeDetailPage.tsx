@@ -33,8 +33,10 @@ const ChallengeDetailPage: React.FC = () => {
   return (
     challengeDetail && (
       <Box>
-        <Box className="mt-4 border-2 rounded">
-          <h2 className="text-xl font-bold border pl-4 py-2 bg-gray-200">{challengeDetail.largeCl.title}</h2>
+        <Box className="mt-4 border-2 rounded dark:bg-darkMode-dark dark:border-darkMode-dark dark:text-darkMode-text">
+          <h2 className="text-xl font-bold border pl-4 py-2 bg-gray-200 dark:bg-darkMode-dark dark:border-darkMode-dark dark:text-darkMode-text">
+            {challengeDetail.largeCl.title}
+          </h2>
         </Box>
         {challengeDetail.contests.map((contest) => {
           return (

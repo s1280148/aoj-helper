@@ -21,14 +21,19 @@ const CourseTopicCard: React.FC<Props> = (props: Props) => {
 
   return (
     <Box>
-      <Box className="border rounded hover:border-course flex px-4 pt-2" onClick={handleTopicCardClick}>
-        <Box className="flex items-center mr-3">{isProblemOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}</Box>
+      <Box
+        className="border rounded hover:border-course flex px-4 pt-2 dark:border-darkMode-dark dark:text-darkMode-text dark:bg-darkMode-darkest dark:hover:border-course-dark"
+        onClick={handleTopicCardClick}
+      >
+        <Box className="flex items-center mr-3 dark:text-darkMode-lighter">
+          {isProblemOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </Box>
         <Box className="flex-1">
           <Box className="text-lg">
-            <span>{topicInfo.shortName}</span>
-            <span className="font-bold ml-4">{topicInfo.name}</span>
+            <span className="dark:text-darkMode-text">{topicInfo.shortName}</span>
+            <span className="font-bold ml-4 dark:text-darkMode-text">{topicInfo.name}</span>
           </Box>
-          <BorderLinearProgressWithLabel barColor="#1abcbc" progress={topicInfo.progress} />
+          <BorderLinearProgressWithLabel barClass="bg-course dark:bg-course-dark" progress={topicInfo.progress} />
         </Box>
       </Box>
       <Collapse in={isProblemOpen}>

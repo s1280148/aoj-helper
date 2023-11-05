@@ -2,7 +2,7 @@ import { Box, Tab, Tabs } from "@mui/material";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import MapIcon from "@mui/icons-material/Map";
 import InboxIcon from "@mui/icons-material/Inbox";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { useState } from "react";
 
 const enum TabType {
@@ -40,24 +40,45 @@ const ProblemListPage: React.FC = () => {
       <Tabs
         value={currentTab}
         onChange={handleTabChange}
-        sx={{
-          ".MuiTab-root": {
-            minHeight: "",
-          },
-          ".Mui-selected": {
-            color: `${getCurrentTabColor(currentTab)}!important`,
-          },
-        }}
+        className="min-h-0"
         variant="fullWidth"
         TabIndicatorProps={{
-          sx: {
-            backgroundColor: getCurrentTabColor(currentTab),
-          },
+          className: getTabIndicatorClass(currentTab),
         }}
       >
-        <Tab icon={<MapIcon />} iconPosition="start" label="コース" value={TabType.COURSE} />
-        <Tab icon={<InboxIcon />} iconPosition="start" label="チャレンジ" value={TabType.CHALLENGE} />
-        <Tab icon={<BookmarkIcon />} iconPosition="start" label="ブックマーク" value={TabType.BOOKMARK} />
+        <Tab
+          className={`
+          min-h-0
+          py-3
+          ${currentTab === TabType.COURSE ? "text-course dark:text-course-dark" : "dark:text-darkMode-text"}
+          `}
+          icon={<MapIcon />}
+          iconPosition="start"
+          label="コース"
+          value={TabType.COURSE}
+        />
+        <Tab
+          className={`
+          min-h-0
+          py-3
+          ${currentTab === TabType.CHALLENGE ? "text-challenge dark:text-challenge" : "dark:text-darkMode-text"}
+          `}
+          icon={<InboxIcon />}
+          iconPosition="start"
+          label="チャレンジ"
+          value={TabType.CHALLENGE}
+        />
+        <Tab
+          className={`
+          min-h-0
+          py-3
+          ${currentTab === TabType.BOOKMARK ? "text-bookmark dark:text-bookmark-dark" : "dark:text-darkMode-text"}
+          `}
+          icon={<BookmarkBorderIcon />}
+          iconPosition="start"
+          label="ブックマーク"
+          value={TabType.BOOKMARK}
+        />
       </Tabs>
       <Outlet />
     </Box>
@@ -66,19 +87,19 @@ const ProblemListPage: React.FC = () => {
 
 export default ProblemListPage;
 
-const getCurrentTabColor = (currentTab: TabType) => {
+const getTabIndicatorClass = (currentTab: TabType) => {
   switch (currentTab) {
     case TabType.COURSE: {
-      return "#1abcbc";
+      return "bg-course dark:bg-course-dark";
     }
     case TabType.CHALLENGE: {
-      return "#777ef2";
+      return "bg-challenge dark:bg-challenge";
     }
     case TabType.BOOKMARK: {
-      return "#c6a57b";
+      return "bg-bookmark dark:bg-bookmark-dark";
     }
     default: {
-      return "inherit";
+      return "";
     }
   }
 };

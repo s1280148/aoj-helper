@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import Dialog from "@mui/material/Dialog";
-import { Alert, Button, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
+import { Alert, Box, Button, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
 
 /**
  * ログイン画面のモーダル
@@ -163,8 +163,13 @@ const LoginModal = () => {
   });
 
   return (
-    <Dialog open={open}>
-      <DialogTitle>ログイン</DialogTitle>
+    <Dialog
+      open={open}
+      PaperProps={{
+        className: "dark:bg-darkMode-bg",
+      }}
+    >
+      <DialogTitle className="dark:text-darkMode-text">ログイン</DialogTitle>
       <DialogContent>
         <form onSubmit={login}>
           <Alert severity="error" className="m-2" sx={{ display: alert ? "" : "none" }}>
@@ -177,7 +182,7 @@ const LoginModal = () => {
             margin="dense"
             fullWidth
             variant="outlined"
-            className="m-1"
+            className="mx-1 my-2"
             inputRef={idRef}
             error={idError}
             helperText={idError ? "入力してください" : ""}
@@ -189,17 +194,31 @@ const LoginModal = () => {
             margin="dense"
             fullWidth
             variant="outlined"
-            className="m-1"
+            className="mx-1 my-2"
             inputRef={passwordRef}
             error={passwordError}
             helperText={passwordError ? "入力してください" : ""}
           />
           <Grid container justifyContent="flex-end" className="mt-2">
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              className="dark:bg-darkMode dark:bg-darkMode-lighter dark:text-darkMode-text"
+            >
               ログイン
             </Button>
           </Grid>
         </form>
+        <Box className="text-center mt-3">
+          <a
+            href="https://onlinejudge.u-aizu.ac.jp/signup"
+            target="_blank"
+            rel="noopener"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            アカウント新規作成
+          </a>
+        </Box>
       </DialogContent>
     </Dialog>
   );

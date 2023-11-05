@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CommentaryDetail, CommentaryInfo } from "../../public-src/ApiResponseType";
 import { callApi } from "../../webview-public-src/ApiUtil";
 import { Box, FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
@@ -6,6 +6,7 @@ import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import "../static/css/description.css";
 import { MathJax } from "better-react-mathjax";
+import { ThemeInfoContext } from "../providers/ThemeInfoProvider";
 
 type Props = {
   problemId: string;
@@ -57,25 +58,43 @@ const CommentaryNote: React.FC<Props> = (props: Props) => {
     setCommentaryDetail(response);
   };
 
+  const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
+
   return (
     <>
       {commentaryDetail && (
         <>
-          <Box className="border-2 rounded bg-white border-gray-200 mb-7">
-            <Box className="bg-gray-200">
+          <Box className="border-2 rounded border-gray-200 dark:border-darkMode-dark dark:bg-darkMode-darkest mb-7">
+            <Box className="bg-gray-200 dark:bg-darkMode-dark">
               <Box className="flex p-2">
                 <Box className="flex items-center mr-auto">
-                  <span className="mr-2">{getCommentaryIcon(commentaryDetail.pattern)}</span>
-                  <p className="text-base">{`${getPatternLabel(commentaryDetail.pattern)}: ${getTypeLabel(
-                    commentaryDetail.type,
-                  )}`}</p>
+                  <span className="mr-2 dark:text-darkMode-text">{getCommentaryIcon(commentaryDetail.pattern)}</span>
+                  <p className="text-base dark:text-darkMode-text">{`${getPatternLabel(
+                    commentaryDetail.pattern,
+                  )}: ${getTypeLabel(commentaryDetail.type)}`}</p>
                 </Box>
                 <Box>
-                  <FormControl sx={{ minWidth: 120 }} size="small" margin="none">
-                    <Select onChange={handleSelectChange} value={commentaryDetail.filter}>
+                  <FormControl sx={{ minWidth: 130 }} size="small" margin="none">
+                    <Select
+                      className="dark:bg-darkMode-lightest dark:border-darkMode-lightest dark:text-darkMode-text"
+                      onChange={handleSelectChange}
+                      value={commentaryDetail.filter}
+                      inputProps={{
+                        className: "py-1",
+                      }}
+                      MenuProps={{
+                        MenuListProps: {
+                          className: "p-0",
+                        },
+                      }}
+                    >
                       {commentaryInfo.filter.map((filter) => {
                         return (
-                          <MenuItem value={filter} dense>
+                          <MenuItem
+                            className="dark:bg-darkMode-lightest dark:border-darkMode-lightest dark:text-darkMode-text"
+                            value={filter}
+                            dense
+                          >
                             {filter}
                           </MenuItem>
                         );
@@ -86,7 +105,10 @@ const CommentaryNote: React.FC<Props> = (props: Props) => {
               </Box>
             </Box>
             <MathJax dynamic>
-              <Box className="description px-3 pb-4" dangerouslySetInnerHTML={{ __html: commentaryDetail.html }}></Box>
+              <Box
+                className={`${isDarkMode ? "description-dark" : "description"} px-3 pt-2 pb-4`}
+                dangerouslySetInnerHTML={{ __html: commentaryDetail.html }}
+              ></Box>
             </MathJax>
           </Box>
         </>
