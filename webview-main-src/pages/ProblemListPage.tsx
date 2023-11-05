@@ -2,7 +2,7 @@ import { Box, Tab, Tabs } from "@mui/material";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import MapIcon from "@mui/icons-material/Map";
 import InboxIcon from "@mui/icons-material/Inbox";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { useState } from "react";
 
 const enum TabType {
@@ -74,7 +74,7 @@ const ProblemListPage: React.FC = () => {
           py-3
           ${currentTab === TabType.BOOKMARK ? "text-bookmark dark:text-bookmark-dark" : "dark:text-darkMode-text"}
           `}
-          icon={<BookmarkIcon />}
+          icon={<BookmarkBorderIcon />}
           iconPosition="start"
           label="ブックマーク"
           value={TabType.BOOKMARK}
