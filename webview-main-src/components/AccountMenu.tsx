@@ -16,7 +16,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 const AccountMenu: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const openAccountMenu = () => {
+  const openAccountMenu = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.currentTarget.blur();
     setOpen(true);
   };
 
