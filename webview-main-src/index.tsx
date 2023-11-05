@@ -6,6 +6,8 @@ import { ProblemInfoProvider } from "./providers/ProblemInfoProvider";
 import { MathJaxContext } from "better-react-mathjax";
 import mathJaxConfig from "./util/MathJaxConfig";
 import { ThemeInfoProvider } from "./providers/ThemeInfoProvider";
+import { ThemeProvider } from "@emotion/react";
+import { createTheme } from "@mui/material";
 
 // 以前に表示していた問題の問題IDを指定
 // 表示していた問題がなければ"ITP1_1_A"を指定

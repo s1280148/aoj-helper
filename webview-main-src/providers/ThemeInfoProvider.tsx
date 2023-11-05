@@ -1,4 +1,36 @@
+import { ThemeProvider } from "@emotion/react";
+import { createTheme } from "@mui/material";
 import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState } from "react";
+
+const lightTheme = createTheme({
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: "none",
+        },
+      },
+    },
+  },
+  palette: {
+    mode: "light",
+  },
+});
+
+const darkTheme = createTheme({
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: "none",
+        },
+      },
+    },
+  },
+  palette: {
+    mode: "dark",
+  },
+});
 
 type Props = {
   children: React.ReactNode;
@@ -26,5 +58,9 @@ export const ThemeInfoProvider: React.FC<Props> = (props) => {
     vscode.setState({ ...vscode.getState(), isDarkMode: isDarkMode });
   }, [isDarkMode]);
 
-  return <ThemeInfoContext.Provider value={{ isDarkMode, setIsDarkMode }}>{children}</ThemeInfoContext.Provider>;
+  return (
+    <ThemeInfoContext.Provider value={{ isDarkMode, setIsDarkMode }}>
+      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>{children}</ThemeProvider>
+    </ThemeInfoContext.Provider>
+  );
 };
