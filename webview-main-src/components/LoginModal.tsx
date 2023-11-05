@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import Dialog from "@mui/material/Dialog";
-import { Alert, Button, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
+import { Alert, Box, Button, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
 
 /**
  * ログイン画面のモーダル
@@ -209,6 +209,16 @@ const LoginModal = () => {
             </Button>
           </Grid>
         </form>
+        <Box className="text-center mt-3">
+          <a
+            href="https://onlinejudge.u-aizu.ac.jp/signup"
+            target="_blank"
+            rel="noopener"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            アカウント新規作成
+          </a>
+        </Box>
       </DialogContent>
     </Dialog>
   );
