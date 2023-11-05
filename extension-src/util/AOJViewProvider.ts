@@ -122,6 +122,9 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
         </head>
         <body class="p-0 bg-white dark:bg-darkMode-bg text-black">
           <style>
+            code {
+              color: unset;
+            }
             ::-webkit-scrollbar {
               width: 0;
             }

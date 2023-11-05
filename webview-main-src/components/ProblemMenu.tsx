@@ -12,6 +12,7 @@ import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from 
 import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
 import "../static/css/problemMenu.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { isChallengeProblem } from "../../public-src/util/ProblemInfoUtil";
 
 const enum Page {
   PRE_COMMENTARY,
@@ -144,7 +145,9 @@ const ProblemMenu: React.FC = () => {
                 <ListItemIcon
                   className={
                     currentPage === Page.PRE_COMMENTARY
-                      ? "text-course dark:text-course-dark"
+                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
+                        ? "text-challenge dark:text-challenge"
+                        : "text-course dark:text-course-dark"
                       : "text-inherit dark:text-darkMode-text"
                   }
                 >
@@ -154,7 +157,9 @@ const ProblemMenu: React.FC = () => {
                   primary="解説（前）"
                   className={
                     currentPage === Page.PRE_COMMENTARY
-                      ? "text-course dark:text-course-dark"
+                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
+                        ? "text-challenge dark:text-challenge"
+                        : "text-course dark:text-course-dark"
                       : "text-inherit dark:text-darkMode-text"
                   }
                 />
@@ -165,7 +170,9 @@ const ProblemMenu: React.FC = () => {
                 <ListItemIcon
                   className={
                     currentPage === Page.PROBLEM
-                      ? "text-course dark:text-course-dark"
+                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
+                        ? "text-challenge dark:text-challenge"
+                        : "text-course dark:text-course-dark"
                       : "text-inherit dark:text-darkMode-text"
                   }
                 >
@@ -175,7 +182,9 @@ const ProblemMenu: React.FC = () => {
                   primary="問題文"
                   className={
                     currentPage === Page.PROBLEM
-                      ? "text-course dark:text-course-dark"
+                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
+                        ? "text-challenge dark:text-challenge"
+                        : "text-course dark:text-course-dark"
                       : "text-inherit dark:text-darkMode-text"
                   }
                 />
@@ -186,7 +195,9 @@ const ProblemMenu: React.FC = () => {
                 <ListItemIcon
                   className={
                     currentPage === Page.POST_COMMENTARY
-                      ? "text-course dark:text-course-dark"
+                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
+                        ? "text-challenge dark:text-challenge"
+                        : "text-course dark:text-course-dark"
                       : "text-inherit dark:text-darkMode-text"
                   }
                 >
@@ -196,7 +207,9 @@ const ProblemMenu: React.FC = () => {
                   primary="解説（後）"
                   className={
                     currentPage === Page.POST_COMMENTARY
-                      ? "text-course dark:text-course-dark"
+                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
+                        ? "text-challenge dark:text-challenge"
+                        : "text-course dark:text-course-dark"
                       : "text-inherit dark:text-darkMode-text"
                   }
                 />
@@ -207,7 +220,9 @@ const ProblemMenu: React.FC = () => {
                 <ListItemIcon
                   className={
                     currentPage === Page.SUBMISSION_RECORD
-                      ? "text-course dark:text-course-dark"
+                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
+                        ? "text-challenge dark:text-challenge"
+                        : "text-course dark:text-course-dark"
                       : "text-inherit dark:text-darkMode-text"
                   }
                 >
@@ -217,7 +232,9 @@ const ProblemMenu: React.FC = () => {
                   primary="提出履歴"
                   className={
                     currentPage === Page.SUBMISSION_RECORD
-                      ? "text-course dark:text-course-dark"
+                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
+                        ? "text-challenge dark:text-challenge"
+                        : "text-course dark:text-course-dark"
                       : "text-inherit dark:text-darkMode-text"
                   }
                 />
@@ -228,7 +245,9 @@ const ProblemMenu: React.FC = () => {
                 <ListItemIcon
                   className={
                     currentPage === Page.MODEL_ANSWER
-                      ? "text-course dark:text-course-dark"
+                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
+                        ? "text-challenge dark:text-challenge"
+                        : "text-course dark:text-course-dark"
                       : "text-inherit dark:text-darkMode-text"
                   }
                 >
@@ -238,7 +257,9 @@ const ProblemMenu: React.FC = () => {
                   primary="模範解答"
                   className={
                     currentPage === Page.MODEL_ANSWER
-                      ? "text-course dark:text-course-dark"
+                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
+                        ? "text-challenge dark:text-challenge"
+                        : "text-course dark:text-course-dark"
                       : "text-inherit dark:text-darkMode-text"
                   }
                 />
