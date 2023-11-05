@@ -32,7 +32,10 @@ const ChallengeCard: React.FC<Props> = (props: Props) => {
     >
       <p className="text-lg">{midlleChallenge.id}</p>
       <p className="text-xs text-gray-600">{`${midlleChallenge.numberOfProblems} problems`}</p>
-      <BorderLinearProgressWithLabel barColor="#777EF2" progress={midlleChallenge.progress} />
+      <BorderLinearProgressWithLabel
+        barClass="bg-challenge dark:bg-challenge-dark"
+        progress={midlleChallenge.progress}
+      />
     </Box>
   );
 };

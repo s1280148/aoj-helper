@@ -26,15 +26,22 @@ const CourseCard: React.FC<Props> = (props: Props) => {
       hover:shadow-lg
       transition-shadow
       duration-200
-      hover:border-course text-gray-900"
+      hover:border-course
+      text-gray-900
+      dark:border-darkMode-dark
+      dark:text-darkMode-text
+      dark:bg-darkMode-darkest
+      dark:hover:border-course-dark"
       onClick={handleCardClick}
     >
       <Box className="text-sm flex items-center">
-        <Box className="border rounded px-1 text-course border-course">{courseInfo.type}</Box>
-        <Box className="ml-3 text-gray-800">{courseInfo.shortName}</Box>
+        <Box className="border rounded px-1 text-course border-course dark:text-course-dark dark:border-course-dark">
+          {courseInfo.type}
+        </Box>
+        <Box className="ml-3 text-gray-800 dark:text-darkMode-text">{courseInfo.shortName}</Box>
       </Box>
-      <Box className="text-sm font-bold mt-2 text-gray-800">{courseInfo.name}</Box>
-      <BorderLinearProgressWithLabel barColor="#1abcbc" progress={courseInfo.progress} />
+      <Box className="text-sm font-bold mt-2 text-gray-800 dark:text-darkMode-text">{courseInfo.name}</Box>
+      <BorderLinearProgressWithLabel barClass="bg-course dark:bg-course-dark" progress={courseInfo.progress} />
     </Box>
   );
 };
