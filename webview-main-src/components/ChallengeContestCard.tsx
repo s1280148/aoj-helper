@@ -21,12 +21,27 @@ const ChallengeContestCard: React.FC<Props> = (props: Props) => {
 
   return (
     <Box>
-      <Box className="border rounded hover:border-challenge flex px-4 pt-2" onClick={handleContestCardClick}>
-        <Box className="flex items-center mr-3">{isProblemOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}</Box>
+      <Box
+        className="
+          border
+          rounded
+          hover:border-challenge
+          flex
+          px-4
+          pt-2
+          dark:border-darkMode-dark
+          dark:text-darkMode-text
+          dark:bg-darkMode-darkest
+          dark:hover:border-challenge-dark"
+        onClick={handleContestCardClick}
+      >
+        <Box className="flex items-center mr-3 dark:text-darkMode-lightest">
+          {isProblemOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        </Box>
         <Box className="flex-1">
           <Box className="text-lg">
-            <span className="text-lg font-bold mr-2">{contestInfo.abbr}</span>
-            <span className="text-base text-gray-500">{`${contestInfo.numberOfProblems} problems`}</span>
+            <span className="text-lg font-bold mr-2 dark:text-darkMode-text">{contestInfo.abbr}</span>
+            <span className="text-base text-gray-500 dark:text-darkMode-text">{`${contestInfo.numberOfProblems} problems`}</span>
           </Box>
           <BorderLinearProgressWithLabel
             barClass="bg-challenge dark:bg-challenge-dark"
