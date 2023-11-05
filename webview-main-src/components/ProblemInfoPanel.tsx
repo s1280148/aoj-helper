@@ -7,6 +7,7 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
 import { callApi } from "../../webview-public-src/ApiUtil";
 import { BookmarkSaveInfo, SessionInfo } from "../../public-src/ApiResponseType";
+import { isChallengeProblem } from "../../public-src/util/ProblemInfoUtil";
 
 const ProblemInfoPanel: React.FC = () => {
   const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
@@ -65,7 +66,17 @@ const ProblemInfoPanel: React.FC = () => {
     <>
       {problemInfo && (
         <Box
-          className="flex items-center px-3 py-1 bg-course border-course dark:bg-course-dark dark:border-course-dark"
+          className={`
+            flex
+            items-center
+            px-3
+            py-1
+            ${
+              isChallengeProblem(problemInfo.problem_id)
+                ? "bg-challenge border-challenge dark:bg-challenge dark:border-challenge"
+                : "bg-course border-course dark:bg-course-dark dark:border-course-dark"
+            }
+          `}
           sx={{ borderRadius: "2rem" }}
         >
           <Box className="flex items-center text-2xl rounded-full text-white dark:text-darkMode-text">
