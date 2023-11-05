@@ -139,7 +139,6 @@ const SubmissionRecordPage: React.FC = () => {
                   dark:bg-${getStatusFromSubmissionStatus(selectedJudgeInfo.submissionStatus)}-dark
                   dark:border-${getStatusFromSubmissionStatus(selectedJudgeInfo.submissionStatus)}-dark
                   dark:text-darkMode-text
-                  text-reject-dark
                   `}
                 >
                   {targetReviewInfo.judgeId}
