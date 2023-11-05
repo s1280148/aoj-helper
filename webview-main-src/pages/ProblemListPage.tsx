@@ -43,7 +43,7 @@ const ProblemListPage: React.FC = () => {
         className="min-h-0"
         variant="fullWidth"
         TabIndicatorProps={{
-          className: `bg-${getCurrentTabColorName(currentTab)} dark:bg-${getCurrentTabColorName(currentTab)}-dark`,
+          className: getTabIndicatorClass(currentTab),
         }}
       >
         <Tab
@@ -61,7 +61,7 @@ const ProblemListPage: React.FC = () => {
           className={`
           min-h-0
           py-3
-          ${currentTab === TabType.CHALLENGE ? "text-challenge dark:text-challenge-dark" : "dark:text-darkMode-text"}
+          ${currentTab === TabType.CHALLENGE ? "text-challenge dark:text-challenge" : "dark:text-darkMode-text"}
           `}
           icon={<InboxIcon />}
           iconPosition="start"
@@ -87,19 +87,19 @@ const ProblemListPage: React.FC = () => {
 
 export default ProblemListPage;
 
-const getCurrentTabColorName = (currentTab: TabType) => {
+const getTabIndicatorClass = (currentTab: TabType) => {
   switch (currentTab) {
     case TabType.COURSE: {
-      return "course";
+      return "bg-course dark:bg-course-dark";
     }
     case TabType.CHALLENGE: {
-      return "challenge";
+      return "bg-challenge dark:bg-challenge";
     }
     case TabType.BOOKMARK: {
-      return "bookmark";
+      return "bg-bookmark dark:bg-bookmark-dark";
     }
     default: {
-      return "course";
+      return "";
     }
   }
 };

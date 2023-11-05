@@ -32,7 +32,7 @@ const ChallengeContestCard: React.FC<Props> = (props: Props) => {
           dark:border-darkMode-dark
           dark:text-darkMode-text
           dark:bg-darkMode-darkest
-          dark:hover:border-challenge-dark"
+          dark:hover:border-challenge"
         onClick={handleContestCardClick}
       >
         <Box className="flex items-center mr-3 dark:text-darkMode-lightest">
@@ -43,10 +43,7 @@ const ChallengeContestCard: React.FC<Props> = (props: Props) => {
             <span className="text-lg font-bold mr-2 dark:text-darkMode-text">{contestInfo.abbr}</span>
             <span className="text-base text-gray-500 dark:text-darkMode-text">{`${contestInfo.numberOfProblems} problems`}</span>
           </Box>
-          <BorderLinearProgressWithLabel
-            barClass="bg-challenge dark:bg-challenge-dark"
-            progress={contestInfo.progress}
-          />
+          <BorderLinearProgressWithLabel barClass="bg-challenge dark:bg-challenge" progress={contestInfo.progress} />
         </Box>
       </Box>
       <Collapse in={isProblemOpen}>

@@ -34,17 +34,17 @@ const ChallengeProblemCard: React.FC<Props> = (props: Props) => {
         dark:border-darkMode-dark
         dark:text-darkMode-text
         dark:bg-darkMode-darkest
-        dark:hover:border-challenge-dark"
+        dark:hover:border-challenge"
       onClick={handleProblemCardClick}
     >
       <Box className="mr-4">
         {problemInfo.isSolved ? (
-          <CheckCircleIcon className="text-challenge dark:text-challenge-dark" />
+          <CheckCircleIcon className="text-challenge dark:text-challenge" />
         ) : (
           <RadioButtonUncheckedIcon className="text-gray-400 dark:text-darkMode-text" />
         )}
       </Box>
-      <Box className="border rounded text-xs p-1 mr-4 text-challenge border-challenge dark:text-challenge-dark dark:border-challenge-dark">
+      <Box className="border rounded text-xs p-1 mr-4 text-challenge border-challenge dark:text-challenge dark:border-challenge">
         <span>{`Day ${day}`}</span>
       </Box>
       <Box>

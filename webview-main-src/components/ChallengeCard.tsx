@@ -33,16 +33,13 @@ const ChallengeCard: React.FC<Props> = (props: Props) => {
       dark:border-darkMode-dark
       dark:hover:border-challenge
       dark:text-darkMode-text
-      dark:hover:border-challenge-dark
+      dark:hover:border-challenge
       "
       onClick={handleChallengeCardClick}
     >
       <p className="text-lg dark:text-darkMode-text">{midlleChallenge.id}</p>
       <p className="text-xs text-gray-600 dark:text-darkMode-text">{`${midlleChallenge.numberOfProblems} problems`}</p>
-      <BorderLinearProgressWithLabel
-        barClass="bg-challenge dark:bg-challenge-dark"
-        progress={midlleChallenge.progress}
-      />
+      <BorderLinearProgressWithLabel barClass="bg-challenge dark:bg-challenge" progress={midlleChallenge.progress} />
     </Box>
   );
 };
