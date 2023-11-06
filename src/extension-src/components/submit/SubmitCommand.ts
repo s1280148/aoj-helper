@@ -1,9 +1,9 @@
-import { ProgrammingLanguage } from "../../public-src/util/LanguageUtil";
-import { SubmissionStatus, getSubmissionStatusMessage } from "../../public-src/util/JudgeInfoUtil";
+import { ProgrammingLanguage } from "../../../public-src/util/LanguageUtil";
+import { SubmissionStatus, getSubmissionStatusMessage } from "../../../public-src/util/JudgeInfoUtil";
 import * as vscode from "vscode";
-import AOJViewProvider from "../util/AOJViewProvider";
-import SubmissionManager from "../util/SubmissionManager";
-import aojApiClient from "../util/AOJApiClient";
+import AOJViewProvider from "../AOJViewProvider";
+import SubmissionManager from "../SubmissionManager";
+import aojApiClient from "../AOJApiClient";
 
 /**
  * 提出コマンドを作成します。

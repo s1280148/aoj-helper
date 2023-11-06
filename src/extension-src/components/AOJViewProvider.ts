@@ -1,9 +1,9 @@
-import { submitButton } from "../components/SubmitButton";
+import { submitButton } from "./submit/SubmitButton";
 import * as path from "path";
 import * as vscode from "vscode";
 import AOJSessionManager from "./AOJSessionManager";
 import aojApiClient from "./AOJApiClient";
-import { EXTENSION_SCHEME } from "./extensionInfo";
+import { EXTENSION_SCHEME } from "../settings/extensionScheme";
 import SimpleDocumentContentProvider from "./SimpleTextDocumentContentProvider";
 
 /**

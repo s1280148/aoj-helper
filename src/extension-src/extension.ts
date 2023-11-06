@@ -1,10 +1,10 @@
-import { submitButton } from "./components/SubmitButton";
+import { createSubmitCommand } from "./components/submit/SubmitCommand";
 import * as vscode from "vscode";
-import AOJSessionManager from "./util/AOJSessionManager";
-import AOJViewProvider from "./util/AOJViewProvider";
-import { createSubmitCommand } from "./components/SubmitCommand";
-import SimpleDocumentContentProvider from "./util/SimpleTextDocumentContentProvider";
-import { EXTENSION_SCHEME } from "./util/extensionInfo";
+import AOJSessionManager from "./components/AOJSessionManager";
+import AOJViewProvider from "./components/AOJViewProvider";
+import SimpleDocumentContentProvider from "./components/SimpleTextDocumentContentProvider";
+import { submitButton } from "./components/submit/SubmitButton";
+import { EXTENSION_SCHEME } from "./settings/extensionScheme";
 
 /**
  * 拡張機能をactivateします。
