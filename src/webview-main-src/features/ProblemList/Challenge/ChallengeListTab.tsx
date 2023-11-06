@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import LargeChallengeSection from "./components/LargeChallengeSection";
 import { LargeChallenge } from "../../../../public-src/types/ApiResponseType";
-import { callApi } from "../../../../webview-public-src/ApiUtil";
+import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
 
 const ChallengeListTab: React.FC = () => {
   const [largeChallengeList, setLargeChgallengeList] = useState<null | LargeChallenge[]>(null);

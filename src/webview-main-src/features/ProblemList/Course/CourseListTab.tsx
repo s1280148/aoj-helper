@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { CourseInfo, CourseInfoList } from "../../../../public-src/types/ApiResponseType";
 import CourseCard from "./components/CourseCard";
-import { callApi } from "../../../../webview-public-src/ApiUtil";
+import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
 
 const CourseListTab: React.FC = () => {
   const [courseInfoList, setCourseInfoList] = useState<null | CourseInfo[]>(null);

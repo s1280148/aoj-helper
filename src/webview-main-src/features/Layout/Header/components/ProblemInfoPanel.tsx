@@ -5,7 +5,7 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { ProblemInfoContext } from "../../../../providers/ProblemInfoProvider";
-import { callApi } from "../../../../../webview-public-src/ApiUtil";
+import { callApi } from "../../../../../webview-public-src/utils/ApiUtil";
 import { BookmarkSaveInfo, SessionInfo } from "../../../../../public-src/types/ApiResponseType";
 import { isChallengeProblem } from "../../../../../public-src/utils/ProblemInfoUtil";
 

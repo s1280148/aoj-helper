@@ -10,7 +10,7 @@ import { getStatusFromSubmissionStatus } from "../../../public-src/utils/JudgeIn
 import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-src/utils/LanguageUtil";
 import { timeStampToDate } from "../../../public-src/utils/DateUtil";
 import { editor } from "monaco-editor";
-import { callApi } from "../../../webview-public-src/ApiUtil";
+import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { ThemeInfoContext } from "../../providers/ThemeInfoProvider";
 import { SubmissionStatus } from "../../../public-src/constants/constant";
 

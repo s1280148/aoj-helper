@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import BorderLinearProgressWithLabel from "../../../components/Element/BorderLinearProgressWithLabel";
 import CourseTopicCard from "./components/CourseTopicCard";
 import { CourseDetail } from "../../../../public-src/types/ApiResponseType";
-import { callApi } from "../../../../webview-public-src/ApiUtil";
+import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
 
 const CourseDetailTab: React.FC = () => {
   const { courseId } = useParams<"courseId">();

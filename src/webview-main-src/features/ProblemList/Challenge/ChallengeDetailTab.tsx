@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 import ChallengeContestCard from "./components/ChallengeContestCard";
 import { ChallengeDetail } from "../../../../public-src/types/ApiResponseType";
-import { callApi } from "../../../../webview-public-src/ApiUtil";
+import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
 
 type ParamTypes = {
   largeChallengeId: string;

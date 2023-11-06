@@ -10,7 +10,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { ModelAnswerInfo, ReviewInfo, SessionInfo } from "../../../public-src/types/ApiResponseType";
 import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-src/utils/LanguageUtil";
-import { callApi } from "../../../webview-public-src/ApiUtil";
+import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { ThemeInfoContext } from "../../providers/ThemeInfoProvider";
 import { SubmissionStatus } from "../../../public-src/constants/constant";
 
