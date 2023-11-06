@@ -1,7 +1,12 @@
+interface VSCodeState {
+  problemId: string;
+  isDarkMode: boolean;
+}
+
 type VSCode = {
-  postMessage(message: any): void;
-  getState(): any;
-  setState(state: any): void;
+  postMessage(message: object): void;
+  getState(): VSCodeState;
+  setState(state: VSCodeState): void;
 };
 
 declare const vscode: VSCode;

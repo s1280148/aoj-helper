@@ -28,8 +28,12 @@ const ProblemPage: React.FC = () => {
 
       try {
         const response = await callApi("findByProblemIdDescription", parameters);
-        setProblemInfo(response as ProblemDescription);
-        vscode.setState({ ...vscode.getState(), problemId: problemId });
+
+        const problemDescription = response as ProblemDescription;
+
+        setProblemInfo(problemDescription);
+
+        vscode.setState({ ...vscode.getState(), problemId: problemDescription.problem_id });
       } catch (e) {
         showErrorToast();
 
