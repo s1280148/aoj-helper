@@ -8,6 +8,7 @@ import mathJaxConfig from "./util/MathJaxConfig";
 import { ThemeInfoProvider } from "./providers/ThemeInfoProvider";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
+import CustomMuiThemeProvider from "./providers/CustomMuiThemeProvider";
 
 // 以前に表示していた問題の問題IDを指定
 // 表示していた問題がなければ"ITP1_1_A"を指定
@@ -18,9 +19,11 @@ root.render(
   <MathJaxContext config={mathJaxConfig}>
     <ProblemInfoProvider>
       <ThemeInfoProvider>
-        <MemoryRouter initialEntries={[`/problem/${problemId}/description`]} initialIndex={0}>
-          <App />
-        </MemoryRouter>
+        <CustomMuiThemeProvider>
+          <MemoryRouter initialEntries={[`/problem/${problemId}/description`]} initialIndex={0}>
+            <App />
+          </MemoryRouter>
+        </CustomMuiThemeProvider>
       </ThemeInfoProvider>
     </ProblemInfoProvider>
   </MathJaxContext>,
