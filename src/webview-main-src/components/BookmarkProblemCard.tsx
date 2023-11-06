@@ -2,8 +2,8 @@ import { Box } from "@mui/material";
 import React from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import { ProblemInfo } from "../../public-src/ApiResponseType";
 import { useNavigate } from "react-router-dom";
+import { ProblemInfo } from "../../public-src/ApiResponseType";
 
 type Props = {
   problemInfo: ProblemInfo;

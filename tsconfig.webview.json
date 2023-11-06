@@ -15,5 +15,5 @@
     "isolatedModules": true,
     "jsx": "react-jsx"
   },
-  "include": ["webview-main-src", "webview-public-src", "public-src"]
+  "include": ["./src/webview-main-src", "./src/webview-public-src", "./src/public-src"]
 }

@@ -1,5 +1,5 @@
-import { ProgrammingLanguage } from "./../../public-src/util/LanguageUtil";
-import { SubmissionStatus, getSubmissionStatusMessage } from "./../../public-src/util/JudgeInfoUtil";
+import { ProgrammingLanguage } from "../../public-src/util/LanguageUtil";
+import { SubmissionStatus, getSubmissionStatusMessage } from "../../public-src/util/JudgeInfoUtil";
 import * as vscode from "vscode";
 import AOJViewProvider from "../util/AOJViewProvider";
 import SubmissionManager from "../util/SubmissionManager";

@@ -6,7 +6,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const config = {
   mode: "none",
-  entry: "./webview-main-src/index.tsx",
+  entry: "./src/webview-main-src/index.tsx",
   output: {
     path: path.join(__dirname, "/dist/webview-main-src"),
     filename: "webview-main.js",
@@ -39,7 +39,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./webview-main-src/index.html",
+      template: "./src/webview-main-src/index.html",
       filename: "index.html",
     }),
     new MiniCssExtractPlugin({

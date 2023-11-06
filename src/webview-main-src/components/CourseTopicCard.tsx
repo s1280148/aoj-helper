@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Collapse, TabProps } from "@mui/material";
+import { Box, Collapse } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import BorderLinearProgressWithLabel from "./BorderLinearProgressWithLabel";
