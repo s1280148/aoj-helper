@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { CourseInfo, CourseInfoList } from "../../public-src/ApiResponseType";
+import { CourseInfo, CourseInfoList } from "../../public-src/types/ApiResponseType";
 import CourseCard from "../components/CourseCard";
 import { callApi } from "../../webview-public-src/ApiUtil";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import LargeChallengeSection from "../components/LargeChallengeSection";
-import { LargeChallenge } from "../../public-src/ApiResponseType";
+import { LargeChallenge } from "../../public-src/types/ApiResponseType";
 import { callApi } from "../../webview-public-src/ApiUtil";
 
 const ChallengeListPage: React.FC = () => {

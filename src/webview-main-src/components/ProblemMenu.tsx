@@ -12,7 +12,7 @@ import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from 
 import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
 import "../static/css/problemMenu.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isChallengeProblem } from "../../public-src/util/ProblemInfoUtil";
+import { isChallengeProblem } from "../../public-src/utils/ProblemInfoUtil";
 
 const enum Page {
   PRE_COMMENTARY,

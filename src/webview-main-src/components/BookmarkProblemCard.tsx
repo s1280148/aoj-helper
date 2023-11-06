@@ -3,7 +3,7 @@ import React from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { useNavigate } from "react-router-dom";
-import { ProblemInfo } from "../../public-src/ApiResponseType";
+import { ProblemInfo } from "../../public-src/types/ApiResponseType";
 
 type Props = {
   problemInfo: ProblemInfo;

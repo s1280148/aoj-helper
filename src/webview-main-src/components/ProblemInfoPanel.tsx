@@ -6,8 +6,8 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
 import { callApi } from "../../webview-public-src/ApiUtil";
-import { BookmarkSaveInfo, SessionInfo } from "../../public-src/ApiResponseType";
-import { isChallengeProblem } from "../../public-src/util/ProblemInfoUtil";
+import { BookmarkSaveInfo, SessionInfo } from "../../public-src/types/ApiResponseType";
+import { isChallengeProblem } from "../../public-src/utils/ProblemInfoUtil";
 
 const ProblemInfoPanel: React.FC = () => {
   const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);

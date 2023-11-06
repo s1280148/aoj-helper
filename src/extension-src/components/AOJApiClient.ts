@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import ApiErrorCode from "../../public-src/ApiErrorCode";
 import AOJViewProvider from "./AOJViewProvider";
+import { ApiErrorCode } from "../../public-src/constants/constant";
 
 /**
  * AOJのAPIクライアント

@@ -1,32 +1,4 @@
-/**
- * 提出の進行状況
- */
-export const enum SubmissionProgress {
-  SUBMITTED = 0,
-  SENT_TO_JUDGE = 1,
-  BUILD = 2,
-  RUN = 3,
-  RESOURCE_LIMIT_CHECK = 4,
-  RESULT_CHECK = 5,
-  PRESENTATION_CHECK = 6,
-  ACCEPTED = 7,
-}
-
-/**
- * 提出ステータス
- */
-export const enum SubmissionStatus {
-  STATE_COMPILEERROR = 0,
-  STATE_WRONGANSWER = 1,
-  STATE_TIMELIMIT = 2,
-  STATE_MEMORYLIMIT = 3,
-  STATE_ACCEPTED = 4,
-  STATE_WAITING = 5,
-  STATE_OUTPUTLIMIT = 6,
-  STATE_RUNTIMEERROR = 7,
-  STATE_PRESENTATIONERROR = 8,
-  STATE_RUNNING = 9,
-}
+import { SubmissionProgress, SubmissionStatus } from "../constants/constant";
 
 /**
  * 提出ステータスからクラス名を取得します。

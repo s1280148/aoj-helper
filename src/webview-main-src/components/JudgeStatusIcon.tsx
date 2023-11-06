@@ -1,8 +1,8 @@
+import { SubmissionStatus } from "../../public-src/constants/constant";
 import {
-  SubmissionStatus,
   getClassNameFromSubmissionStatus,
   getShortStatusNameFromSubmissionStatus,
-} from "../../public-src/util/JudgeInfoUtil";
+} from "../../public-src/utils/JudgeInfoUtil";
 
 type Props = {
   submissionStatus: SubmissionStatus;

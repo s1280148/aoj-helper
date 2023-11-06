@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import BorderLinearProgressWithLabel from "./BorderLinearProgressWithLabel";
-import { CourseInfo } from "../../public-src/ApiResponseType";
+import { CourseInfo } from "../../public-src/types/ApiResponseType";
 import { useNavigate } from "react-router-dom";
 
 type Props = {

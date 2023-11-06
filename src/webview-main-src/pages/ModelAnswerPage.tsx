@@ -8,11 +8,11 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import { editor } from "monaco-editor";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { ModelAnswerInfo, ReviewInfo, SessionInfo } from "../../public-src/ApiResponseType";
-import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../public-src/util/LanguageUtil";
-import { SubmissionStatus } from "../../public-src/util/JudgeInfoUtil";
+import { ModelAnswerInfo, ReviewInfo, SessionInfo } from "../../public-src/types/ApiResponseType";
+import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../public-src/utils/LanguageUtil";
 import { callApi } from "../../webview-public-src/ApiUtil";
 import { ThemeInfoContext } from "../providers/ThemeInfoProvider";
+import { SubmissionStatus } from "../../public-src/constants/constant";
 
 const ModelAnswerPage: React.FC = () => {
   const { problemId } = useParams<"problemId">();

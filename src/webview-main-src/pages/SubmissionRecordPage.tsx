@@ -5,13 +5,14 @@ import JudgeStatusIcon from "../components/JudgeStatusIcon";
 import "../static/css/monacoEditor.css";
 import Editor, { Monaco } from "@monaco-editor/react";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { ReviewInfo, SessionInfo, SubmissionRecord } from "../../public-src/ApiResponseType";
-import { SubmissionStatus, getStatusFromSubmissionStatus } from "../../public-src/util/JudgeInfoUtil";
-import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../public-src/util/LanguageUtil";
-import { timeStampToDate } from "../../public-src/util/DateUtil";
+import { ReviewInfo, SessionInfo, SubmissionRecord } from "../../public-src/types/ApiResponseType";
+import { getStatusFromSubmissionStatus } from "../../public-src/utils/JudgeInfoUtil";
+import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../public-src/utils/LanguageUtil";
+import { timeStampToDate } from "../../public-src/utils/DateUtil";
 import { editor } from "monaco-editor";
 import { callApi } from "../../webview-public-src/ApiUtil";
 import { ThemeInfoContext } from "../providers/ThemeInfoProvider";
+import { SubmissionStatus } from "../../public-src/constants/constant";
 
 const SubmissionRecordPage: React.FC = () => {
   const { problemId } = useParams<"problemId">();

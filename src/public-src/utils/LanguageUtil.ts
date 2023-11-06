@@ -1,25 +1,4 @@
-export enum ProgrammingLanguage {
-  C = "C",
-  Cpp = "C++",
-  Java = "JAVA",
-  Cpp11 = "C++11",
-  Cpp14 = "C++14",
-  Cpp17 = "C++17",
-  CS = "C#",
-  D = "D",
-  Go = "Go",
-  Ruby = "Ruby",
-  Rust = "Rust",
-  Python = "Python",
-  Python3 = "Python3",
-  PyPy3 = "PyPy3",
-  JavaScript = "JavaScript",
-  Scala = "Scala",
-  Haskell = "Haskell",
-  OCaml = "OCaml",
-  PHP = "PHP",
-  Kotlin = "Kotlin",
-}
+import { ProgrammingLanguage } from "../constants/constant";
 
 export const getMonacoEditorLanguageFromProgrammingLanguage = (programmingLanguageStr: string) => {
   const programmingLanguage = programmingLanguageStr as ProgrammingLanguage;

@@ -4,7 +4,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import BorderLinearProgressWithLabel from "./BorderLinearProgressWithLabel";
 import { useState } from "react";
 import CourseProblemCard from "./CourseProblemCard";
-import { TopicInfo } from "../../public-src/ApiResponseType";
+import { TopicInfo } from "../../public-src/types/ApiResponseType";
 
 type Props = {
   topicInfo: TopicInfo;

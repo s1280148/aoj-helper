@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
-import { isChallengeProblem } from "../../public-src/util/ProblemInfoUtil";
+import { isChallengeProblem } from "../../public-src/utils/ProblemInfoUtil";
 
 const ProblemListButton: React.FC = () => {
   const navigate = useNavigate();

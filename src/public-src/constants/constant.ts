@@ -1,7 +1,60 @@
 /**
+ * 提出の進行状況
+ */
+export const enum SubmissionProgress {
+  SUBMITTED = 0,
+  SENT_TO_JUDGE = 1,
+  BUILD = 2,
+  RUN = 3,
+  RESOURCE_LIMIT_CHECK = 4,
+  RESULT_CHECK = 5,
+  PRESENTATION_CHECK = 6,
+  ACCEPTED = 7,
+}
+
+/**
+ * 提出ステータス
+ */
+export const enum SubmissionStatus {
+  STATE_COMPILEERROR = 0,
+  STATE_WRONGANSWER = 1,
+  STATE_TIMELIMIT = 2,
+  STATE_MEMORYLIMIT = 3,
+  STATE_ACCEPTED = 4,
+  STATE_WAITING = 5,
+  STATE_OUTPUTLIMIT = 6,
+  STATE_RUNTIMEERROR = 7,
+  STATE_PRESENTATIONERROR = 8,
+  STATE_RUNNING = 9,
+}
+
+export enum ProgrammingLanguage {
+  C = "C",
+  Cpp = "C++",
+  Java = "JAVA",
+  Cpp11 = "C++11",
+  Cpp14 = "C++14",
+  Cpp17 = "C++17",
+  CS = "C#",
+  D = "D",
+  Go = "Go",
+  Ruby = "Ruby",
+  Rust = "Rust",
+  Python = "Python",
+  Python3 = "Python3",
+  PyPy3 = "PyPy3",
+  JavaScript = "JavaScript",
+  Scala = "Scala",
+  Haskell = "Haskell",
+  OCaml = "OCaml",
+  PHP = "PHP",
+  Kotlin = "Kotlin",
+}
+
+/**
  * APIエラーコード
  */
-const enum ApiErrorCode {
+export const enum ApiErrorCode {
   // 無効なアクセストークンが送信された
   INVALID_ACCESS_TOKEN_ERROR = 1101,
 
@@ -47,5 +100,3 @@ const enum ApiErrorCode {
   // 不明なエラー
   UNKNOWN_ERROR = 9999,
 }
-
-export default ApiErrorCode;

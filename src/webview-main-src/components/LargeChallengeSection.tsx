@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import ChallengeCard from "./ChallengeCard";
-import { LargeChallenge } from "../../public-src/ApiResponseType";
+import { LargeChallenge } from "../../public-src/types/ApiResponseType";
 
 type Props = {
   largeChallenge: LargeChallenge;

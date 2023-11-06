@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { CommentaryDetail, CommentaryInfo } from "../../public-src/ApiResponseType";
+import { CommentaryDetail, CommentaryInfo } from "../../public-src/types/ApiResponseType";
 import { callApi } from "../../webview-public-src/ApiUtil";
 import { Box, FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";

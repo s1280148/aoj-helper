@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import BookmarkProblemCard from "../components/BookmarkProblemCard";
-import { BookmarkInfo, SessionInfo } from "../../public-src/ApiResponseType";
+import { BookmarkInfo, SessionInfo } from "../../public-src/types/ApiResponseType";
 import { callApi } from "../../webview-public-src/ApiUtil";
 
 const BookmarkListPage: React.FC = () => {

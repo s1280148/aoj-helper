@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import BorderLinearProgressWithLabel from "./BorderLinearProgressWithLabel";
 import { useNavigate } from "react-router-dom";
-import { MiddleChallenge } from "../../public-src/ApiResponseType";
+import { MiddleChallenge } from "../../public-src/types/ApiResponseType";
 
 type Props = {
   largeChallengeId: string;

@@ -6,7 +6,7 @@ import ProblemListButton from "./ProblemListButton";
 import ProblemInfoPanel from "./ProblemInfoPanel";
 import { useContext } from "react";
 import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
-import { isChallengeProblem } from "../../public-src/util/ProblemInfoUtil";
+import { isChallengeProblem } from "../../public-src/utils/ProblemInfoUtil";
 
 /**
  * ヘッダー

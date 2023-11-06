@@ -4,7 +4,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import BorderLinearProgressWithLabel from "./BorderLinearProgressWithLabel";
 import ChallengeProblemCard from "./ChallengeProblemCard";
-import { ChallengeContestInfo } from "../../public-src/ApiResponseType";
+import { ChallengeContestInfo } from "../../public-src/types/ApiResponseType";
 
 type Props = {
   contestInfo: ChallengeContestInfo;

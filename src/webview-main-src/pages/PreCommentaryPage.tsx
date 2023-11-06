@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { callApi } from "../../webview-public-src/ApiUtil";
-import { CommentaryInfo } from "../../public-src/ApiResponseType";
+import { CommentaryInfo } from "../../public-src/types/ApiResponseType";
 import CommentaryNote from "../components/CommentaryNote";
 import { Box } from "@mui/material";
 

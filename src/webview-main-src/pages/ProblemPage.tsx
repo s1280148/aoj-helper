@@ -5,7 +5,7 @@ import { MathJaxContext, MathJax } from "better-react-mathjax";
 import mathJaxConfig from "../util/MathJaxConfig";
 import "../static/css/description.css";
 import { ProblemInfoContext } from "../providers/ProblemInfoProvider";
-import { ProblemDescription } from "../../public-src/ApiResponseType";
+import { ProblemDescription } from "../../public-src/types/ApiResponseType";
 import { callApi } from "../../webview-public-src/ApiUtil";
 import { ThemeInfoContext } from "../providers/ThemeInfoProvider";
 

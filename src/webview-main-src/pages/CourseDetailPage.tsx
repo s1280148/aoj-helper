@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 import BorderLinearProgressWithLabel from "../components/BorderLinearProgressWithLabel";
 import CourseTopicCard from "../components/CourseTopicCard";
-import { CourseDetail } from "../../public-src/ApiResponseType";
+import { CourseDetail } from "../../public-src/types/ApiResponseType";
 import { callApi } from "../../webview-public-src/ApiUtil";
 
 const CourseDetailPage: React.FC = () => {

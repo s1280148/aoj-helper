@@ -5,13 +5,13 @@ import ErrorIcon from "@mui/icons-material/Error";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import "../static/css/judgeDetail.css";
 import {
-  SubmissionStatus,
   getClassNameFromShortStatusName,
   getClassNameFromSubmissionStatus,
   getShortStatusNameFromSubmissionStatus,
   getSubmissionProgressFromSubmissionStatus,
-} from "../../public-src/util/JudgeInfoUtil";
-import { JudgeDetail } from "../../public-src/ApiResponseType";
+} from "../../public-src/utils/JudgeInfoUtil";
+import { JudgeDetail } from "../../public-src/types/ApiResponseType";
+import { SubmissionStatus } from "../../public-src/constants/constant";
 
 /**
  * ジャッジ詳細モーダル
