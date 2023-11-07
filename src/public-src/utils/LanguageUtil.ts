@@ -1,5 +1,10 @@
 import { ProgrammingLanguage } from "../constants/constant";
 
+/**
+ * プログラミング言語を示す文字列からモナコエディターで設定するプログラミング言語名を取得します。
+ * @param programmingLanguageStr - プログラミング言語を示す文字列
+ * @returns プログラミング言語名
+ */
 export const getMonacoEditorLanguageFromProgrammingLanguage = (programmingLanguageStr: string) => {
   const programmingLanguage = programmingLanguageStr as ProgrammingLanguage;
 

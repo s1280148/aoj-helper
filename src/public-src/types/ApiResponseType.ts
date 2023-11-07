@@ -1,3 +1,6 @@
+/**
+ * セッション情報
+ */
 export interface SessionInfo {
   id: string;
   name: string;
@@ -12,6 +15,9 @@ export interface SessionInfo {
   status: SubmissionStatusInfo;
 }
 
+/**
+ * 提出ステータス情報
+ */
 export interface SubmissionStatusInfo {
   submissions: number;
   solved: number;
@@ -24,14 +30,18 @@ export interface SubmissionStatusInfo {
   runtimeError: number;
 }
 
-// 解説の情報
+/**
+ * 解説の情報
+ */
 export interface CommentaryInfo {
   type: string;
   pattern: string;
   filter: string[];
 }
 
-// 問題の情報
+/**
+ * 問題の説明
+ */
 export interface ProblemDescription {
   language: string;
   html: string;
@@ -50,6 +60,9 @@ export interface ProblemDescription {
   server_time: number;
 }
 
+/**
+ * 解説の詳細情報
+ */
 export interface CommentaryDetail {
   language: string;
   filter: string;
@@ -60,11 +73,17 @@ export interface CommentaryDetail {
   created_at: number;
 }
 
+/**
+ * コースリスト
+ */
 export interface CourseInfoList {
   filter: null | string;
   courses: CourseInfo[];
 }
 
+/**
+ * コース情報
+ */
 export interface CourseInfo {
   id: number;
   serial: number;
@@ -78,6 +97,9 @@ export interface CourseInfo {
   description: string;
 }
 
+/**
+ * コース詳細
+ */
 export interface CourseDetail {
   id: number;
   serial: number;
@@ -93,6 +115,9 @@ export interface CourseDetail {
   description: string;
 }
 
+/**
+ * コーストピック情報
+ */
 export interface TopicInfo {
   id: number;
   serial: number;
@@ -107,6 +132,9 @@ export interface TopicInfo {
   description: string;
 }
 
+/**
+ * 問題情報
+ */
 export interface ProblemInfo {
   id: string;
   available: number;
@@ -126,12 +154,18 @@ export interface ProblemInfo {
   userScore: number;
 }
 
+/**
+ * チャレンジの大分類
+ */
 export interface LargeChallenge {
   id: string;
   title: string;
   middleCls: MiddleChallenge[];
 }
 
+/**
+ * チャレンジの中分類
+ */
 export interface MiddleChallenge {
   id: string;
   numberOfProblems: number;
@@ -139,11 +173,17 @@ export interface MiddleChallenge {
   progress: number;
 }
 
+/**
+ * チャレンジ詳細
+ */
 export interface ChallengeDetail {
   largeCl: LargeChallenge;
   contests: ChallengeContestInfo[];
 }
 
+/**
+ * チャレンジコンテスト情報
+ */
 export interface ChallengeContestInfo {
   abbr: string;
   largeCl: string;
@@ -155,6 +195,9 @@ export interface ChallengeContestInfo {
   days: ChallengeDayInfo[];
 }
 
+/**
+ * チャレンジ日情報
+ */
 export interface ChallengeDayInfo {
   id: string;
   day: number;
@@ -165,6 +208,9 @@ export interface ChallengeDayInfo {
   problems: ProblemInfo[];
 }
 
+/**
+ * ブックマーク情報
+ */
 export interface BookmarkInfo {
   progress: number;
   numberOfProblems: number;
@@ -172,7 +218,9 @@ export interface BookmarkInfo {
   problems: ProblemInfo[];
 }
 
-// ジャッジ詳細
+/**
+ * ジャッジ詳細
+ */
 export interface JudgeDetail {
   judgeId: number;
   compileError: string;
@@ -182,7 +230,9 @@ export interface JudgeDetail {
   submissionRecord: SubmissionRecord;
 }
 
-// 判定結果
+/**
+ * 判定結果
+ */
 export interface CaseVerdict {
   serial: number;
   status: string;
@@ -194,7 +244,9 @@ export interface CaseVerdict {
   outputSize: number;
 }
 
-// 提出記録
+/**
+ * 提出記録
+ */
 export interface SubmissionRecord {
   judgeId: number;
   judgeType: number;
@@ -213,6 +265,9 @@ export interface SubmissionRecord {
   token: string | null;
 }
 
+/**
+ * レビュー情報
+ */
 export interface ReviewInfo {
   judgeId: number;
   userId: string;
@@ -226,6 +281,9 @@ export interface ReviewInfo {
   reviewed: number;
 }
 
+/**
+ * 模範解答情報
+ */
 export interface ModelAnswerInfo {
   judgeId: number;
   userId: string;
@@ -242,6 +300,9 @@ export interface ModelAnswerInfo {
   review: number;
 }
 
+/**
+ * ブックマーク保存情報
+ */
 export interface BookmarkSaveInfo {
   userId: string;
   problemId: string;

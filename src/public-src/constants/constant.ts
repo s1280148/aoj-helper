@@ -28,6 +28,9 @@ export const enum SubmissionStatus {
   STATE_RUNNING = 9,
 }
 
+/**
+ * 選択可能なプログラミング言語
+ */
 export enum ProgrammingLanguage {
   C = "C",
   Cpp = "C++",

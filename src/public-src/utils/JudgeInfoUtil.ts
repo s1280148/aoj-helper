@@ -2,6 +2,7 @@ import { SubmissionProgress, SubmissionStatus } from "../constants/constant";
 
 /**
  * 提出ステータスからクラス名を取得します。
+ * @param submissionStatus - 提出ステータス
  * @returns クラス名
  */
 export const getClassNameFromSubmissionStatus = (submissionStatus: SubmissionStatus) => {
@@ -12,6 +13,11 @@ export const getClassNameFromSubmissionStatus = (submissionStatus: SubmissionSta
   }
 };
 
+/**
+ * 提出ステータスから提出結果の文字列を取得します。
+ * @param submissionStatus - 提出ステータス
+ * @returns 提出結果の文字列
+ */
 export const getStatusFromSubmissionStatus = (submissionStatus: SubmissionStatus) => {
   if (submissionStatus === SubmissionStatus.STATE_ACCEPTED) {
     return "accept";
@@ -33,8 +39,8 @@ export const getClassNameFromShortStatusName = (submissionStatusShortName: strin
 };
 
 /**
- * 提出ステータスから提出の進行情報を取得します。
- * @param submissionStatus 提出ステータス
+ * 提出ステータスから提出の進行状況を取得します。
+ * @param submissionStatus - 提出ステータス
  * @returns 提出の進行状況
  */
 export const getSubmissionProgressFromSubmissionStatus = (submissionStatus: SubmissionStatus) => {

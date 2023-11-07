@@ -1,3 +1,8 @@
+/**
+ * タイムスタンプから日付の文字列を取得します。
+ * @param msec - ミリ秒
+ * @returns yyyy/MM/dd hh:mm:ss 形式の文字列
+ */
 export const timeStampToDate = (msec: number) => {
   const date = new Date(msec);
   const year = date.getFullYear();
@@ -8,4 +13,4 @@ export const timeStampToDate = (msec: number) => {
   const second = ("0" + date.getSeconds()).slice(-2);
 
   return `${year}/${month}/${day} ${hour}:${minute}:${second}`;
-}
+};
