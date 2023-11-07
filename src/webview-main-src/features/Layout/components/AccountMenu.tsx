@@ -2,7 +2,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useContext, useState } from "react";
-import { ThemeInfoContext } from "../../../../providers/ThemeInfoProvider";
+import { ThemeInfoContext } from "../../../providers/ThemeInfoProvider";
 import { Box, Button, Dialog, DialogContent, Switch } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 

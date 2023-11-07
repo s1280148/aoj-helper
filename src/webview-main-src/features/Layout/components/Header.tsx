@@ -1,9 +1,9 @@
 import { AppBar, Box, Toolbar } from "@mui/material";
-import AccountMenu from "./components/AccountMenu";
-import ProblemSearchBar from "./components/ProblemSearchBar";
-import ProblemMenu from "./components/ProblemMenu";
-import ProblemListButton from "./components/ProblemListButton";
-import ProblemInfoPanel from "./components/ProblemInfoPanel";
+import AccountMenu from "./AccountMenu";
+import ProblemSearchBar from "./ProblemSearchBar";
+import ProblemMenu from "./ProblemMenu";
+import ProblemListButton from "./ProblemListButton";
+import ProblemInfoPanel from "./ProblemInfoPanel";
 import { useContext } from "react";
 import { ProblemInfoContext } from "../../../providers/ProblemInfoProvider";
 import { isChallengeProblem } from "../../../../public-src/utils/ProblemInfoUtil";

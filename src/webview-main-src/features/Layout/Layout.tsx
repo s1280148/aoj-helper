@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import { Outlet, ScrollRestoration } from "react-router-dom";
-import Header from "./Header/Header";
-import JudgeDetailModal from "../JudgeDetail/JudgeDetailModal";
-import LoginModal from "../Login/LoginModal";
+import Header from "./components/Header";
+import JudgeDetailModal from "../judge-detail/JudgeDetailModal";
+import LoginModal from "../login/LoginModal";
 import ScrollTop from "./components/ScrollTop";
 
 /**

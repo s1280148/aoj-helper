@@ -9,9 +9,9 @@ import FeedbackIcon from "@mui/icons-material/Feedback";
 import HistoryIcon from "@mui/icons-material/History";
 import GroupIcon from "@mui/icons-material/Group";
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { ProblemInfoContext } from "../../../../providers/ProblemInfoProvider";
+import { ProblemInfoContext } from "../../../providers/ProblemInfoProvider";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isChallengeProblem } from "../../../../../public-src/utils/ProblemInfoUtil";
+import { isChallengeProblem } from "../../../../public-src/utils/ProblemInfoUtil";
 
 const enum Page {
   PRE_COMMENTARY,

@@ -1,16 +1,16 @@
 import { Route, Routes } from "react-router-dom";
-import Layout from "../features/Layout/Layout";
-import CourseListTab from "../features/ProblemList/Course/CourseListTab";
-import CourseDetailTab from "../features/ProblemList/Course/CourseDetailTab";
-import ChallengeListTab from "../features/ProblemList/Challenge/ChallengeListTab";
-import ChallengeDetailTab from "../features/ProblemList/Challenge/ChallengeDetailTab";
-import BookmarkListTab from "../features/ProblemList/Bookmark/BookmarkListTab";
-import PreCommentaryPage from "../features/Commentary/PreCommentaryPage";
-import PostCommentaryPage from "../features/Commentary/PostCommentaryPage";
-import SubmissionRecordPage from "../features/SubmissionRecord/SubmissionRecordPage";
-import ModelAnswerPage from "../features/ModelAnswer/ModelAnswerPage";
-import ProblemListPage from "../features/ProblemList/ProblemListPage";
-import ProblemDescriptionPage from "../features/ProblemDescription/ProblemDescriptionPage";
+import Layout from "../features/layout/Layout";
+import CourseListTab from "../features/problem-list/course/CourseListTab";
+import CourseDetailTab from "../features/problem-list/course/CourseDetailTab";
+import ChallengeListTab from "../features/problem-list/challenge/ChallengeListTab";
+import ChallengeDetailTab from "../features/problem-list/challenge/ChallengeDetailTab";
+import BookmarkListTab from "../features/problem-list/bookmark/BookmarkListTab";
+import PreCommentaryPage from "../features/commentary/PreCommentaryPage";
+import PostCommentaryPage from "../features/commentary/PostCommentaryPage";
+import SubmissionRecordPage from "../features/submission-record/SubmissionRecordPage";
+import ModelAnswerPage from "../features/model-answer/ModelAnswerPage";
+import ProblemListPage from "../features/problem-list/ProblemListPage";
+import ProblemDescriptionPage from "../features/problem-description/ProblemDescriptionPage";
 
 export const AppRoutes = () => {
   return (
