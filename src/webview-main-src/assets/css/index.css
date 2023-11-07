@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+code {
+  color: unset;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}

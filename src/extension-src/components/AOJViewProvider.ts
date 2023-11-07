@@ -121,14 +121,6 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           <title>React App</title>
         </head>
         <body class="p-0 bg-white dark:bg-darkMode-bg text-black">
-          <style>
-            code {
-              color: unset;
-            }
-            ::-webkit-scrollbar {
-              width: 0;
-            }
-          </style>
           <noscript>You need to enable JavaScript to run this app.</noscript>
           <script>
             const vscode = acquireVsCodeApi();
