@@ -39,7 +39,6 @@ class AOJApiClient {
         // エラーコードを取得
         const code: number = error.response.data[0].id;
 
-        // viewProviderのインスタンスを取得
         const aojViewProvider = AOJViewProvider.getInstance();
 
         // エラーコードによって処理を分岐する
@@ -67,7 +66,7 @@ class AOJApiClient {
 
   /**
    * セッション情報を適用します。
-   * @param cookie cookieの値
+   * @param cookie - cookieの値
    */
   applySession = (cookie: string) => {
     // judgeApiのクライアントにセッション情報を適用
@@ -94,7 +93,7 @@ class AOJApiClient {
    * ログインを行います。
    * @param id - ID
    * @param password - パスワード
-   * @returns ログイン結果
+   * @returns レスポンス
    */
   login = async (id: string, password: string) => {
     const requestBody = {
@@ -107,7 +106,7 @@ class AOJApiClient {
 
   /**
    * ログアウトを行います。
-   * @returns ログアウト結果
+   * @returns レスポンス
    */
   logout = async () => {
     return this.judgeApiClient.delete("/session");
@@ -115,26 +114,26 @@ class AOJApiClient {
 
   /**
    * セッション情報を取得します。
-   * @returns セッション情報
+   * @returns レスポンス
    */
   session = async () => {
     return this.judgeApiClient.get("/self");
   };
 
   /**
-   * 言語と問題IDから問題の情報を取得します。
-   * @param lang - 言語
+   * 問題の情報を取得します。
+   * @param lang - 表示言語
    * @param problemId - 問題ID
-   * @returns 問題の情報
+   * @returns レスポンス
    */
   findByProblemIdDescription = async (lang: string, problemId: string) => {
     return this.judgeApiClient.get(`/resources/descriptions/${lang}/${problemId}`);
   };
 
   /**
-   * ジャッジIDからジャッジの詳細を取得します。
+   * ジャッジの詳細を取得します。
    * @param judgeId - ジャッジID
-   * @returns ジャッジの詳細
+   * @returns レスポンス
    */
   findByJudgeIdVerdict = async (judgeId: string) => {
     return this.judgeApiClient.get(`/verdicts/${judgeId}`);
@@ -142,7 +141,7 @@ class AOJApiClient {
 
   /**
    * キューにある提出記録一覧を取得します。
-   * @returns 提出記録一覧
+   * @returns レスポンス
    */
   findRecentSubmissionRecords = async () => {
     return this.judgeApiClient.get("/submission_records/recent");
@@ -150,10 +149,10 @@ class AOJApiClient {
 
   /**
    * 提出を行います。
-   * @param problemId 問題ID
-   * @param language プログラミング言語
-   * @param sourceCode ソースコード
-   * @returns 提出のトークン
+   * @param problemId - 問題ID
+   * @param language - プログラミング言語
+   * @param sourceCode - ソースコード
+   * @returns レスポンス
    */
   submit = async (problemId: string, language: string, sourceCode: string) => {
     const requestBody = {
@@ -165,6 +164,15 @@ class AOJApiClient {
     return this.judgeApiClient.post("/submissions", requestBody);
   };
 
+  /**
+   * 解説のHTMLを取得します。
+   * @param dlang - 表示言語
+   * @param problemId - 問題ID
+   * @param pattern - パターン
+   * @param type - タイプ
+   * @param filter - フィルター
+   * @returns レスポンス
+   */
   findHtmlByLanguageAndProblemIdAndPatternAndTypeAndFilter = async (
     dlang: string,
     problemId: string,
@@ -175,44 +183,103 @@ class AOJApiClient {
     return this.judgeApiClient.get(`/resources/commentaries/${dlang}/${problemId}/${pattern}/${type}/${filter}`);
   };
 
+  /**
+   * 解説で利用可能なフィルターを取得します。
+   * @param language - 表示言語
+   * @param problemId - 問題ID
+   * @returns レスポンス
+   */
   findAvailableFilters = async (language: string, problemId: string) => {
     return this.judgeApiClient.get(`/resources/commentaries/filters/${language}/${problemId}`);
   };
 
+  /**
+   * コース一覧を取得します。
+   * @param lang - 表示言語
+   * @returns レスポンス
+   */
   findAllCoursesPage = async (lang: string) => {
     return this.judgeApiClient.get(`/courses?lang=${lang}`);
   };
 
+  /**
+   * コースのトピック一覧を取得します。
+   * @param courseId - コースID
+   * @param lang - 表示言語
+   * @returns レスポンス
+   */
   findByCourseIdPage = async (courseId: string, lang: string) => {
     return this.judgeApiClient.get(`/courses/${courseId}?lang=${lang}`);
   };
 
+  /**
+   * チャレンジの大分類一覧を取得します。
+   * @returns レスポンス
+   */
   findTopPage = async () => {
     return this.judgeApiClient.get("/challenges");
   };
 
+  /**
+   * チャレンジ一覧を取得します。
+   * @param largeCl - チャレンジの大分類
+   * @param middleCl - チャレンジの中分類
+   * @returns レスポンス
+   */
   findByLargeCLAndMiddleCLPage = async (largeCl: string, middleCl: string) => {
     return this.judgeApiClient.get(`/challenges/cl/${largeCl}/${middleCl}`);
   };
 
+  /**
+   * ユーザーのブックマーク一覧を取得します。
+   * @param userId - ユーザーID
+   * @returns レスポンス
+   */
   findByUserIdBookMarkDetail = async (userId: string) => {
     return this.judgeApiClient.get(`/problems/bookmarks/users/${userId}`);
   };
 
+  /**
+   * ユーザーIDと問題IDから提出記録一覧を取得します。
+   * @param userId - ユーザーID
+   * @param problemId - 問題ID
+   * @param page - ページ番号
+   * @param size - 1ページあたりのサイズ
+   * @returns レスポンス
+   */
   findByUserIdAndProblemIdSubmissionRecords = async (userId: string, problemId: string, page: number, size: number) => {
     return this.judgeApiClient.get(
       `/submission_records/users/${userId}/problems/${problemId}?page=${page}&size=${size}`,
     );
   };
 
+  /**
+   * 提出されたソースコードを取得します。
+   * @param judgeId - ジャッジID
+   * @returns レスポンス
+   */
   findByJudgeIdReivew = async (judgeId: number) => {
     return this.judgeApiClient.get(`/reviews/${judgeId}`);
   };
 
+  /**
+   * 模範解答一覧を取得します。
+   * @param problemId - 問題ID
+   * @param lang - プログラミング言語
+   * @param page - ページ番号
+   * @param size - 1ページあたりのサイズ
+   * @returns レスポンス
+   */
   findByProblemIdAndLanguageModelAnswers = async (problemId: string, lang: string, page: number, size: number) => {
     return this.judgeApiClient.get(`/solutions/problems/${problemId}/lang/${lang}/rating?page=${page}&size=${size}`);
   };
 
+  /**
+   * ブックマークを登録します。
+   * @param userId - ユーザーID
+   * @param problemId - 問題ID
+   * @returns レスポンス
+   */
   saveBookmark = async (userId: string, problemId: string) => {
     const requestBody = {
       userId: userId,
@@ -222,6 +289,12 @@ class AOJApiClient {
     return this.judgeApiClient.post("/bookmarks", requestBody);
   };
 
+  /**
+   * ブックマークを削除します。
+   * @param userId - ユーザーID
+   * @param problemId - 問題ID
+   * @returns レスポンス
+   */
   deleteBookmark = async (userId: string, problemId: string) => {
     const requestBody = {
       userId: userId,

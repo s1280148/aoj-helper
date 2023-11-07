@@ -4,7 +4,6 @@ import aojApiClient from "./AOJApiClient";
 
 /**
  * AOJのセッションマネージャー
- * （シングルトン）
  */
 class AOJSessionManager {
   /** Cookieを保存するためのキー */
@@ -18,7 +17,7 @@ class AOJSessionManager {
 
   /**
    * コンストラクタ
-   * @param secretStrage シークレットストレージ
+   * @param secretStrage - シークレットストレージ
    */
   private constructor(secretStrage: SecretStorage) {
     this.secretStrage = secretStrage;
@@ -26,7 +25,7 @@ class AOJSessionManager {
 
   /**
    * インスタンスを作成します。
-   * @param secretStorage シークレットストレージ
+   * @param secretStorage - シークレットストレージ
    * @returns インスタンス
    */
   static createInstance(secretStorage: SecretStorage) {
@@ -67,6 +66,8 @@ class AOJSessionManager {
 
   /**
    * セッションを作成します。
+   * @param id - ユーザーID
+   * @param password - パスワード
    */
   async createSession(id: string, password: string) {
     // ログインを行う

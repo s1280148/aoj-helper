@@ -7,8 +7,7 @@ import { EXTENSION_SCHEME } from "../settings/extensionScheme";
 import SimpleDocumentContentProvider from "./SimpleTextDocumentContentProvider";
 
 /**
- * AOJViewProvider
- * （シングルトン）
+ * AOJのViewProvider
  */
 class AOJViewProvider implements vscode.WebviewViewProvider {
   /** viewType */
@@ -28,7 +27,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
 
   /**
    * コンストラクタ
-   * @param extensionUri extension Uri
+   * @param extensionUri - extension Uri
    */
   private constructor(extensionUri: vscode.Uri) {
     this._extensionUri = extensionUri;
@@ -36,7 +35,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
 
   /**
    * インスタンスを作成します。
-   * @param extensionUri extension Uri
+   * @param extensionUri - extension Uri
    * @returns インスタンス
    */
   static createInstance(extensionUri: vscode.Uri) {
@@ -66,10 +65,10 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
   }
 
   /**
-   * Webviewのviewをresolveします。
-   * @param webviewView webviewView
-   * @param context コンテキスト
-   * @param _token トークン
+   * Webviewのviewを解決します。
+   * @param webviewView - webviewView
+   * @param context - コンテキスト
+   * @param _token - トークン
    */
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
@@ -83,7 +82,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
       enableScripts: true,
     };
 
-    // webviewにhtmlをセットする
+    // htmlを取得し、webviewにセットする
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
     // webviewからのメッセージをハンドリングする
@@ -94,8 +93,8 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
   }
 
   /**
-   * htmlを取得します。
-   * @param webview webview
+   * webviewのhtmlを取得します。
+   * @param webview - webview
    * @returns html
    */
   private _getHtmlForWebview(webview: vscode.Webview) {
@@ -141,7 +140,8 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
   }
 
   /**
-   * webviewからのメッセージをハンドリングします
+   * webviewからのメッセージをハンドリングします。
+   * @param webview - webview
    */
   private handleMessageFromWebView(webview: vscode.Webview) {
     webview.onDidReceiveMessage(async (message) => {
@@ -164,14 +164,22 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           break;
         }
         case "showDiff": {
+          // 現在表示中のテキストエディタの内容について、受信した内容との差分を表示する。
+
+          // 受信した内容
           const content: string = message.content;
 
+          // 現在表示中のテキストエディタ
           const activeTextEditor = vscode.window.activeTextEditor;
 
+          // 現在表示中のテキストエディタが存在しない場合、return
           if (!activeTextEditor) {
             return;
           }
 
+          // 左: 現在表示中のテキストエディタの内容
+          // 右: 受信した内容
+          // として、差分エディターを表示
           vscode.commands.executeCommand(
             "vscode.diff",
             activeTextEditor.document.uri,
@@ -182,6 +190,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           );
           break;
         }
+        // 以下 API呼び出し
         case "session": {
           const response = await aojApiClient.session();
 
@@ -514,6 +523,9 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
     });
   }
 
+  /**
+   * 現在表示中の問題を解答済みに変更します。
+   */
   public changeCurrentProblemToSolved() {
     this._view?.webview.postMessage({
       type: "changeCurrentProblemToSolved",

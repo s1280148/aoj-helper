@@ -7,7 +7,7 @@ import { submitButton } from "./components/submit/SubmitButton";
 import { EXTENSION_SCHEME } from "./settings/extensionScheme";
 
 /**
- * 拡張機能をactivateします。
+ * 拡張機能のエントリーポイント
  * @param context - コンテキスト
  */
 export const activate = (context: vscode.ExtensionContext) => {
@@ -22,10 +22,11 @@ export const activate = (context: vscode.ExtensionContext) => {
   const submitCommand = createSubmitCommand();
   context.subscriptions.push(submitCommand);
 
-  // 提出ボタンを作成し表示
+  // 提出ボタンを作成し、表示
   context.subscriptions.push(submitButton);
   submitButton.show();
 
+  // SimpleDocumentContentProviderを作成し、登録
   const simpleDocumentContentProvider = new SimpleDocumentContentProvider();
   vscode.workspace.registerTextDocumentContentProvider(EXTENSION_SCHEME, simpleDocumentContentProvider);
 };

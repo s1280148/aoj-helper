@@ -48,7 +48,7 @@ export const createSubmitCommand = () => {
       const submissionManager = new SubmissionManager(currentProblemId, selectedLanguage, sourceCode);
       await submissionManager.submit();
 
-      // 提出が失敗した場合にreturn
+      // 提出が失敗した場合、return
       if (!submissionManager.isSubmissionSuccess()) {
         return;
       }
@@ -80,7 +80,7 @@ export const createSubmitCommand = () => {
             .showInformationMessage(submissionStatusMessage, "結果を表示")
             .then((message) => handleMessageBtnSelection(message, judgeId));
 
-          // 現在表示中の問題がACになった場合、拡張機能にメッセージを送信
+          // 現在表示中の問題がACになった場合、webviewにメッセージを送信
           if (aojViewProvider.getCurrentProblemId() === currentProblemId) {
             aojViewProvider.changeCurrentProblemToSolved();
           }
@@ -99,12 +99,12 @@ export const createSubmitCommand = () => {
 
 /**
  * メッセージのボタンの選択をハンドリングします。
- * @param message メッセージ
- * @param judgeId ジャッジID
+ * @param message - メッセージ
+ * @param judgeId - ジャッジID
  */
 const handleMessageBtnSelection = async (message: string | undefined, judgeId: string) => {
   if (!message) {
-    // 選択されていない場合return
+    // ボタンが選択されていない場合、return
     return;
   } else if (message === "結果を表示") {
     // 結果を表示する

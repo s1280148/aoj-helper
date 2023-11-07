@@ -32,15 +32,16 @@ class SubmissionManager {
 
   /**
    * コンストラクタ
-   * @param problemId 問題ID
-   * @param language 言語
-   * @param sourceCode ソースコード
+   * @param problemId - 問題ID
+   * @param language - 言語
+   * @param sourceCode - ソースコード
    */
   constructor(problemId: string, language: string, sourceCode: string) {
     this.problemId = problemId;
     this.language = language;
     this.sourceCode = sourceCode;
 
+    // ウェブソケットのメッセージ受信イベントの定義
     this.webSocket.onmessage = (e) => {
       const submissionInformation: SubmissionInformation = JSON.parse(e.data.toString());
 
@@ -62,6 +63,7 @@ class SubmissionManager {
       this.submissionSuccess = true;
       this.submitToken = submitResponse.data.token;
     } else {
+      // 提出が失敗した場合、ウェブソケットを閉じる
       this.webSocket.close();
     }
   }
@@ -70,6 +72,7 @@ class SubmissionManager {
    * 提出結果を取得できるまで待機します。
    */
   async waitForSubmissionResult() {
+    // 1秒待つ関数
     const wait = (millisecond: number) => new Promise((resolve) => setTimeout(resolve, millisecond));
 
     // 1秒毎に提出結果が確定しているかを確認する
@@ -81,6 +84,7 @@ class SubmissionManager {
       await wait(1000);
     }
 
+    // 提出結果が確定した後、ウェブソケットを閉じる
     this.webSocket.close();
   }
 
