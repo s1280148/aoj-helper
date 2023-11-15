@@ -4,11 +4,17 @@ import LargeChallengeSection from "./components/LargeChallengeSection";
 import { LargeChallenge } from "../../../../public-src/types/ApiResponseType";
 import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
 
+/**
+ * チャレンジ一覧タブ
+ * @returns チャレンジ一覧タブ
+ */
 const ChallengeListTab: React.FC = () => {
+  // チャレンジ大分類一覧のstate
   const [largeChallengeList, setLargeChgallengeList] = useState<null | LargeChallenge[]>(null);
 
   useEffect(() => {
     const findTopPage = async () => {
+      // チャレンジ大分類一覧を取得し、stateにセット
       const parameters = {};
 
       const response = (await callApi("findTopPage", parameters)) as { largeCls: LargeChallenge[] };

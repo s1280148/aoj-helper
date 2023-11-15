@@ -7,12 +7,22 @@ type Props = {
   courseInfo: CourseInfo;
 };
 
+/**
+ * コースカード
+ * @param props - props
+ * @returns コースカード
+ */
 const CourseCard: React.FC<Props> = (props: Props) => {
+  // propsからコース情報を取得
   const { courseInfo } = props;
 
   const navigate = useNavigate();
 
+  /**
+   * コースカードの押下をハンドリングします。
+   */
   const handleCardClick = () => {
+    // コース詳細タブを表示
     navigate(`/problem/list/course/${courseInfo.id}`);
   };
 

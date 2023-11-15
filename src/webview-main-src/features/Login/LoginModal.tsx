@@ -3,11 +3,11 @@ import Dialog from "@mui/material/Dialog";
 import { Alert, Box, Button, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
 
 /**
- * ログイン画面のモーダル
- * @returns ログイン画面のモーダル
+ * ログインモーダル
+ * @returns ログインモーダル
  */
 const LoginModal = () => {
-  /** モーダルの開閉のstate */
+  // ログインモーダルの表示状態のstate
   const [open, setOpen] = useState<boolean>(false);
 
   /**
@@ -34,8 +34,10 @@ const LoginModal = () => {
     hideAlert();
   };
 
-  /** IDとパスワードのエラーのstate */
+  // IDのエラーの表示状態のstate
   const [idError, setIdError] = useState<boolean>(false);
+
+  // パスワードのエラーの表示状態のstate
   const [passwordError, setPasswordError] = useState<boolean>(false);
 
   /**
@@ -66,7 +68,7 @@ const LoginModal = () => {
     setPasswordError(false);
   };
 
-  /** アラートのstate */
+  // ログイン失敗アラートの表示状態のstate
   const [alert, setAlert] = useState<boolean>(false);
 
   /**
@@ -83,13 +85,15 @@ const LoginModal = () => {
     setAlert(false);
   };
 
-  /** IDとパスワードのref */
+  // IDの入力のref
   const idRef = useRef<HTMLInputElement>(null);
+
+  // パスワードの入力のref
   const passwordRef = useRef<HTMLInputElement>(null);
 
   /**
    * ログインを行います。
-   * @param e イベント
+   * @param e - フォームのsubmit時のイベント
    */
   const login = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,15 +102,15 @@ const LoginModal = () => {
     const id = idRef.current?.value;
     const password = passwordRef.current?.value;
 
-    // 入力をチェックする
+    // 入力が有効かをチェック
     const isInputValid = checkInputContents(id, password);
 
-    // 入力が有効でない場合return
+    // 入力が有効でない場合、return
     if (!isInputValid) {
       return;
     }
 
-    // 拡張機能にログインを要求するメッセージを送信
+    // 拡張機能側に、ログインを要求するメッセージを送信
     vscode.postMessage({
       type: "login",
       contents: {
@@ -117,9 +121,12 @@ const LoginModal = () => {
   };
 
   /**
-   * 入力された内容をチェックします。
+   * 入力されたログイン情報をチェックします。
+   * @param id - ID
+   * @param password - パスワード
+   * @returns 入力されたログイン情報が有効か
    */
-  const checkInputContents = (id: string | undefined, password: string | undefined) => {
+  const checkInputContents = (id: undefined | string, password: undefined | string) => {
     let isInputValid = true;
 
     // IDのチェック
@@ -141,7 +148,7 @@ const LoginModal = () => {
     return isInputValid;
   };
 
-  // 拡張機能からメッセージを受け取る
+  // 拡張機能側から、ログインに関するメッセージを受信
   window.addEventListener("message", (event) => {
     const message = event.data;
 

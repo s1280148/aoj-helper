@@ -13,6 +13,9 @@ import { ProblemInfoContext } from "../../../providers/ProblemInfoProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isChallengeProblem } from "../../../../public-src/utils/ProblemInfoUtil";
 
+/**
+ * ページ
+ */
 const enum Page {
   PRE_COMMENTARY,
   PROBLEM_DESCRIPTION,
@@ -27,7 +30,7 @@ const enum Page {
  * @returns 問題メニュー
  */
 const ProblemMenu: React.FC = () => {
-  // メニューの表示状態のstate
+  // 問題メニューの表示状態のstate
   const [open, setOpen] = useState<boolean>(false);
 
   /**
@@ -44,20 +47,28 @@ const ProblemMenu: React.FC = () => {
     setOpen(false);
   };
 
+  // 現在表示中の問題の情報のstate
   const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
 
   const problemId = problemInfo?.problem_id;
 
+  // 現在表示中の問題に、解説（前）が存在するか
   const hasPreCommentary =
     problemInfo && problemInfo.commentaries.filter((commentary) => commentary.pattern === "pre").length > 0;
 
+  // 現在表示中の問題に、解説（後）が存在するか
   const hasPostCommentary =
     problemInfo && problemInfo.commentaries.filter((commentary) => commentary.pattern === "post").length > 0;
 
+  // 現在表示中のページのstate
   const [currentPage, setCurrentPage] = useState<Page>(Page.PROBLEM_DESCRIPTION);
 
   const navigate = useNavigate();
 
+  /**
+   * ページの選択をハンドリングします。
+   * @param selectedPage - 選択されたページ
+   */
   const handlePageSelect = (selectedPage: Page) => {
     if (currentPage === selectedPage) {
       closeMenu();
@@ -66,22 +77,27 @@ const ProblemMenu: React.FC = () => {
 
     switch (selectedPage) {
       case Page.PRE_COMMENTARY: {
+        // 解説（前）ページに移動
         navigate(`/problem/${problemId}/commentary/pre`);
         break;
       }
       case Page.PROBLEM_DESCRIPTION: {
+        // 問題説明ページに移動
         navigate(`/problem/${problemId}/description`);
         break;
       }
       case Page.POST_COMMENTARY: {
+        // 解説（後）ページに移動
         navigate(`/problem/${problemId}/commentary/post`);
         break;
       }
       case Page.SUBMISSION_RECORD: {
+        // 提出履歴ページに移動
         navigate(`/problem/${problemId}/submission-record`);
         break;
       }
       case Page.MODEL_ANSWER: {
+        // 模範解答ページに移動
         navigate(`/problem/${problemId}/model-answer`);
       }
     }
@@ -94,6 +110,7 @@ const ProblemMenu: React.FC = () => {
   useEffect(() => {
     const pathname = location.pathname;
 
+    // locationが変更された場合に、現在表示中のページをセット
     switch (true) {
       case /^\/problem\/.*\/commentary\/pre$/.test(pathname): {
         setCurrentPage(Page.PRE_COMMENTARY);

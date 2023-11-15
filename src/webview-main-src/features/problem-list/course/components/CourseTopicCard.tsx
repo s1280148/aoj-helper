@@ -10,11 +10,21 @@ type Props = {
   topicInfo: TopicInfo;
 };
 
+/**
+ * コーストピックカード
+ * @param props - props
+ * @returns コーストピックカード
+ */
 const CourseTopicCard: React.FC<Props> = (props: Props) => {
+  // propsからトピック情報を取得
   const { topicInfo } = props;
 
+  // 問題の表示状態のstate
   const [isProblemOpen, setIsProblemOpen] = useState<boolean>(false);
 
+  /**
+   * コーストピックカードの押下をハンドリングします。
+   */
   const handleTopicCardClick = () => {
     setIsProblemOpen(!isProblemOpen);
   };

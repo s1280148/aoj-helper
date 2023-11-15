@@ -11,18 +11,31 @@ import LogoutIcon from "@mui/icons-material/Logout";
  * @returns アカウントメニュー
  */
 const AccountMenu: React.FC = () => {
+  // アカウントメニューの表示状態のstate
   const [open, setOpen] = useState<boolean>(false);
 
+  /**
+   * アカウントメニューを開きます。
+   * @param e - ボタン押下時のイベント
+   */
   const openAccountMenu = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    // 押下されたボタンにフォーカスが残るので、明示的に外す
     e.currentTarget.blur();
     setOpen(true);
   };
 
+  /**
+   * アカウントメニューを閉じます。
+   */
   const closeAccountMenu = () => {
     setOpen(false);
   };
 
+  /**
+   * ログアウトを行います。
+   */
   const logout = () => {
+    // 拡張機能側に、ログアウトを要求するメッセージを送信
     vscode.postMessage({
       type: "logout",
     });
@@ -30,8 +43,13 @@ const AccountMenu: React.FC = () => {
     closeAccountMenu();
   };
 
+  // ダークモードかのstate
   const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
 
+  /**
+   * テーマボタンの押下をハンドリングします。
+   * @param e - ボタン押下時のイベント
+   */
   const handleThemeToggleButtonChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsDarkMode(e.target.checked);
   };

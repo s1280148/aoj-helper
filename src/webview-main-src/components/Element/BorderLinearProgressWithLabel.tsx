@@ -6,11 +6,19 @@ type Props = {
   progress: number;
 };
 
+/**
+ * ラベル付きプログレスバー
+ * @param props - props
+ * @returns ラベル付きプログレスバー
+ */
 const BorderLinearProgressWithLabel: React.FC<Props> = (props: Props) => {
+  // バーに付与するクラスと進捗をpropsから取得
   const { barClass, progress } = props;
 
+  // 進捗を小数点以下2桁まで表示（以降切り捨て）
   const progressPar = Math.round(progress * 100) / 100;
 
+  // 角が丸いプログレスバーを定義
   const BorderLinearProgress = styled(LinearProgress)(() => ({
     height: 8,
     borderRadius: 5,

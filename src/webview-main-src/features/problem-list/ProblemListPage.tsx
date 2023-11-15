@@ -5,20 +5,37 @@ import InboxIcon from "@mui/icons-material/Inbox";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { useState } from "react";
 
+/**
+ * タブの種類
+ */
 const enum TabType {
   COURSE,
   CHALLENGE,
   BOOKMARK,
 }
 
+/**
+ * 問題一覧ページ
+ * @returns 問題一覧ページ
+ *
+ * @remarks
+ * コース一覧タブ、チャレンジ一覧タブ、ブックマーク一覧タブがある
+ */
 const ProblemListPage: React.FC = () => {
+  // 現在表示中のタブ
   const [currentTab, setCurrentTab] = useState(TabType.COURSE);
 
   const navigate = useNavigate();
 
+  /**
+   * タブの変更をハンドリングします。
+   * @param event - タブ変更時のイベント
+   * @param newTab 選択されたタブ
+   */
   const handleTabChange = (event: React.SyntheticEvent<Element, Event>, newTab: TabType) => {
     setCurrentTab(newTab);
 
+    // 選択されたタブによって表示する内容を変更する
     switch (newTab) {
       case TabType.COURSE: {
         navigate("/problem/list/course/list");

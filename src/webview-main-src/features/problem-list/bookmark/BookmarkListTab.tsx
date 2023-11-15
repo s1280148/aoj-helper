@@ -4,16 +4,23 @@ import BookmarkProblemCard from "./components/BookmarkProblemCard";
 import { BookmarkInfo, SessionInfo } from "../../../../public-src/types/ApiResponseType";
 import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
 
+/**
+ * ブックマーク一覧タブ
+ * @returns ブックマーク一覧タブ
+ */
 const BookmarkListTab: React.FC = () => {
+  // ブックマーク情報のstate
   const [bookmarkInfo, setBookmarkInfo] = useState<null | BookmarkInfo>(null);
 
   useEffect(() => {
     const findBookmarkProblemList = async () => {
+      // セッション情報を取得し、ユーザーIDを取得
       const parametersForSession = {};
       const sessionResponse = (await callApi("session", parametersForSession)) as SessionInfo;
 
       const userId = sessionResponse.id;
 
+      // ブックマーク情報を取得し、stateにセット
       const parameterForBookmark = {
         userId: userId,
       };

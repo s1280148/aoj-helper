@@ -14,24 +14,35 @@ import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { ThemeInfoContext } from "../../providers/ThemeInfoProvider";
 import { SubmissionStatus } from "../../../public-src/constants/constant";
 
+/**
+ * 模範解答ページ
+ * @returns 模範解答ページ
+ */
 const ModelAnswerPage: React.FC = () => {
+  // パスパラメータから問題IDを取得
   const { problemId } = useParams<"problemId">();
 
+  // 模範解答情報一覧のstate
   const [modelAnswerInfoList, setModelAnswerInfoList] = useState<null | ModelAnswerInfo[]>(null);
 
+  // 表示中の模範解答一覧のstate
   const [displayingModelAnswerInfoList, setDisplayingModelAnswerInfoList] = useState<null | ModelAnswerInfo[]>(null);
 
+  // 選択された模範解答のジャッジID
   const [selectedJudgeId, setSelectedJudgeId] = useState<null | number>(null);
 
+  // 1ページに表示する模範回答の数
   const PAGE_SIZE = 10;
 
   useEffect(() => {
     const findModelAnswerList = async () => {
+      // セッション情報を取得し、プログラミング言語を取得
       const parametersForSession = {};
       const sessionResponse = (await callApi("session", parametersForSession)) as SessionInfo;
 
       const language = sessionResponse.defaultProgrammingLanguage;
 
+      // 模範解答一覧を取得し、stateにセット
       const parameterForModelAnswer = {
         problemId: problemId,
         lang: language,
@@ -51,25 +62,37 @@ const ModelAnswerPage: React.FC = () => {
   }, [problemId]);
 
   useEffect(() => {
-    setDisplayingModelAnswerInfoList(modelAnswerInfoList?.slice(0, 10) ?? null);
+    setDisplayingModelAnswerInfoList(modelAnswerInfoList?.slice(0, PAGE_SIZE) ?? null);
   }, [modelAnswerInfoList]);
 
+  /**
+   * ページの変更をハンドリングします。
+   * @param event - ページ変更時のイベント
+   * @param page - 選択されたページ番号
+   */
   const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    // 模範解答一覧から、選択されたページに対応する部分を表示中の模範解答一覧のstateにセット
     const startIndex = (page - 1) * 10;
     const endIndex = startIndex + PAGE_SIZE;
 
     setDisplayingModelAnswerInfoList(modelAnswerInfoList!.slice(startIndex, endIndex));
   };
 
-  const handleSubmissionRecordRowClick = (judgeId: number) => {
+  /**
+   * 模範解答の行の押下をハンドリングします。
+   * @param judgeId - 選択された模範解答のジャッジID
+   */
+  const handleModelAnswerRowClick = (judgeId: number) => {
     setSelectedJudgeId(judgeId);
   };
 
-  const [targetReviewInfo, setTargetReviewInfo] = useState<null | ReviewInfo>();
+  // 選択された提出のレビュー情報
+  const [targetReviewInfo, setTargetReviewInfo] = useState<null | ReviewInfo>(null);
 
   useEffect(() => {
     if (selectedJudgeId) {
       const findByJudgeIdReivew = async () => {
+        // 選択された提出のレビュー情報を取得し、stateにセット
         const parameters = {
           judgeId: selectedJudgeId,
         };
@@ -78,6 +101,7 @@ const ModelAnswerPage: React.FC = () => {
 
         setTargetReviewInfo(response);
 
+        // ウィンドウとモナコエディターの参照位置を一番上に変更
         window.scrollTo(0, 0);
         editorRef.current?.revealLine(1);
       };
@@ -86,34 +110,54 @@ const ModelAnswerPage: React.FC = () => {
     }
   }, [selectedJudgeId]);
 
+  // モナコエディターのref
   const editorRef = useRef<null | editor.IStandaloneCodeEditor>(null);
 
-  const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
+  /**
+   * モナコエディターのマウントをハンドリングします。
+   * @param editor - モナコエディター
+   */
+  const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor) => {
     editorRef.current = editor;
   };
 
+  /**
+   * "閉じる"ボタンの押下をハンドリングします。
+   */
   const handleCloseButtonClick = () => {
     setSelectedJudgeId(null);
     setTargetReviewInfo(null);
   };
 
+  // コピー完了トーストの表示状態のstate
   const [isOpenCopyToast, setIsOpenCopyToast] = useState<boolean>(false);
 
+  /**
+   * "コピー"ボタンの押下をハンドリングします。
+   */
   const handleCopyButtonClick = () => {
     setIsOpenCopyToast(true);
   };
 
+  /**
+   * コピー完了トーストを非表示にします。
+   */
   const hideCopyToast = () => {
     setIsOpenCopyToast(false);
   };
 
+  /**
+   * "diff"ボタンの押下をハンドリングします。
+   */
   const handleDiffButtonClick = () => {
+    // 拡張機能側に、現在表示中のテキストエディタとの差分表示を要求するメッセージを送信する
     vscode.postMessage({
       type: "showDiff",
       content: targetReviewInfo!.sourceCode,
     });
   };
 
+  // ダークモードかのstate
   const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
 
   return (
@@ -121,7 +165,7 @@ const ModelAnswerPage: React.FC = () => {
       {selectedJudgeId && targetReviewInfo && (
         <Box className="border-2 rounded border-gray-300 dark:border-darkMode-dark dark:bg-darkMode-darkest">
           <Box className="bg-gray-200 px-4 py-2 dark:bg-darkMode-dark">
-            <Box className="text-gray-800 flex  dark:text-darkmode-text">
+            <Box className="text-gray-800 flex dark:text-darkmode-text">
               <Box className="mr-2">
                 <span className="dark:text-darkMode-text">Judge ID : </span>
                 <span
@@ -288,7 +332,7 @@ const ModelAnswerPage: React.FC = () => {
                     `}
                     onClick={
                       displayingModelAnswerInfo.policy === "public"
-                        ? () => handleSubmissionRecordRowClick(displayingModelAnswerInfo.judgeId)
+                        ? () => handleModelAnswerRowClick(displayingModelAnswerInfo.judgeId)
                         : () => {}
                     }
                   >
@@ -316,7 +360,9 @@ const ModelAnswerPage: React.FC = () => {
                     <td className="border px-1 py-2 border-gray-300 dark:border-darkMode-dark dark:text-darkMode-text">
                       {displayingModelAnswerInfo.language}
                     </td>
-                    <td className="border px-1 py-2 border-gray-300 dark:border-darkMode-dark dark:text-darkMode-text">{`${displayingModelAnswerInfo.cpuTime} sec`}</td>
+                    <td className="border px-1 py-2 border-gray-300 dark:border-darkMode-dark dark:text-darkMode-text">{`${
+                      displayingModelAnswerInfo.cpuTime / 100
+                    } sec`}</td>
                     <td className="border px-1 py-2 border-gray-300 dark:border-darkMode-dark dark:text-darkMode-text">{`${displayingModelAnswerInfo.codeSize} B`}</td>
                   </tr>
                 );

@@ -6,10 +6,17 @@ import CourseTopicCard from "./components/CourseTopicCard";
 import { CourseDetail } from "../../../../public-src/types/ApiResponseType";
 import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
 
+/**
+ * コース詳細タブ
+ * @returns コース詳細タブ
+ */
 const CourseDetailTab: React.FC = () => {
+  // パスパラメータからコースIDを取得
   const { courseId } = useParams<"courseId">();
 
+  // コース詳細のstate
   const [courseDetail, setCourseDetail] = useState<null | CourseDetail>(null);
+
   useEffect(() => {
     const findByCourseIdPage = async () => {
       const parameters = {
@@ -17,6 +24,7 @@ const CourseDetailTab: React.FC = () => {
         lang: "ja",
       };
 
+      // コース詳細を取得し、stateにセット
       const response = (await callApi("findByCourseIdPage", parameters)) as { course: CourseDetail };
 
       setCourseDetail(response.course);

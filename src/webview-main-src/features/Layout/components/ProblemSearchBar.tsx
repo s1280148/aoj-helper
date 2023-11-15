@@ -7,13 +7,10 @@ import { useNavigate } from "react-router-dom";
  * @returns 問題検索バー
  */
 const ProblemSearchBar: React.FC = () => {
-  // 問題IDのref
+  // 問題IDの入力のref
   const problemIdRef = useRef<HTMLInputElement>(null);
 
-  // ページ遷移のためのナビゲート
-  const navigate = useNavigate();
-
-  // エラートーストの表示のstate
+  // エラートーストの表示状態のstate
   const [errorToastOpen, setErrorToastOpen] = useState<boolean>(false);
 
   /**
@@ -30,6 +27,8 @@ const ProblemSearchBar: React.FC = () => {
     setErrorToastOpen(false);
   };
 
+  const navigate = useNavigate();
+
   /**
    * 問題ページを表示します。
    */
@@ -43,7 +42,7 @@ const ProblemSearchBar: React.FC = () => {
       return;
     }
 
-    // 問題ページへ遷移
+    // 問題説明ページに移動
     navigate(`/problem/${problemId}/description`);
   };
 

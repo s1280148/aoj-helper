@@ -4,7 +4,12 @@ import { CourseInfo, CourseInfoList } from "../../../../public-src/types/ApiResp
 import CourseCard from "./components/CourseCard";
 import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
 
+/**
+ * コース一覧タブ
+ * @returns コース一覧タブ
+ */
 const CourseListTab: React.FC = () => {
+  // コース情報一覧のstate
   const [courseInfoList, setCourseInfoList] = useState<null | CourseInfo[]>(null);
 
   useEffect(() => {
@@ -13,6 +18,7 @@ const CourseListTab: React.FC = () => {
         lang: "ja",
       };
 
+      // コース情報一覧を取得し、stateにセット
       const response = (await callApi("findAllCoursesPage", parameters)) as CourseInfoList;
 
       setCourseInfoList(response.courses);

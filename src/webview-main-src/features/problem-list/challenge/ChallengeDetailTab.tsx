@@ -10,13 +10,20 @@ type ParamTypes = {
   middleChallengeId: string;
 };
 
+/**
+ * チャレンジ詳細タブ
+ * @returns チャレンジ詳細タブ
+ */
 const ChallengeDetailTab: React.FC = () => {
+  // パスパラメータからチャレンジ大分類IDとチャレンジ中分類IDを取得
   const { largeChallengeId, middleChallengeId } = useParams<ParamTypes>();
 
+  // チャレンジ詳細のstate
   const [challengeDetail, setChallengeDetail] = useState<null | ChallengeDetail>(null);
 
   useEffect(() => {
     const findByLargeCLAndMiddleCLPage = async () => {
+      // チャレンジ詳細を取得し、stateにセット
       const parameters = {
         largeCl: largeChallengeId,
         middleCl: middleChallengeId,

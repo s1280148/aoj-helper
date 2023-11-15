@@ -9,12 +9,19 @@ import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
 import { BookmarkSaveInfo, SessionInfo } from "../../../../public-src/types/ApiResponseType";
 import { isChallengeProblem } from "../../../../public-src/utils/ProblemInfoUtil";
 
+/**
+ * 問題情報パネル
+ * @returns 問題情報パネル
+ */
 const ProblemInfoPanel: React.FC = () => {
+  // 現在表示中の問題の情報のstate
   const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
 
+  // ブックマークしているかのstate
   const [isBookmark, setIsBookmark] = useState<boolean>(false);
 
   useEffect(() => {
+    // 拡張機能側から、現在の問題を解答隅に変更することを要求するメッセージを受信
     window.addEventListener("message", (event) => {
       const message = event.data;
 
@@ -32,18 +39,24 @@ const ProblemInfoPanel: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    // 表示中の問題がブックマークされているかをセット
     if (problemInfo?.bookmarks) {
       setIsBookmark(problemInfo.bookmarks.length !== 0);
     }
   }, [problemInfo]);
 
+  /**
+   * ブックマークボタンの押下をハンドリングします。
+   */
   const handleBookmarkButtonClick = async () => {
+    // セッション情報を取得し、ユーザーIDを取得
     const parametersForSession = {};
     const sessionResponse = (await callApi("session", parametersForSession)) as SessionInfo;
 
     const userId = sessionResponse.id;
 
     if (!isBookmark) {
+      // ブックマークをしていない状態でボタンを押下した場合、ブックマークしている状態に変更
       const parameterForSaveBookmark = {
         userId: userId,
         problemId: problemInfo!.problem_id,
@@ -52,6 +65,7 @@ const ProblemInfoPanel: React.FC = () => {
 
       setIsBookmark(true);
     } else {
+      // ブックマークをしている状態でボタンを押下した場合、ブックマークしていない状態に変更
       const parameterForDeleteBookmark = {
         userId: userId,
         problemId: problemInfo!.problem_id,

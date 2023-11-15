@@ -13,6 +13,7 @@ import { isChallengeProblem } from "../../../../public-src/utils/ProblemInfoUtil
  * @returns ヘッダー
  */
 const Header: React.FC = () => {
+  // 現在表示中の問題の情報のstate
   const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
 
   return (

@@ -9,12 +9,22 @@ type Props = {
   problemInfo: ProblemInfo;
 };
 
+/**
+ * ブックマーク問題カード
+ * @param props - props
+ * @returns ブックマーク問題カード
+ */
 const BookmarkProblemCard: React.FC<Props> = (props: Props) => {
+  // propsから問題情報を取得
   const { problemInfo } = props;
 
   const navigate = useNavigate();
 
+  /**
+   * ブックマーク問題カードの押下をハンドリングします。
+   */
   const handleProblemCardClick = () => {
+    // 問題説明ページに移動
     navigate(`/problem/${problemInfo.id}/description`);
   };
 

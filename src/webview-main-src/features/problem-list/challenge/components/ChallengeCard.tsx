@@ -9,12 +9,22 @@ type Props = {
   midlleChallenge: MiddleChallenge;
 };
 
+/**
+ * チャレンジカード
+ * @param props - props
+ * @returns チャレンジカード
+ */
 const ChallengeCard: React.FC<Props> = (props: Props) => {
+  // propsからチャレンジ大分類IDとチャレンジ中分類を取得
   const { largeChallengeId, midlleChallenge } = props;
 
   const navigate = useNavigate();
 
+  /**
+   * チャレンジカードの押下をハンドリングします。
+   */
   const handleChallengeCardClick = () => {
+    // チャレンジ詳細タブを表示
     navigate(`/problem/list/challenge/${largeChallengeId}/${midlleChallenge.id}`);
   };
 

@@ -10,11 +10,21 @@ type Props = {
   contestInfo: ChallengeContestInfo;
 };
 
+/**
+ * チャレンジコンテストカード
+ * @param props - props
+ * @returns チャレンジコンテストカード
+ */
 const ChallengeContestCard: React.FC<Props> = (props: Props) => {
+  // propsからチャレンジコンテスト情報を取得
   const { contestInfo } = props;
 
+  // 問題の表示状態のstate
   const [isProblemOpen, setIsProblemOpen] = useState<boolean>(false);
 
+  /**
+   * チャレンジコンテストカードの押下をハンドリングします。
+   */
   const handleContestCardClick = () => {
     setIsProblemOpen(!isProblemOpen);
   };

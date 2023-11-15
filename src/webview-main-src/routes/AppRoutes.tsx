@@ -12,6 +12,10 @@ import ModelAnswerPage from "../features/model-answer/ModelAnswerPage";
 import ProblemListPage from "../features/problem-list/ProblemListPage";
 import ProblemDescriptionPage from "../features/problem-description/ProblemDescriptionPage";
 
+/**
+ * アプリケーション全体のルーティング
+ * @returns URLに対応するコンポーネント
+ */
 export const AppRoutes = () => {
   return (
     <Routes>

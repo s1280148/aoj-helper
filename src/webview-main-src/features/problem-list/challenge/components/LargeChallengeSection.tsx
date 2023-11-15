@@ -7,7 +7,13 @@ type Props = {
   largeChallenge: LargeChallenge;
 };
 
+/**
+ * チャレンジ大分類セクション
+ * @param props - props
+ * @returns チャレンジ大分類セクション
+ */
 const LargeChallengeSection: React.FC<Props> = (props: Props) => {
+  // propsからチャレンジ大分類を取得
   const { largeChallenge } = props;
 
   return (

@@ -9,11 +9,11 @@ import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { ThemeInfoContext } from "../../providers/ThemeInfoProvider";
 
 /**
- * 問題ページ
- * @returns 問題ページ
+ * 問題説明ページ
+ * @returns 問題説明ページ
  */
 const ProblemDescriptionPage: React.FC = () => {
-  // 問題IDをパスパラメータから取得
+  // パスパラメータから問題IDを取得
   const { problemId } = useParams<"problemId">();
 
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ const ProblemDescriptionPage: React.FC = () => {
       };
 
       try {
+        // 問題の情報を取得し、stateにセット
         const response = await callApi("findByProblemIdDescription", parameters);
 
         const problemDescription = response as ProblemDescription;
@@ -34,6 +35,7 @@ const ProblemDescriptionPage: React.FC = () => {
 
         vscode.setState({ ...vscode.getState(), problemId: problemDescription.problem_id });
       } catch (e) {
+        // エラーが発生した場合、エラートーストを表示し、前の問題を表示
         showErrorToast();
 
         const beforeProblemId = problemInfo?.problem_id;
@@ -45,10 +47,10 @@ const ProblemDescriptionPage: React.FC = () => {
     getProblemInfo();
   }, [problemId]);
 
-  // 問題の情報のstate
+  // 現在表示中の問題の情報のstate
   const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
 
-  // エラートーストの表示のstate
+  // エラートーストの表示状態のstate
   const [errorToastOpen, setErrorToastOpen] = useState<boolean>(false);
 
   /**
@@ -65,6 +67,7 @@ const ProblemDescriptionPage: React.FC = () => {
     setErrorToastOpen(false);
   };
 
+  // ダークモードかのstate
   const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
 
   return (

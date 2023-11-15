@@ -19,7 +19,7 @@ import { SubmissionStatus } from "../../../public-src/constants/constant";
  */
 const JudgeDetailModal: React.FC = () => {
   useEffect(() => {
-    // 拡張機能からメッセージを受信
+    // 拡張機能側から、ジャッジ詳細モーダルの表示を要求するメッセージを受信
     window.addEventListener("message", (event) => {
       const message = event.data;
 
@@ -36,7 +36,7 @@ const JudgeDetailModal: React.FC = () => {
     });
   }, []);
 
-  // モーダルの開閉のstate
+  // モーダルの表示状態のstate
   const [open, setOpen] = useState<boolean>(false);
 
   /**
@@ -210,19 +210,22 @@ const JudgeDetailModal: React.FC = () => {
 };
 
 /**
- * 提出ステータスから進行状況のアイコンの要素を取得します。
+ * 提出ステータスから進行状況のアイコンの要素一覧を取得します。
  * @param submissionStatus - 提出ステータス
- * @returns 進行状況のアイコンの要素
+ * @returns 進行状況のアイコンの要素一覧
  */
 const getSubmissionProgressIconElementsFromSubmitStatus = (submissionStatus: SubmissionStatus) => {
+  // 提出ステータスから提出の進行状況を取得
   let submissionProgress = getSubmissionProgressFromSubmissionStatus(submissionStatus);
 
+  // 進行状況のアイコンの要素一覧
   const elements: ReactElement[] = [];
 
   for (let i = 0; i < 7; i++) {
     let element: ReactElement;
 
     if (i < submissionProgress) {
+      // 完了している要素
       element = (
         <Box
           className={`relative text-3xl flex justify-center ${i === 0 ? "" : "left-border"} ${
@@ -233,6 +236,7 @@ const getSubmissionProgressIconElementsFromSubmitStatus = (submissionStatus: Sub
         </Box>
       );
     } else if (i === submissionProgress) {
+      // ジャッジが停止した要素
       element = (
         <Box
           className={`relative text-3xl flex justify-center ${i === 0 ? "" : "left-border"} ${
@@ -243,6 +247,7 @@ const getSubmissionProgressIconElementsFromSubmitStatus = (submissionStatus: Sub
         </Box>
       );
     } else {
+      // 行われていない要素
       element = (
         <Box
           className={`relative text-3xl flex justify-center ${i === 0 ? "" : "left-border"} ${
@@ -261,7 +266,8 @@ const getSubmissionProgressIconElementsFromSubmitStatus = (submissionStatus: Sub
 };
 
 /**
- * 進行状況のテキストの要素を取得します。
+ * 進行状況のテキストの要素一覧を取得します。
+ * @returns 進行状況のテキストの要素一覧
  */
 const getSubmissionProgressTextElements = (): ReactElement[] => {
   const textList = [

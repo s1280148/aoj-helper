@@ -14,11 +14,18 @@ import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { ThemeInfoContext } from "../../providers/ThemeInfoProvider";
 import { SubmissionStatus } from "../../../public-src/constants/constant";
 
+/**
+ * 提出履歴ページ
+ * @returns 提出履歴ページ
+ */
 const SubmissionRecordPage: React.FC = () => {
+  // パスパラメータから問題IDを取得
   const { problemId } = useParams<"problemId">();
 
+  // 提出履歴一覧のstate
   const [submissionRecordList, setSubmissionRecordList] = useState<null | SubmissionRecord[]>(null);
 
+  // 表示中の提出履歴一覧のstate
   const [displayingSubmissionRecordList, setDisplayingSubmissionRecordList] = useState<null | SubmissionRecord[]>(null);
 
   type JudgeInfo = {
@@ -26,17 +33,21 @@ const SubmissionRecordPage: React.FC = () => {
     submissionStatus: SubmissionStatus;
   };
 
+  // 選択された提出履歴のジャッジ情報
   const [selectedJudgeInfo, setSelectedJudgeInfo] = useState<null | JudgeInfo>(null);
 
+  // 1ページに表示する模範回答の数
   const PAGE_SIZE = 10;
 
   useEffect(() => {
     const findSubmissionRecordList = async () => {
+      // セッション情報を取得し、ユーザーIDを取得
       const parametersForSession = {};
       const sessionResponse = (await callApi("session", parametersForSession)) as SessionInfo;
 
       const userId = sessionResponse.id;
 
+      // 提出履歴一覧を取得し、stateにセット
       const parameterForSubmissionRecord = {
         userId: userId,
         problemId: problemId,
@@ -56,16 +67,27 @@ const SubmissionRecordPage: React.FC = () => {
   }, [problemId]);
 
   useEffect(() => {
-    setDisplayingSubmissionRecordList(submissionRecordList?.slice(0, 10) ?? null);
+    setDisplayingSubmissionRecordList(submissionRecordList?.slice(0, PAGE_SIZE) ?? null);
   }, [submissionRecordList]);
 
+  /**
+   * ページの変更をハンドリングします。
+   * @param event - ページ変更時のイベント
+   * @param page - 選択されたページ番号
+   */
   const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    // 提出履歴一覧から、選択されたページに対応する部分を表示中の提出履歴一覧のstateにセット
     const startIndex = (page - 1) * 10;
     const endIndex = startIndex + PAGE_SIZE;
 
     setDisplayingSubmissionRecordList(submissionRecordList!.slice(startIndex, endIndex));
   };
 
+  /**
+   * 提出履歴の行の押下をハンドリングします。
+   * @param judgeId - ジャッジID
+   * @param submissionStatus - 提出ステータス
+   */
   const handleSubmissionRecordRowClick = (judgeId: number, submissionStatus: SubmissionStatus) => {
     const judgeInfo: JudgeInfo = {
       judgeId: judgeId,
@@ -75,11 +97,13 @@ const SubmissionRecordPage: React.FC = () => {
     setSelectedJudgeInfo(judgeInfo);
   };
 
+  // 選択された提出のレビュー情報
   const [targetReviewInfo, setTargetReviewInfo] = useState<null | ReviewInfo>();
 
   useEffect(() => {
     if (selectedJudgeInfo) {
       const findByJudgeIdReivew = async () => {
+        // 選択された提出のレビュー情報を取得し、stateにセット
         const parameters = {
           judgeId: selectedJudgeInfo.judgeId,
         };
@@ -88,6 +112,7 @@ const SubmissionRecordPage: React.FC = () => {
 
         setTargetReviewInfo(response);
 
+        // ウィンドウとモナコエディターの参照位置を一番上に変更
         window.scrollTo(0, 0);
         editorRef.current?.revealLine(1);
       };
@@ -96,27 +121,43 @@ const SubmissionRecordPage: React.FC = () => {
     }
   }, [selectedJudgeInfo]);
 
+  // モナコエディターのref
   const editorRef = useRef<null | editor.IStandaloneCodeEditor>(null);
 
+  /**
+   * モナコエディターのマウントをハンドリングします。
+   * @param editor - モナコエディター
+   */
   const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
     editorRef.current = editor;
   };
 
+  /**
+   * "閉じる"ボタンの押下をハンドリングします。
+   */
   const handleCloseButtonClick = () => {
     setSelectedJudgeInfo(null);
     setTargetReviewInfo(null);
   };
 
+  // コピー完了トーストの表示状態のstates
   const [isOpenCopyToast, setIsOpenCopyToast] = useState<boolean>(false);
 
+  /**
+   * "コピー"ボタンの押下をハンドリングします。
+   */
   const handleCopyButtonClick = () => {
     setIsOpenCopyToast(true);
   };
 
+  /**
+   * コピー完了トーストを非表示にします。
+   */
   const hideCopyToast = () => {
     setIsOpenCopyToast(false);
   };
 
+  // ダークモードかのstate
   const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
 
   return (

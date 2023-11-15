@@ -10,12 +10,22 @@ type Props = {
   problemInfo: ProblemInfo;
 };
 
+/**
+ * チャレンジ問題カード
+ * @param props - props
+ * @returns チャレンジ問題カード
+ */
 const ChallengeProblemCard: React.FC<Props> = (props: Props) => {
+  // propsから日付と問題情報を取得
   const { day, problemInfo } = props;
 
   const navigate = useNavigate();
 
+  /**
+   * チャレンジ問題カードの押下をハンドリングします。
+   */
   const handleProblemCardClick = () => {
+    // 問題説明ページに移動
     navigate(`/problem/${problemInfo.id}/description`);
   };
 
