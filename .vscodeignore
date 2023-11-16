@@ -1,7 +1,8 @@
 .vscode/
-public-src/
-extension-src/
-webview-main-src/
+src/public-src/
+src/webview-public-src/
+src/extension-src/
+src/webview-main-src/
 node_modules/
 .gitignore
 postcss.config.js

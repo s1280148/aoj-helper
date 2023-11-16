@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./webview-main-src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/webview-main-src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {

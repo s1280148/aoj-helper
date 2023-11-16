@@ -1,0 +1,16 @@
+.left-border:before,
+.right-border:after {
+  content: "";
+  position: absolute;
+  width: calc(50% - 0.9rem);
+  top: 1.05rem;
+  border-bottom: 2px solid #b0bec5;
+}
+
+.left-border:before {
+  left: 0;
+}
+
+.right-border:after {
+  right: 0;
+}

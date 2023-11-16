@@ -11,7 +11,7 @@ const config = {
   target: "node",
   mode: "none",
 
-  entry: "./extension-src/extension.ts",
+  entry: "./src/extension-src/extension.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "extension.js",
