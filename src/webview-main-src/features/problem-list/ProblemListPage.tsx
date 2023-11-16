@@ -104,6 +104,11 @@ const ProblemListPage: React.FC = () => {
 
 export default ProblemListPage;
 
+/**
+ * 現在のタブ種類からタブに付与するクラス名を取得します。
+ * @param currentTab 現在のタブ
+ * @returns タブに付与するクラス名
+ */
 const getTabIndicatorClass = (currentTab: TabType) => {
   switch (currentTab) {
     case TabType.COURSE: {

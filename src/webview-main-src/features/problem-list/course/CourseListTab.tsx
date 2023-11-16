@@ -14,11 +14,11 @@ const CourseListTab: React.FC = () => {
 
   useEffect(() => {
     const findAllCoursesPage = async () => {
+      // コース情報一覧を取得し、stateにセット
       const parameters = {
         lang: "ja",
       };
 
-      // コース情報一覧を取得し、stateにセット
       const response = (await callApi("findAllCoursesPage", parameters)) as CourseInfoList;
 
       setCourseInfoList(response.courses);

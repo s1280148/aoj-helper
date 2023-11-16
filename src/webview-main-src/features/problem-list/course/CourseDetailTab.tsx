@@ -19,12 +19,12 @@ const CourseDetailTab: React.FC = () => {
 
   useEffect(() => {
     const findByCourseIdPage = async () => {
+      // コース詳細を取得し、stateにセット
       const parameters = {
         courseId: courseId,
         lang: "ja",
       };
 
-      // コース詳細を取得し、stateにセット
       const response = (await callApi("findByCourseIdPage", parameters)) as { course: CourseDetail };
 
       setCourseDetail(response.course);
