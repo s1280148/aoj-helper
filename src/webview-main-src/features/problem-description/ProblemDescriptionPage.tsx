@@ -20,13 +20,13 @@ const ProblemDescriptionPage: React.FC = () => {
 
   useEffect(() => {
     const getProblemInfo = async () => {
+      // 問題の情報を取得し、stateにセット
       const parameters = {
         lang: "ja",
         problemId: problemId,
       };
 
       try {
-        // 問題の情報を取得し、stateにセット
         const response = await callApi("findByProblemIdDescription", parameters);
 
         const problemDescription = response as ProblemDescription;
