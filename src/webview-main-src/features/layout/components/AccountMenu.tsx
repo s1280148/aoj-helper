@@ -2,9 +2,20 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useContext, useState } from "react";
-import { ThemeInfoContext } from "../../../providers/ThemeInfoProvider";
-import { Box, Button, Dialog, DialogContent, Switch } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogContent,
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Switch,
+} from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { EnvironmentInfoContext } from "../../../providers/EnvironmentInfoProvider";
+import { ProgrammingLanguage } from "../../../../public-src/constants/constant";
 
 /**
  * アカウントメニュー
@@ -43,15 +54,29 @@ const AccountMenu: React.FC = () => {
     closeAccountMenu();
   };
 
-  // ダークモードかのstate
-  const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
+
+  /**
+   * プログラミング言語のセレクトメニューの変更をハンドリングします。
+   * @param e - セレクトメニュー変更時のイベント
+   */
+  const handleProgrammingLanguageSelectChange = (e: SelectChangeEvent) => {
+    setEnvironmentInfo({
+      ...environmentInfo,
+      programmingLanguage: e.target.value as ProgrammingLanguage,
+    });
+  };
 
   /**
    * テーマボタンの押下をハンドリングします。
    * @param e - ボタン押下時のイベント
    */
   const handleThemeToggleButtonChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsDarkMode(e.target.checked);
+    setEnvironmentInfo({
+      ...environmentInfo,
+      isDarkMode: e.target.checked,
+    });
   };
 
   return (
@@ -71,11 +96,45 @@ const AccountMenu: React.FC = () => {
       >
         <DialogContent>
           <Box>
-            <h1 className="text-xl dark:text-darkMode-text">ダークモード</h1>
-            <Switch checked={isDarkMode} onChange={handleThemeToggleButtonChange} />
+            <h1 className="text-xl dark:text-darkMode-text mb-3">プログラミング言語</h1>
+            <FormControl sx={{ minWidth: 130 }} size="small" margin="none">
+              <Select
+                className="dark:bg-darkMode-lightest dark:border-darkMode-lightest dark:text-darkMode-text"
+                onChange={handleProgrammingLanguageSelectChange}
+                value={environmentInfo.programmingLanguage}
+                inputProps={{
+                  className: "py-1",
+                }}
+                MenuProps={{
+                  MenuListProps: {
+                    className: "p-0",
+                  },
+                }}
+              >
+                {Object.values(ProgrammingLanguage).map((programmingLanguage) => {
+                  return (
+                    <MenuItem
+                      className="dark:bg-darkMode-lightest dark:border-darkMode-lightest dark:text-darkMode-text"
+                      value={programmingLanguage}
+                      dense
+                    >
+                      {programmingLanguage}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
           </Box>
           <Box className="mt-7">
-            <Button variant={isDarkMode ? "outlined" : "contained"} startIcon={<LogoutIcon />} onClick={logout}>
+            <h1 className="text-xl dark:text-darkMode-text">ダークモード</h1>
+            <Switch checked={environmentInfo.isDarkMode} onChange={handleThemeToggleButtonChange} />
+          </Box>
+          <Box className="mt-7">
+            <Button
+              variant={environmentInfo.isDarkMode ? "outlined" : "contained"}
+              startIcon={<LogoutIcon />}
+              onClick={logout}
+            >
               ログアウト
             </Button>
           </Box>

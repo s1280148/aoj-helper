@@ -11,8 +11,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { ModelAnswerInfo, ReviewInfo, SessionInfo } from "../../../public-src/types/ApiResponseType";
 import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-src/utils/LanguageUtil";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
-import { ThemeInfoContext } from "../../providers/ThemeInfoProvider";
 import { SubmissionStatus } from "../../../public-src/constants/constant";
+import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
 
 /**
  * 模範解答ページ
@@ -31,35 +31,29 @@ const ModelAnswerPage: React.FC = () => {
   // 選択された模範解答のジャッジID
   const [selectedJudgeId, setSelectedJudgeId] = useState<null | number>(null);
 
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
+
   // 1ページに表示する模範回答の数
   const PAGE_SIZE = 10;
 
   useEffect(() => {
     const findModelAnswerList = async () => {
-      // セッション情報を取得し、プログラミング言語を取得
-      const parametersForSession = {};
-      const sessionResponse = (await callApi("session", parametersForSession)) as SessionInfo;
-
-      const language = sessionResponse.defaultProgrammingLanguage;
-
       // 模範解答一覧を取得し、stateにセット
-      const parameterForModelAnswer = {
+      const parameter = {
         problemId: problemId,
-        lang: language,
+        lang: environmentInfo.programmingLanguage,
         page: 0,
         size: 65536,
       };
 
-      const modelAnswerResponse = (await callApi(
-        "findByProblemIdAndLanguageModelAnswers",
-        parameterForModelAnswer,
-      )) as ModelAnswerInfo[];
+      const response = (await callApi("findByProblemIdAndLanguageModelAnswers", parameter)) as ModelAnswerInfo[];
 
-      setModelAnswerInfoList(modelAnswerResponse);
+      setModelAnswerInfoList(response);
     };
 
     findModelAnswerList();
-  }, [problemId]);
+  }, [problemId, environmentInfo]);
 
   useEffect(() => {
     setDisplayingModelAnswerInfoList(modelAnswerInfoList?.slice(0, PAGE_SIZE) ?? null);
@@ -157,9 +151,6 @@ const ModelAnswerPage: React.FC = () => {
     });
   };
 
-  // ダークモードかのstate
-  const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
-
   return (
     <Box>
       {selectedJudgeId && targetReviewInfo && (
@@ -221,7 +212,7 @@ const ModelAnswerPage: React.FC = () => {
                 scrollBeyondLastLine: false,
               }}
               onMount={handleEditorDidMount}
-              theme={isDarkMode ? "vs-dark" : "light"}
+              theme={environmentInfo.isDarkMode ? "vs-dark" : "light"}
             />
           </Box>
           <Box className="m-3 text-right">

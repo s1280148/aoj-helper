@@ -1,9 +1,9 @@
 import { MathJaxContext } from "better-react-mathjax";
 import { ProblemInfoProvider } from "./ProblemInfoProvider";
-import { ThemeInfoProvider } from "./ThemeInfoProvider";
 import CustomMuiThemeProvider from "./CustomMuiThemeProvider";
 import mathJaxConfig from "../settings/MathJaxConfig";
 import { MemoryRouter } from "react-router-dom";
+import { EnvironmentInfoProvider } from "./EnvironmentInfoProvider";
 
 type Props = {
   children: React.ReactNode;
@@ -23,7 +23,7 @@ const AppProvider: React.FC<Props> = (props: Props) => {
 
   return (
     <MathJaxContext config={mathJaxConfig}>
-      <ThemeInfoProvider>
+      <EnvironmentInfoProvider>
         <CustomMuiThemeProvider>
           <ProblemInfoProvider>
             <MemoryRouter initialEntries={[`/problem/${problemId}/description`]} initialIndex={0}>
@@ -31,7 +31,7 @@ const AppProvider: React.FC<Props> = (props: Props) => {
             </MemoryRouter>
           </ProblemInfoProvider>
         </CustomMuiThemeProvider>
-      </ThemeInfoProvider>
+      </EnvironmentInfoProvider>
     </MathJaxContext>
   );
 };

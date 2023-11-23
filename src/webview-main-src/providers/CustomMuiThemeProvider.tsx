@@ -1,5 +1,5 @@
 import { ThemeProvider, createTheme } from "@mui/material";
-import { ThemeInfoContext } from "./ThemeInfoProvider";
+import { EnvironmentInfoContext } from "./EnvironmentInfoProvider";
 import { useContext } from "react";
 
 // ライトモードのテーマ
@@ -46,10 +46,10 @@ type Props = {
 const CustomMuiThemeProvider: React.FC<Props> = (props: Props) => {
   const { children } = props;
 
-  // ダークモードかのstate
-  const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
 
-  return <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>{children}</ThemeProvider>;
+  return <ThemeProvider theme={environmentInfo.isDarkMode ? darkTheme : lightTheme}>{children}</ThemeProvider>;
 };
 
 export default CustomMuiThemeProvider;
