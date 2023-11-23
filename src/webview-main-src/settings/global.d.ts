@@ -1,5 +1,8 @@
+declare type ProgrammingLanguage = import("./../../public-src/constants/constant").ProgrammingLanguage;
+
 interface VSCodeState {
   problemId: string;
+  programmingLanguage: ProgrammingLanguage;
   isDarkMode: boolean;
 }
 
