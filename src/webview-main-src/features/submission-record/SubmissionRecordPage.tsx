@@ -11,8 +11,8 @@ import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-
 import { timeStampToDate } from "../../../public-src/utils/DateUtil";
 import { editor } from "monaco-editor";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
-import { ThemeInfoContext } from "../../providers/ThemeInfoProvider";
 import { SubmissionStatus } from "../../../public-src/constants/constant";
+import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
 
 /**
  * 提出履歴ページ
@@ -157,8 +157,8 @@ const SubmissionRecordPage: React.FC = () => {
     setIsOpenCopyToast(false);
   };
 
-  // ダークモードかのstate
-  const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
 
   return (
     <Box>
@@ -221,7 +221,7 @@ const SubmissionRecordPage: React.FC = () => {
                 scrollBeyondLastLine: false,
               }}
               onMount={handleEditorDidMount}
-              theme={isDarkMode ? "vs-dark" : "light"}
+              theme={environmentInfo.isDarkMode ? "vs-dark" : "light"}
             />
           </Box>
           <Box className="m-3 text-right">

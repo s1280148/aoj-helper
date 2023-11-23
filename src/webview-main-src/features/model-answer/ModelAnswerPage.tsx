@@ -11,8 +11,8 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { ModelAnswerInfo, ReviewInfo, SessionInfo } from "../../../public-src/types/ApiResponseType";
 import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-src/utils/LanguageUtil";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
-import { ThemeInfoContext } from "../../providers/ThemeInfoProvider";
 import { SubmissionStatus } from "../../../public-src/constants/constant";
+import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
 
 /**
  * 模範解答ページ
@@ -157,8 +157,8 @@ const ModelAnswerPage: React.FC = () => {
     });
   };
 
-  // ダークモードかのstate
-  const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
 
   return (
     <Box>
@@ -221,7 +221,7 @@ const ModelAnswerPage: React.FC = () => {
                 scrollBeyondLastLine: false,
               }}
               onMount={handleEditorDidMount}
-              theme={isDarkMode ? "vs-dark" : "light"}
+              theme={environmentInfo.isDarkMode ? "vs-dark" : "light"}
             />
           </Box>
           <Box className="m-3 text-right">

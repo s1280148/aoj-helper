@@ -2,9 +2,9 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useContext, useState } from "react";
-import { ThemeInfoContext } from "../../../providers/ThemeInfoProvider";
 import { Box, Button, Dialog, DialogContent, Switch } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { EnvironmentInfoContext } from "../../../providers/EnvironmentInfoProvider";
 
 /**
  * アカウントメニュー
@@ -43,15 +43,18 @@ const AccountMenu: React.FC = () => {
     closeAccountMenu();
   };
 
-  // ダークモードかのstate
-  const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
 
   /**
    * テーマボタンの押下をハンドリングします。
    * @param e - ボタン押下時のイベント
    */
   const handleThemeToggleButtonChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsDarkMode(e.target.checked);
+    setEnvironmentInfo({
+      ...environmentInfo,
+      isDarkMode: e.target.checked,
+    });
   };
 
   return (
@@ -72,10 +75,14 @@ const AccountMenu: React.FC = () => {
         <DialogContent>
           <Box>
             <h1 className="text-xl dark:text-darkMode-text">ダークモード</h1>
-            <Switch checked={isDarkMode} onChange={handleThemeToggleButtonChange} />
+            <Switch checked={environmentInfo.isDarkMode} onChange={handleThemeToggleButtonChange} />
           </Box>
           <Box className="mt-7">
-            <Button variant={isDarkMode ? "outlined" : "contained"} startIcon={<LogoutIcon />} onClick={logout}>
+            <Button
+              variant={environmentInfo.isDarkMode ? "outlined" : "contained"}
+              startIcon={<LogoutIcon />}
+              onClick={logout}
+            >
               ログアウト
             </Button>
           </Box>

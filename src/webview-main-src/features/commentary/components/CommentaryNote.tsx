@@ -6,7 +6,7 @@ import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import "../../../assets/css/description.css";
 import { MathJax } from "better-react-mathjax";
-import { ThemeInfoContext } from "../../../providers/ThemeInfoProvider";
+import { EnvironmentInfoContext } from "../../../providers/EnvironmentInfoProvider";
 
 type Props = {
   problemId: string;
@@ -74,8 +74,8 @@ const CommentaryNote: React.FC<Props> = (props: Props) => {
     setCommentaryDetail(response);
   };
 
-  // ダークモードかのstate
-  const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
 
   return (
     <>
@@ -125,7 +125,7 @@ const CommentaryNote: React.FC<Props> = (props: Props) => {
             </Box>
             <MathJax dynamic>
               <Box
-                className={`${isDarkMode ? "description-dark" : "description"} px-3 pt-2 pb-4`}
+                className={`${environmentInfo.isDarkMode ? "description-dark" : "description"} px-3 pt-2 pb-4`}
                 dangerouslySetInnerHTML={{ __html: commentaryDetail.html }}
               ></Box>
             </MathJax>

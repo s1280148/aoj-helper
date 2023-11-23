@@ -6,7 +6,7 @@ import "../../assets/css/description.css";
 import { ProblemInfoContext } from "../../providers/ProblemInfoProvider";
 import { ProblemDescription } from "../../../public-src/types/ApiResponseType";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
-import { ThemeInfoContext } from "../../providers/ThemeInfoProvider";
+import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
 
 /**
  * 問題説明ページ
@@ -67,8 +67,8 @@ const ProblemDescriptionPage: React.FC = () => {
     setErrorToastOpen(false);
   };
 
-  // ダークモードかのstate
-  const { isDarkMode, setIsDarkMode } = useContext(ThemeInfoContext);
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
 
   return (
     <>
@@ -85,7 +85,7 @@ const ProblemDescriptionPage: React.FC = () => {
           <MathJax dynamic>
             <Box
               id="description"
-              className={isDarkMode ? "description-dark" : "description"}
+              className={environmentInfo.isDarkMode ? "description-dark" : "description"}
               dangerouslySetInnerHTML={{ __html: problemInfo.html }}
             ></Box>
           </MathJax>
