@@ -286,11 +286,13 @@ const ModelAnswerPage: React.FC = () => {
           <Snackbar
             open={isOpenCopyToast}
             anchorOrigin={{ vertical: "top", horizontal: "left" }}
-            autoHideDuration={1000}
+            autoHideDuration={2000}
             onClose={hideCopyToast}
             sx={{ right: "auto" }}
           >
-            <Alert severity="success">コピーしました</Alert>
+            <Alert severity="success" className="dark:bg-teal-900 dark:text-darkMode-text">
+              コピーしました
+            </Alert>
           </Snackbar>
         </Box>
       )}
