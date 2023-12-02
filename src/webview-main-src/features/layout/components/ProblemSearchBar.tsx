@@ -65,7 +65,9 @@ const ProblemSearchBar: React.FC = () => {
         onClose={hideErrorToast}
         sx={{ right: "auto" }}
       >
-        <Alert severity="error">問題IDを入力してください</Alert>
+        <Alert severity="error" className="dark:bg-red-900 dark:text-darkMode-text">
+          問題IDを入力してください
+        </Alert>
       </Snackbar>
     </>
   );

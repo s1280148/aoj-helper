@@ -290,7 +290,9 @@ const ModelAnswerPage: React.FC = () => {
             onClose={hideCopyToast}
             sx={{ right: "auto" }}
           >
-            <Alert severity="success">コピーしました</Alert>
+            <Alert severity="success" className="dark:bg-accept-dark dark:text-darkMode-text">
+              コピーしました
+            </Alert>
           </Snackbar>
         </Box>
       )}
