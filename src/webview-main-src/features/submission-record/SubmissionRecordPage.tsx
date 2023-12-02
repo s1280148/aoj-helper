@@ -273,7 +273,7 @@ const SubmissionRecordPage: React.FC = () => {
           <Snackbar
             open={isOpenCopyToast}
             anchorOrigin={{ vertical: "top", horizontal: "left" }}
-            autoHideDuration={1000}
+            autoHideDuration={2000}
             onClose={hideCopyToast}
             sx={{ right: "auto" }}
           >
