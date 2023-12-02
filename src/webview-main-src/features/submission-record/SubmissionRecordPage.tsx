@@ -277,7 +277,7 @@ const SubmissionRecordPage: React.FC = () => {
             onClose={hideCopyToast}
             sx={{ right: "auto" }}
           >
-            <Alert severity="success" className="dark:bg-accept-dark dark:text-darkMode-text">
+            <Alert severity="success" className="dark:bg-teal-900 dark:text-darkMode-text">
               コピーしました
             </Alert>
           </Snackbar>
