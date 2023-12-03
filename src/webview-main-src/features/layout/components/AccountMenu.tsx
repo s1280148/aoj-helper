@@ -16,9 +16,8 @@ import {
 import LogoutIcon from "@mui/icons-material/Logout";
 import { EnvironmentInfoContext } from "../../../providers/EnvironmentInfoProvider";
 import { DisplayLanguage, ProgrammingLanguage } from "../../../../public-src/constants/constant";
-import i18next from "i18next";
-import { getDisplayLanguageLabelFromDisplayLanguage } from "../../../../public-src/utils/LanguageUtil";
 import { useTranslation } from "react-i18next";
+import { getDisplayLanguageLabelFromDisplayLanguage } from "../../../../public-src/utils/DisplayLanguageUtil";
 
 /**
  * アカウントメニュー

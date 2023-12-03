@@ -9,7 +9,7 @@ import { editor } from "monaco-editor";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { ModelAnswerInfo, ReviewInfo, SessionInfo } from "../../../public-src/types/ApiResponseType";
-import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-src/utils/LanguageUtil";
+import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-src/utils/ProgrammingLanguageUtil";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { SubmissionStatus } from "../../../public-src/constants/constant";
 import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";

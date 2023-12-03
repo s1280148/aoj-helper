@@ -7,7 +7,7 @@ import Editor, { Monaco } from "@monaco-editor/react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { ReviewInfo, SessionInfo, SubmissionRecord } from "../../../public-src/types/ApiResponseType";
 import { getStatusFromSubmissionStatus } from "../../../public-src/utils/JudgeInfoUtil";
-import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-src/utils/LanguageUtil";
+import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-src/utils/ProgrammingLanguageUtil";
 import { timeStampToDate } from "../../../public-src/utils/DateUtil";
 import { editor } from "monaco-editor";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
