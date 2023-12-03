@@ -5,6 +5,8 @@ import AOJSessionManager from "./AOJSessionManager";
 import aojApiClient from "./AOJApiClient";
 import { EXTENSION_SCHEME } from "../settings/extensionScheme";
 import SimpleDocumentContentProvider from "./SimpleTextDocumentContentProvider";
+import { DisplayLanguage } from "../../public-src/constants/constant";
+import { default as dlm } from "./DisplayLanguageManager";
 
 /**
  * AOJのViewProvider
@@ -189,6 +191,11 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
             "模範解答との比較",
           );
           break;
+        }
+        case "changeDisplayLanguage": {
+          // 表示言語を変更する
+          const displayLanguage = message.content as DisplayLanguage;
+          dlm.changeDisplayLanguage(displayLanguage);
         }
         // 以下 API呼び出し
         case "session": {

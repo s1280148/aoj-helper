@@ -41,6 +41,14 @@ export const EnvironmentInfoProvider: React.FC<Props> = (props) => {
   });
 
   useEffect(() => {
+    // 拡張機能側に、表示言語の切り替えを通知
+    vscode.postMessage({
+      type: "changeDisplayLanguage",
+      content: environmentInfo.displayLanguage,
+    });
+  }, []);
+
+  useEffect(() => {
     // ダークモードである場合、htmlタグにクラスを付与
     if (environmentInfo.isDarkMode) {
       document.querySelector("html")!.classList.add("dark");
@@ -50,6 +58,12 @@ export const EnvironmentInfoProvider: React.FC<Props> = (props) => {
 
     // 表示言語を切り替え
     i18next.changeLanguage(environmentInfo.displayLanguage);
+
+    // 拡張機能側に、表示言語の切り替えを通知
+    vscode.postMessage({
+      type: "changeDisplayLanguage",
+      content: environmentInfo.displayLanguage,
+    });
 
     // 環境情報をvscodeのstateに保存
     vscode.setState({
