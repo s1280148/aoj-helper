@@ -7,6 +7,7 @@ import { ProblemInfoContext } from "../../providers/ProblemInfoProvider";
 import { ProblemDescription } from "../../../public-src/types/ApiResponseType";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
+import { useTranslation } from "react-i18next";
 
 /**
  * 問題説明ページ
@@ -18,11 +19,14 @@ const ProblemDescriptionPage: React.FC = () => {
 
   const navigate = useNavigate();
 
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
+
   useEffect(() => {
     const getProblemInfo = async () => {
       // 問題の情報を取得し、stateにセット
       const parameters = {
-        lang: "ja",
+        lang: environmentInfo.displayLanguage,
         problemId: problemId,
       };
 
@@ -45,7 +49,7 @@ const ProblemDescriptionPage: React.FC = () => {
     };
 
     getProblemInfo();
-  }, [problemId]);
+  }, [problemId, environmentInfo]);
 
   // 現在表示中の問題の情報のstate
   const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
@@ -67,8 +71,7 @@ const ProblemDescriptionPage: React.FC = () => {
     setErrorToastOpen(false);
   };
 
-  // 環境情報のstate
-  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -98,7 +101,7 @@ const ProblemDescriptionPage: React.FC = () => {
         onClose={hideErrorToast}
         sx={{ right: "auto" }}
       >
-        <Alert severity="error">問題が見つかりません。</Alert>
+        <Alert severity="error">{t("problemDescription.alert.notFound")}</Alert>
       </Snackbar>
     </>
   );

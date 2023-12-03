@@ -103,3 +103,11 @@ export const enum ApiErrorCode {
   // 不明なエラー
   UNKNOWN_ERROR = 9999,
 }
+
+/**
+ * 表示言語
+ */
+export enum DisplayLanguage {
+  Japanese = "ja",
+  English = "en",
+}

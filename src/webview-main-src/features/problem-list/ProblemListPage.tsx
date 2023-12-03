@@ -4,6 +4,7 @@ import MapIcon from "@mui/icons-material/Map";
 import InboxIcon from "@mui/icons-material/Inbox";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 /**
  * タブの種類
@@ -52,6 +53,8 @@ const ProblemListPage: React.FC = () => {
     }
   };
 
+  const { t } = useTranslation();
+
   return (
     <Box>
       <Tabs
@@ -71,7 +74,7 @@ const ProblemListPage: React.FC = () => {
           `}
           icon={<MapIcon />}
           iconPosition="start"
-          label="コース"
+          label={t("problemList.tab.course")}
           value={TabType.COURSE}
         />
         <Tab
@@ -82,7 +85,7 @@ const ProblemListPage: React.FC = () => {
           `}
           icon={<InboxIcon />}
           iconPosition="start"
-          label="チャレンジ"
+          label={t("problemList.tab.challenge")}
           value={TabType.CHALLENGE}
         />
         <Tab
@@ -93,7 +96,7 @@ const ProblemListPage: React.FC = () => {
           `}
           icon={<BookmarkBorderIcon />}
           iconPosition="start"
-          label="ブックマーク"
+          label={t("problemList.tab.bookmark")}
           value={TabType.BOOKMARK}
         />
       </Tabs>

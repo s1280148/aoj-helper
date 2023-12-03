@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import LargeChallengeSection from "./components/LargeChallengeSection";
 import { LargeChallenge } from "../../../../public-src/types/ApiResponseType";
 import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
+import { useTranslation } from "react-i18next";
 
 /**
  * チャレンジ一覧タブ
@@ -25,6 +26,8 @@ const ChallengeListTab: React.FC = () => {
     findTopPage();
   }, []);
 
+  const { t } = useTranslation();
+
   return (
     <>
       <Box className="mt-4 border-2 rounded dark:bg-darkMode-darkest dark:border-darkMode-dark dark:text-darkMode-text">
@@ -41,9 +44,9 @@ const ChallengeListTab: React.FC = () => {
             dark:border-darkMode-dark
             dark:text-darkMode-text"
         >
-          チャレンジリスト
+          {t("challengeList.title")}
         </h2>
-        <p className="p-1 pl-4 my-2 dark:text-darkMode-text">コンテストの過去問に挑戦</p>
+        <p className="p-1 pl-4 my-2 dark:text-darkMode-text">{t("challengeList.description")}</p>
       </Box>
       <Box>
         {largeChallengeList &&

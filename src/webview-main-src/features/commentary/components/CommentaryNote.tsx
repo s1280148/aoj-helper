@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useTransition } from "react";
 import { CommentaryDetail, CommentaryInfo } from "../../../../public-src/types/ApiResponseType";
 import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
 import { Box, FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
@@ -7,6 +7,7 @@ import FeedbackIcon from "@mui/icons-material/Feedback";
 import "../../../assets/css/description.css";
 import { MathJax } from "better-react-mathjax";
 import { EnvironmentInfoContext } from "../../../providers/EnvironmentInfoProvider";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   problemId: string;
@@ -35,7 +36,7 @@ const CommentaryNote: React.FC<Props> = (props: Props) => {
     const getCommentaryDetail = async () => {
       // 解説の詳細情報を取得し、stateにセット
       const parameters = {
-        dlang: "ja",
+        dlang: environmentInfo.displayLanguage,
         problemId: problemId,
         pattern: commentaryInfo.pattern,
         type: commentaryInfo.type,
@@ -63,7 +64,7 @@ const CommentaryNote: React.FC<Props> = (props: Props) => {
     const filter = event.target.value;
 
     const parameters = {
-      dlang: "ja",
+      dlang: environmentInfo.displayLanguage,
       problemId: problemId,
       pattern: commentaryInfo.pattern,
       type: commentaryInfo.type,
@@ -79,6 +80,8 @@ const CommentaryNote: React.FC<Props> = (props: Props) => {
     setCommentaryDetail(response);
   };
 
+  const { t } = useTranslation();
+
   return (
     <>
       {commentaryDetail && (
@@ -92,7 +95,9 @@ const CommentaryNote: React.FC<Props> = (props: Props) => {
                   </span>
                   <p className="text-base dark:text-darkMode-text">{`${
                     commentaryDetail.pattern === "pre" ? "Pre note" : "Post note"
-                  }: ${commentaryDetail.type === "general" ? "一般解説" : "言語解説"}`}</p>
+                  }: ${
+                    commentaryDetail.type === "general" ? t("commentary.type.general") : t("commentary.type.language")
+                  }`}</p>
                 </Box>
                 <Box>
                   <FormControl sx={{ minWidth: 130 }} size="small" margin="none">

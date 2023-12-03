@@ -12,6 +12,7 @@ import {
 } from "../../../public-src/utils/JudgeInfoUtil";
 import { JudgeDetail } from "../../../public-src/types/ApiResponseType";
 import { SubmissionStatus } from "../../../public-src/constants/constant";
+import { useTranslation } from "react-i18next";
 
 /**
  * ジャッジ詳細モーダル
@@ -56,6 +57,8 @@ const JudgeDetailModal: React.FC = () => {
   // ジャッジ詳細のstate
   const [judgeDetail, setJudgeDetail] = useState<JudgeDetail | null>(null);
 
+  const { t } = useTranslation();
+
   return (
     <>
       {judgeDetail && (
@@ -71,7 +74,7 @@ const JudgeDetailModal: React.FC = () => {
           <Box className="p-2 w-full h-full">
             <Box className="border-2 rounded mb-3 border-gray-300 dark:border-darkMode-dark dark:bg-darkMode-darkest">
               <Box className="px-3 py-2 flex bg-gray-200 text-gray-600 dark:bg-darkMode-dark dark:border-darkMode-dark dark:text-darkMode-text">
-                <span className="mx-1 flex items-center dark:text-darkMode-text">結果 :</span>
+                <span className="mx-1 flex items-center dark:text-darkMode-text">{t("judgeDetail.result")}</span>
                 <p
                   className={`${getClassNameFromSubmissionStatus(
                     judgeDetail.submissionRecord.status,
@@ -90,16 +93,16 @@ const JudgeDetailModal: React.FC = () => {
               </Box>
               <Box className="grid grid-cols-4 border-b h-8 text-base font-bold text-gray-800 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
                 <Box className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
-                  言語
+                  {t("judgeDetail.language")}
                 </Box>
                 <Box className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
-                  時間
+                  {t("judgeDetail.cpuTime")}
                 </Box>
                 <Box className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
-                  メモリー
+                  {t("judgeDetail.memory")}
                 </Box>
                 <Box className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
-                  コード長
+                  {t("judgeDetail.codeSize")}
                 </Box>
               </Box>
               <Box className="grid grid-cols-4 h-8 text-base text-gray-800 dark:text-darkMode-text dark:bg-darkMode-darkest dark:border-darkMode-dark">
@@ -122,25 +125,25 @@ const JudgeDetailModal: React.FC = () => {
                 <thead className="grid w-full border-2 rounded border-gray-300 dark:border-darkMode-dark">
                   <tr className="grid grid-cols-7">
                     <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
-                      ケース
+                      {t("judgeDetail.testCaseId")}
                     </th>
                     <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
-                      ステータス
+                      {t("judgeDetail.judgeStatus")}
                     </th>
                     <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
-                      時間
+                      {t("judgeDetail.cpuTime")}
                     </th>
                     <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
-                      メモリー
+                      {t("judgeDetail.memory")}
                     </th>
                     <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
-                      入力
+                      {t("judgeDetail.input")}
                     </th>
                     <th className="border-r flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
-                      出力
+                      {t("judgeDetail.output")}
                     </th>
                     <th className="flex justify-center items-center bg-gray-200 dark:text-darkMode-text dark:bg-darkMode-dark dark:border-darkMode-dark">
-                      ケース名
+                      {t("jugeDetail.testCaseName")}
                     </th>
                   </tr>
                   <tbody className="border-r-2 border-l-2 border-gray-300 dark:bg-darkMode-darkest dark:border-darkMode-dark">
@@ -168,16 +171,16 @@ const JudgeDetailModal: React.FC = () => {
                                 )}
                               </td>
                               <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200 dark:border-darkMode-dark dark:text-darkMode-text">
-                                {caseVerDict.cpuTime ? `${(caseVerDict.cpuTime / 100).toFixed(2)} sec` : "sec"}
+                                {caseVerDict.cpuTime ? `${(caseVerDict.cpuTime / 100).toFixed(2)} sec` : "0.00 sec"}
                               </td>
                               <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200 dark:border-darkMode-dark dark:text-darkMode-text">
-                                {caseVerDict.memory ? `${caseVerDict.memory} KB` : "KB"}
+                                {caseVerDict.memory ? `${caseVerDict.memory} KB` : "0 KB"}
                               </td>
                               <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200 dark:border-darkMode-dark dark:text-darkMode-text">
-                                {caseVerDict.inputSize ? `${caseVerDict.inputSize} B` : "B"}
+                                {caseVerDict.inputSize ? `${caseVerDict.inputSize} B` : "0 B"}
                               </td>
                               <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200 dark:border-darkMode-dark dark:text-darkMode-text">
-                                {caseVerDict.outputSize ? `${caseVerDict.outputSize} B` : "B"}
+                                {caseVerDict.outputSize ? `${caseVerDict.outputSize} B` : "0 B"}
                               </td>
                               <td className="border-r border-b flex justify-center items-center text-center p-1 border-gray-200 dark:border-darkMode-dark">
                                 <p

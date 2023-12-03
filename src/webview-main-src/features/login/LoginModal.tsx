@@ -1,6 +1,12 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import { Alert, Box, Button, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
+import { ProblemInfoContext } from "../../providers/ProblemInfoProvider";
+import { callApi } from "../../../webview-public-src/utils/ApiUtil";
+import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
+import { ProblemDescription } from "../../../public-src/types/ApiResponseType";
 
 /**
  * ログインモーダル
@@ -22,7 +28,6 @@ const LoginModal = () => {
    */
   const closeLoginModal = () => {
     setOpen(false);
-    cleanupLoginModal();
   };
 
   /**
@@ -148,6 +153,8 @@ const LoginModal = () => {
     return isInputValid;
   };
 
+  const navigation = useNavigate();
+
   // 拡張機能側から、ログインに関するメッセージを受信
   window.addEventListener("message", (event) => {
     const message = event.data;
@@ -163,11 +170,37 @@ const LoginModal = () => {
             break;
           case "close":
             closeLoginModal();
+            cleanupLoginModal();
+            updateProblemInfo();
             break;
         }
         break;
     }
   });
+
+  // 現在表示中の問題の情報のstate
+  const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
+
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
+
+  /**
+   * ログイン時に問題情報を更新します。
+   */
+  const updateProblemInfo = async () => {
+    // 問題の情報を取得し、stateにセット
+    const parameters = {
+      lang: environmentInfo.displayLanguage,
+      problemId: problemInfo?.problem_id,
+    };
+    const response = await callApi("findByProblemIdDescription", parameters);
+
+    const problemDescription = response as ProblemDescription;
+
+    setProblemInfo(problemDescription);
+  };
+
+  const { t } = useTranslation();
 
   return (
     <Dialog
@@ -176,11 +209,19 @@ const LoginModal = () => {
         className: "dark:bg-darkMode-bg",
       }}
     >
-      <DialogTitle className="dark:text-darkMode-text">ログイン</DialogTitle>
+      <DialogTitle className="dark:text-darkMode-text">{t("loginModal.login")}</DialogTitle>
       <DialogContent>
         <form onSubmit={login}>
-          <Alert severity="error" className="m-2" sx={{ display: alert ? "" : "none" }}>
-            ログインに失敗しました。
+          <Alert
+            severity="error"
+            className={`
+            m-2
+            dark:bg-red-900
+            dark:text-darkMode-text
+            ${alert ? "" : "hidden"}
+            `}
+          >
+            {t("loginModal.alert.failedLogin")}
           </Alert>
           <TextField
             id="id"
@@ -192,7 +233,7 @@ const LoginModal = () => {
             className="mx-1 my-2"
             inputRef={idRef}
             error={idError}
-            helperText={idError ? "入力してください" : ""}
+            helperText={idError ? t("loginModal.error.empty") : ""}
           />
           <TextField
             id="password"
@@ -204,7 +245,7 @@ const LoginModal = () => {
             className="mx-1 my-2"
             inputRef={passwordRef}
             error={passwordError}
-            helperText={passwordError ? "入力してください" : ""}
+            helperText={passwordError ? t("loginModal.error.empty") : ""}
           />
           <Grid container justifyContent="flex-end" className="mt-2">
             <Button
@@ -212,7 +253,7 @@ const LoginModal = () => {
               type="submit"
               className="dark:bg-darkMode dark:bg-darkMode-lighter dark:text-darkMode-text"
             >
-              ログイン
+              {t("loginModal.login")}
             </Button>
           </Grid>
         </form>
@@ -223,7 +264,7 @@ const LoginModal = () => {
             rel="noopener"
             className="text-blue-600 dark:text-blue-400 hover:underline"
           >
-            アカウント新規作成
+            {t("loginModal.createAccount")}
           </a>
         </Box>
       </DialogContent>

@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 import BorderLinearProgressWithLabel from "../../../components/Element/BorderLinearProgressWithLabel";
 import CourseTopicCard from "./components/CourseTopicCard";
 import { CourseDetail } from "../../../../public-src/types/ApiResponseType";
 import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
+import { EnvironmentInfoContext } from "../../../providers/EnvironmentInfoProvider";
 
 /**
  * コース詳細タブ
@@ -17,12 +18,15 @@ const CourseDetailTab: React.FC = () => {
   // コース詳細のstate
   const [courseDetail, setCourseDetail] = useState<null | CourseDetail>(null);
 
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
+
   useEffect(() => {
     const findByCourseIdPage = async () => {
       // コース詳細を取得し、stateにセット
       const parameters = {
         courseId: courseId,
-        lang: "ja",
+        lang: environmentInfo.displayLanguage,
       };
 
       const response = (await callApi("findByCourseIdPage", parameters)) as { course: CourseDetail };

@@ -1,7 +1,9 @@
+declare type DisplayLanguage = import("./../../public-src/constants/constant").DisplayLanguage;
 declare type ProgrammingLanguage = import("./../../public-src/constants/constant").ProgrammingLanguage;
 
 interface VSCodeState {
   problemId: string;
+  displayLanguage: DisplayLanguage;
   programmingLanguage: ProgrammingLanguage;
   isDarkMode: boolean;
 }

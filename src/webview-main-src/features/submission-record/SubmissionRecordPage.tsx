@@ -7,12 +7,13 @@ import Editor, { Monaco } from "@monaco-editor/react";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { ReviewInfo, SessionInfo, SubmissionRecord } from "../../../public-src/types/ApiResponseType";
 import { getStatusFromSubmissionStatus } from "../../../public-src/utils/JudgeInfoUtil";
-import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-src/utils/LanguageUtil";
+import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-src/utils/ProgrammingLanguageUtil";
 import { timeStampToDate } from "../../../public-src/utils/DateUtil";
 import { editor } from "monaco-editor";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { SubmissionStatus } from "../../../public-src/constants/constant";
 import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
+import { useTranslation } from "react-i18next";
 
 /**
  * 提出履歴ページ
@@ -160,6 +161,8 @@ const SubmissionRecordPage: React.FC = () => {
   // 環境情報のstate
   const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
 
+  const { t } = useTranslation();
+
   return (
     <Box>
       {selectedJudgeInfo && targetReviewInfo && (
@@ -245,7 +248,7 @@ const SubmissionRecordPage: React.FC = () => {
                 dark:hover:border-darkMode-lighter"
                 type="button"
               >
-                コピー
+                {t("monacoEditor.copy")}
               </button>
             </CopyToClipboard>
             <button
@@ -267,7 +270,7 @@ const SubmissionRecordPage: React.FC = () => {
               type="button"
               onClick={handleCloseButtonClick}
             >
-              閉じる
+              {t("monacoEditor.close")}
             </button>
           </Box>
           <Snackbar
@@ -278,7 +281,7 @@ const SubmissionRecordPage: React.FC = () => {
             sx={{ right: "auto" }}
           >
             <Alert severity="success" className="dark:bg-teal-900 dark:text-darkMode-text">
-              コピーしました
+              {t("monacoEditor.alert.copied")}
             </Alert>
           </Snackbar>
         </Box>

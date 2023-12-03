@@ -5,7 +5,9 @@
     "lib": ["ES2020"],
     "rootDir": ".",
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "include": ["./src/extension-src", "./src/public-src"]
 }
