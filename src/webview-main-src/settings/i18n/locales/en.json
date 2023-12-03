@@ -27,6 +27,7 @@
   "problemSearchBar.button.text": "Search",
   "problemSearchBar.alert.requireProblemId": "Input Problem ID",
   "loginModal.login": "Login",
+  "loginModal.password": "Password",
   "loginModal.alert.failedLogin": "Login failed.",
   "loginModal.error.empty": "Required",
   "loginModal.createAccount": "Create account",

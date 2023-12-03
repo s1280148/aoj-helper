@@ -237,7 +237,7 @@ const LoginModal = () => {
           />
           <TextField
             id="password"
-            label="パスワード"
+            label={t("loginModal.password")}
             type="password"
             margin="dense"
             fullWidth
