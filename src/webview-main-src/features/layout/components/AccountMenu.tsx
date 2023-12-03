@@ -15,7 +15,10 @@ import {
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { EnvironmentInfoContext } from "../../../providers/EnvironmentInfoProvider";
-import { ProgrammingLanguage } from "../../../../public-src/constants/constant";
+import { DisplayLanguage, ProgrammingLanguage } from "../../../../public-src/constants/constant";
+import i18next from "i18next";
+import { getDisplayLanguageLabelFromDisplayLanguage } from "../../../../public-src/utils/LanguageUtil";
+import { useTranslation } from "react-i18next";
 
 /**
  * アカウントメニュー
@@ -58,6 +61,17 @@ const AccountMenu: React.FC = () => {
   const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
 
   /**
+   * 表示言語のセレクトメニューの変更をハンドリングします。
+   * @param e - セレクトメニュー変更時のイベント
+   */
+  const handleDisplayLanguageSelectChange = (e: SelectChangeEvent) => {
+    setEnvironmentInfo({
+      ...environmentInfo,
+      displayLanguage: e.target.value as DisplayLanguage,
+    });
+  };
+
+  /**
    * プログラミング言語のセレクトメニューの変更をハンドリングします。
    * @param e - セレクトメニュー変更時のイベント
    */
@@ -79,6 +93,8 @@ const AccountMenu: React.FC = () => {
     });
   };
 
+  const { t } = useTranslation();
+
   return (
     <>
       <Tooltip title="メニュー">
@@ -96,6 +112,36 @@ const AccountMenu: React.FC = () => {
       >
         <DialogContent>
           <Box>
+            <h1 className="text-xl dark:text-darkMode-text mb-3">表示言語</h1>
+            <FormControl sx={{ minWidth: 130 }} size="small" margin="none">
+              <Select
+                className="dark:bg-darkMode-lightest dark:border-darkMode-lightest dark:text-darkMode-text"
+                onChange={handleDisplayLanguageSelectChange}
+                value={environmentInfo.displayLanguage}
+                inputProps={{
+                  className: "py-1",
+                }}
+                MenuProps={{
+                  MenuListProps: {
+                    className: "p-0",
+                  },
+                }}
+              >
+                {Object.values(DisplayLanguage).map((displayLanguage) => {
+                  return (
+                    <MenuItem
+                      className="dark:bg-darkMode-lightest dark:border-darkMode-lightest dark:text-darkMode-text"
+                      value={displayLanguage}
+                      dense
+                    >
+                      {getDisplayLanguageLabelFromDisplayLanguage(displayLanguage)}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box className="mt-7">
             <h1 className="text-xl dark:text-darkMode-text mb-3">プログラミング言語</h1>
             <FormControl sx={{ minWidth: 130 }} size="small" margin="none">
               <Select
