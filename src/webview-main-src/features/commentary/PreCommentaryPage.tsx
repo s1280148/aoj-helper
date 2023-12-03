@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { CommentaryInfo } from "../../../public-src/types/ApiResponseType";
 import CommentaryNote from "./components/CommentaryNote";
 import { Box } from "@mui/material";
+import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
 
 /**
  * 解説（前）ページ
@@ -16,6 +17,9 @@ const PreCommentaryPage: React.FC = () => {
   // 解説（前）の情報のstate
   const [preCommentaryInfoList, setPreCommentaryInfoList] = useState<null | CommentaryInfo[]>(null);
 
+  // 環境情報のstate
+  const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
+
   useEffect(() => {
     /**
      * 解説（前）の情報を取得します。
@@ -23,7 +27,7 @@ const PreCommentaryPage: React.FC = () => {
     const getAvailableFilters = async () => {
       // 解説（前）の情報を取得し、stateにセット
       const parameters = {
-        language: "ja",
+        language: environmentInfo.displayLanguage,
         problemId: problemId,
       };
 

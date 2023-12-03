@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import { ProblemInfoContext } from "../../../providers/ProblemInfoProvider";
 import { isChallengeProblem } from "../../../../public-src/utils/ProblemInfoUtil";
+import { useTranslation } from "react-i18next";
 
 /**
  * 問題集ボタン
@@ -34,8 +35,10 @@ const ProblemListButton: React.FC = () => {
     }
   };
 
+  const { t } = useTranslation();
+
   return (
-    <Tooltip title="問題集">
+    <Tooltip title={t("problemListButton.tooltip")}>
       <IconButton
         className={
           isPageOpen

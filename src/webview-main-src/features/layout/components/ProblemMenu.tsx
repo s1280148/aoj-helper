@@ -12,6 +12,7 @@ import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from 
 import { ProblemInfoContext } from "../../../providers/ProblemInfoProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import { isChallengeProblem } from "../../../../public-src/utils/ProblemInfoUtil";
+import { useTranslation } from "react-i18next";
 
 /**
  * ページ
@@ -139,9 +140,11 @@ const ProblemMenu: React.FC = () => {
     }
   }, [location]);
 
+  const { t } = useTranslation();
+
   return (
     <>
-      <Tooltip title="問題メニュー">
+      <Tooltip title={t("problemMenu.tooltip")}>
         <IconButton className="text-black dark:text-darkMode-text" onClick={openMenu}>
           <MenuIcon />
         </IconButton>
@@ -170,7 +173,7 @@ const ProblemMenu: React.FC = () => {
                   <LiveHelpIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="解説（前）"
+                  primary={t("problemMenu.page.preCommentary")}
                   className={
                     currentPage === Page.PRE_COMMENTARY
                       ? problemInfo && isChallengeProblem(problemInfo.problem_id)
@@ -195,7 +198,7 @@ const ProblemMenu: React.FC = () => {
                   <DescriptionIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="問題文"
+                  primary={t("problemMenu.page.problemDescription")}
                   className={
                     currentPage === Page.PROBLEM_DESCRIPTION
                       ? problemInfo && isChallengeProblem(problemInfo.problem_id)
@@ -220,7 +223,7 @@ const ProblemMenu: React.FC = () => {
                   <FeedbackIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="解説（後）"
+                  primary={t("problemMenu.page.postCommentary")}
                   className={
                     currentPage === Page.POST_COMMENTARY
                       ? problemInfo && isChallengeProblem(problemInfo.problem_id)
@@ -245,7 +248,7 @@ const ProblemMenu: React.FC = () => {
                   <HistoryIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="提出履歴"
+                  primary={t("problemMenu.page.submissionRecord")}
                   className={
                     currentPage === Page.SUBMISSION_RECORD
                       ? problemInfo && isChallengeProblem(problemInfo.problem_id)
@@ -270,7 +273,7 @@ const ProblemMenu: React.FC = () => {
                   <GroupIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="模範解答"
+                  primary={t("problemMenu.page.modelAnswer")}
                   className={
                     currentPage === Page.MODEL_ANSWER
                       ? problemInfo && isChallengeProblem(problemInfo.problem_id)

@@ -13,6 +13,7 @@ import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { SubmissionStatus } from "../../../public-src/constants/constant";
 import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
+import { useTranslation } from "react-i18next";
 
 /**
  * 模範解答ページ
@@ -151,6 +152,8 @@ const ModelAnswerPage: React.FC = () => {
     });
   };
 
+  const { t } = useTranslation();
+
   return (
     <Box>
       {selectedJudgeId && targetReviewInfo && (
@@ -236,7 +239,7 @@ const ModelAnswerPage: React.FC = () => {
               type="button"
               onClick={handleDiffButtonClick}
             >
-              diff
+              Diff
             </button>
             <CopyToClipboard text={targetReviewInfo.sourceCode} onCopy={handleCopyButtonClick}>
               <button
@@ -258,7 +261,7 @@ const ModelAnswerPage: React.FC = () => {
                 dark:hover:border-darkMode-lighter"
                 type="button"
               >
-                コピー
+                {t("monacoEditor.copy")}
               </button>
             </CopyToClipboard>
             <button
@@ -280,7 +283,7 @@ const ModelAnswerPage: React.FC = () => {
               type="button"
               onClick={handleCloseButtonClick}
             >
-              閉じる
+              {t("monacoEditor.close")}
             </button>
           </Box>
           <Snackbar
@@ -291,7 +294,7 @@ const ModelAnswerPage: React.FC = () => {
             sx={{ right: "auto" }}
           >
             <Alert severity="success" className="dark:bg-teal-900 dark:text-darkMode-text">
-              コピーしました
+              {t("monacoEditor.alert.copied")}
             </Alert>
           </Snackbar>
         </Box>

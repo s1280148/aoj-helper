@@ -1,5 +1,6 @@
 import { Alert, Button, OutlinedInput, Snackbar } from "@mui/material";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -46,17 +47,19 @@ const ProblemSearchBar: React.FC = () => {
     navigate(`/problem/${problemId}/description`);
   };
 
+  const { t } = useTranslation();
+
   return (
     <>
       <OutlinedInput
         size="small"
         className="my-2 focus:outline-none dark:border-darkMode-lighter dark:bg-darkMode-lighter dark:text-darkMode-text"
-        placeholder="問題IDを入力"
+        placeholder={t("problemSearchBar.input.placeHolder")}
         inputRef={problemIdRef}
         sx={{ width: "130px" }}
       />
       <Button className="dark:text-darkMode-text" onClick={showProblemPage}>
-        検索
+        {t("problemSearchBar.button.text")}
       </Button>
       <Snackbar
         open={errorToastOpen}
@@ -66,7 +69,7 @@ const ProblemSearchBar: React.FC = () => {
         sx={{ right: "auto" }}
       >
         <Alert severity="error" className="dark:bg-red-900 dark:text-darkMode-text">
-          問題IDを入力してください
+          {t("problemSearchBar.alert.requireProblemId")}
         </Alert>
       </Snackbar>
     </>
