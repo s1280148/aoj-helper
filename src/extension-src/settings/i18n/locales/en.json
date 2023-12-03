@@ -1,4 +1,9 @@
 {
-  "Submit.submitButton.text": "AOJ: Submit",
-  "Submit.submitButton.tooltip": "Submit answer to displayed problem"
+  "submit.submitButton.text": "AOJ: Submit",
+  "submit.submitButton.tooltip": "Submit answer to displayed problem",
+  "submit.submitCommand.selectLanguage": "Select Language",
+  "submit.submitCommand.progress.title": "Submit",
+  "submit.submitCommand.progress.message": "Running...",
+  "submit.submitCommand.submitResult.showResult": "Show Result",
+  "modelAnswer.showDiff": "Comparison with model answer"
 }

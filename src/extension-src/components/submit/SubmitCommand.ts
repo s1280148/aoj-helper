@@ -4,6 +4,7 @@ import AOJViewProvider from "../AOJViewProvider";
 import SubmissionManager from "../SubmissionManager";
 import aojApiClient from "../AOJApiClient";
 import { ProgrammingLanguage, SubmissionStatus } from "../../../public-src/constants/constant";
+import { default as dlm } from "../DisplayLanguageManager";
 
 /**
  * 提出コマンドを作成します。
@@ -23,7 +24,7 @@ export const createSubmitCommand = () => {
 
       // QuickPickのオプションを作成
       const option: vscode.QuickPickOptions = {
-        title: "言語を選択",
+        title: dlm.t("submit.submitCommand.selectLanguage"),
       };
 
       // Quickpickを表示し、結果を取得
@@ -56,12 +57,12 @@ export const createSubmitCommand = () => {
       // 進捗バーを表示
       const progressOption: vscode.ProgressOptions = {
         location: vscode.ProgressLocation.Notification,
-        title: "提出",
+        title: dlm.t("submit.submitCommand.progress.title"),
       };
 
       await vscode.window.withProgress(progressOption, async (progress) => {
         progress.report({
-          message: "実行中...",
+          message: dlm.t("submit.submitCommand.progress.message"),
         });
 
         // ジャッジ結果が取得できるまで待つ
@@ -77,7 +78,7 @@ export const createSubmitCommand = () => {
         if (submissionStatus === SubmissionStatus.STATE_ACCEPTED) {
           // 提出ステータスがACの場合、通常のメッセージを表示
           vscode.window
-            .showInformationMessage(submissionStatusMessage, "結果を表示")
+            .showInformationMessage(submissionStatusMessage, dlm.t("submit.submitCommand.submitResult.showResult"))
             .then((message) => handleMessageBtnSelection(message, judgeId));
 
           // 現在表示中の問題がACになった場合、webviewにメッセージを送信
@@ -87,7 +88,7 @@ export const createSubmitCommand = () => {
         } else {
           // 提出ステータスがAC以外の場合、エラーメッセージを表示
           vscode.window
-            .showErrorMessage(submissionStatusMessage, "結果を表示")
+            .showErrorMessage(submissionStatusMessage, dlm.t("submit.submitCommand.submitResult.showResult"))
             .then((message) => handleMessageBtnSelection(message, judgeId));
         }
       });
@@ -106,7 +107,7 @@ const handleMessageBtnSelection = async (message: string | undefined, judgeId: s
   if (!message) {
     // ボタンが選択されていない場合、return
     return;
-  } else if (message === "結果を表示") {
+  } else if (message === dlm.t("submit.submitCommand.submitResult.showResult")) {
     // 結果を表示する
 
     // ジャッジの詳細を取得する

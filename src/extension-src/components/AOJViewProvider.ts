@@ -188,7 +188,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
             vscode.Uri.parse(
               `${EXTENSION_SCHEME}:text/${content}${SimpleDocumentContentProvider.suffix}=${Math.random()}`,
             ),
-            "模範解答との比較",
+            dlm.t("modelAnswer.showDiff"),
           );
           break;
         }

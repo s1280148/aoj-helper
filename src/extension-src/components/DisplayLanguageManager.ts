@@ -59,8 +59,8 @@ class DisplayLanguageManager {
    */
   private changeElementTextManually = () => {
     // 提出ボタンのテキストを変更
-    submitButton.text = this.t("Submit.submitButton.text");
-    submitButton.tooltip = this.t("Submit.submitButton.tooltip");
+    submitButton.text = this.t("submit.submitButton.text");
+    submitButton.tooltip = this.t("submit.submitButton.tooltip");
   };
 }
 
