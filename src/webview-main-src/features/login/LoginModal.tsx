@@ -153,8 +153,6 @@ const LoginModal = () => {
     return isInputValid;
   };
 
-  const navigation = useNavigate();
-
   // 拡張機能側から、ログインに関するメッセージを受信
   window.addEventListener("message", (event) => {
     const message = event.data;
@@ -171,7 +169,7 @@ const LoginModal = () => {
           case "close":
             closeLoginModal();
             cleanupLoginModal();
-            updateProblemInfo();
+            // updateProblemInfo();
             break;
         }
         break;
