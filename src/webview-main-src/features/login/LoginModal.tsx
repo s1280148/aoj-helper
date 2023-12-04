@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import { Alert, Box, Button, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
@@ -154,27 +154,29 @@ const LoginModal = () => {
   };
 
   // 拡張機能側から、ログインに関するメッセージを受信
-  window.addEventListener("message", (event) => {
-    const message = event.data;
+  useEffect(() => {
+    window.addEventListener("message", (event) => {
+      const message = event.data;
 
-    switch (message.type) {
-      case "login":
-        switch (message.command) {
-          case "show":
-            openLoginModal();
-            break;
-          case "error":
-            showAlert();
-            break;
-          case "close":
-            closeLoginModal();
-            cleanupLoginModal();
-            // updateProblemInfo();
-            break;
-        }
-        break;
-    }
-  });
+      switch (message.type) {
+        case "login":
+          switch (message.command) {
+            case "show":
+              openLoginModal();
+              break;
+            case "error":
+              showAlert();
+              break;
+            case "close":
+              closeLoginModal();
+              cleanupLoginModal();
+              resetSelectedProblem();
+              break;
+          }
+          break;
+      }
+    });
+  }, []);
 
   // 現在表示中の問題の情報のstate
   const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
@@ -182,20 +184,15 @@ const LoginModal = () => {
   // 環境情報のstate
   const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
 
+  const navigate = useNavigate();
+
   /**
-   * ログイン時に問題情報を更新します。
+   * ログイン時に問題をリセットします。
    */
-  const updateProblemInfo = async () => {
-    // 問題の情報を取得し、stateにセット
-    const parameters = {
-      lang: environmentInfo.displayLanguage,
-      problemId: problemInfo?.problem_id,
-    };
-    const response = await callApi("findByProblemIdDescription", parameters);
-
-    const problemDescription = response as ProblemDescription;
-
-    setProblemInfo(problemDescription);
+  const resetSelectedProblem = async () => {
+    // 問題をITP1_1_Aに変更
+    navigate("/refresh");
+    navigate("/problem/ITP1_1_A/description");
   };
 
   const { t } = useTranslation();
