@@ -2,7 +2,7 @@
   "name": "aoj-helper",
   "displayName": "AOJ Helper",
   "description": "",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "s1280148",
   "engines": {
     "vscode": "^1.77.0"
