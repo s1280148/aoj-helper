@@ -54,7 +54,7 @@ const ModelAnswerPage: React.FC = () => {
     };
 
     findModelAnswerList();
-  }, [problemId, environmentInfo]);
+  }, [problemId, environmentInfo.programmingLanguage]);
 
   useEffect(() => {
     setDisplayingModelAnswerInfoList(modelAnswerInfoList?.slice(0, PAGE_SIZE) ?? null);
