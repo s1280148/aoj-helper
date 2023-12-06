@@ -107,7 +107,8 @@
   },
   "scripts": {
     "build production": "webpack --config ./webpack.config.webview-main.js --mode production && webpack --config ./webpack.config.extension.js --mode production",
-    "build development": "webpack --config ./webpack.config.webview-main.js --mode=development --devtool=source-map && webpack --config ./webpack.config.extension.js --mode=development --devtool=source-map"
+    "build development": "webpack --config ./webpack.config.webview-main.js --mode=development --devtool=source-map && webpack --config ./webpack.config.extension.js --mode=development --devtool=source-map",
+    "vscode:prepublish": "webpack --config ./webpack.config.webview-main.js --mode production && webpack --config ./webpack.config.extension.js --mode production"
   },
   "browserslist": {
     "production": [
