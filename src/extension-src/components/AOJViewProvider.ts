@@ -114,7 +114,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
    */
   private _getHtmlForWebview(webview: vscode.Webview) {
     const cssFileName = "webview-main.css";
-    const scriptFileName = "webView-main.js";
+    const scriptFileName = "webview-main.js";
 
     // webViewのUriに変換
     const cssUri = this._view?.webview.asWebviewUri(
