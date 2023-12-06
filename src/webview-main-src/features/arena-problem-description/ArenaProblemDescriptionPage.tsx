@@ -10,13 +10,19 @@ import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider"
 import { useTranslation } from "react-i18next";
 import { convertStringToBoolean } from "../../../public-src/utils/BooeanUtil";
 
+type ParamTypes = {
+  arenaId: string;
+  arenaProblemId: string;
+  problemId: string;
+};
+
 /**
- * 問題説明ページ
+ * アリーナ問題説明ページ
  * @returns 問題説明ページ
  */
-const ProblemDescriptionPage: React.FC = () => {
+const ArenaProblemDescriptionPage: React.FC = () => {
   // パスパラメータから問題IDを取得
-  const { problemId } = useParams<"problemId">();
+  const { arenaId, arenaProblemId, problemId } = useParams<ParamTypes>();
 
   const navigate = useNavigate();
 
@@ -30,9 +36,9 @@ const ProblemDescriptionPage: React.FC = () => {
       const parameters = {
         lang: environmentInfo.displayLanguage,
         problemId: problemId,
-        isArena: false,
-        arenaId: "",
-        arenaProblemId: "",
+        isArena: true,
+        arenaId: arenaId,
+        arenaProblemId: arenaProblemId,
       };
 
       try {
@@ -43,17 +49,17 @@ const ProblemDescriptionPage: React.FC = () => {
         setProblemInfo(problemDescription);
 
         setArenaSelectInfo({
-          isArena: false,
-          arenaId: "",
-          arenaProblemId: "",
+          isArena: true,
+          arenaId: arenaId!,
+          arenaProblemId: arenaProblemId!,
         });
 
         vscode.setState({
           ...vscode.getState(),
           problemId: problemDescription.problem_id,
-          isArena: false,
-          arenaId: "",
-          arenaProblemId: "",
+          isArena: true,
+          arenaId: arenaId!,
+          arenaProblemId: arenaProblemId!,
         });
       } catch (e) {
         // エラーが発生した場合、エラートーストを表示し、前の問題を表示
@@ -124,4 +130,4 @@ const ProblemDescriptionPage: React.FC = () => {
   );
 };
 
-export default ProblemDescriptionPage;
+export default ArenaProblemDescriptionPage;

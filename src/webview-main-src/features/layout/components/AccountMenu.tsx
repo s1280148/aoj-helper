@@ -62,7 +62,7 @@ const AccountMenu: React.FC = () => {
   const { environmentInfo, setEnvironmentInfo } = useContext(EnvironmentInfoContext);
 
   // 現在表示中の問題の情報のstate
-  const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
+  const { problemInfo, setProblemInfo, arenaSelectInfo } = useContext(ProblemInfoContext);
 
   const navigate = useNavigate();
 
@@ -77,7 +77,13 @@ const AccountMenu: React.FC = () => {
     });
 
     // 問題説明画面に遷移
-    navigate(`/problem/${problemInfo?.problem_id}/description`);
+    if (arenaSelectInfo.isArena) {
+      navigate(
+        `/problem/arena/${arenaSelectInfo.arenaId}/${arenaSelectInfo.arenaProblemId}/${problemInfo?.problem_id}/description`,
+      );
+    } else {
+      navigate(`/problem/${problemInfo?.problem_id}/description`);
+    }
   };
 
   /**

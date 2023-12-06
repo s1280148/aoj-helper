@@ -10,7 +10,10 @@ import PostCommentaryPage from "../features/commentary/PostCommentaryPage";
 import SubmissionRecordPage from "../features/submission-record/SubmissionRecordPage";
 import ModelAnswerPage from "../features/model-answer/ModelAnswerPage";
 import ProblemListPage from "../features/problem-list/ProblemListPage";
+import ArenaListTab from "../features/problem-list/arena/ArenaListTab";
+import ArenaDetailTab from "../features/problem-list/arena/ArenaDetailTab";
 import ProblemDescriptionPage from "../features/problem-description/ProblemDescriptionPage";
+import ArenaProblemDescriptionPage from "../features/arena-problem-description/ArenaProblemDescriptionPage";
 
 /**
  * アプリケーション全体のルーティング
@@ -26,9 +29,15 @@ export const AppRoutes = () => {
           <Route path="challenge/list" element={<ChallengeListTab />} />
           <Route path="challenge/:largeChallengeId/:middleChallengeId" element={<ChallengeDetailTab />} />
           <Route path="bookmark/list" element={<BookmarkListTab />} />
+          <Route path="arena/list" element={<ArenaListTab />} />
+          <Route path="arena/:arenaId" element={<ArenaDetailTab />} />
         </Route>
         <Route path="/problem/:problemId/commentary/pre" element={<PreCommentaryPage />} />
         <Route path="/problem/:problemId/description" element={<ProblemDescriptionPage />} />
+        <Route
+          path="/problem/arena/:arenaId/:arenaProblemId/:problemId/description"
+          element={<ArenaProblemDescriptionPage />}
+        />
         <Route path="/problem/:problemId/commentary/post" element={<PostCommentaryPage />} />
         <Route path="/problem/:problemId/submission-record" element={<SubmissionRecordPage />} />
         <Route path="/problem/:problemId/model-answer" element={<ModelAnswerPage />} />

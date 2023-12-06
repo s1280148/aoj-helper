@@ -1,7 +1,7 @@
 import { ProgrammingLanguage, DisplayLanguage } from "./../../public-src/constants/constant";
 import translation_ja from "../settings/i18n/locales/ja.json";
 import translation_en from "../settings/i18n/locales/en.json";
-import { submitButton } from "./submit/SubmitButton";
+import submitButton from "./submit/SubmitButton";
 
 /**
  * 翻訳テキスト一覧のオブジェクトの型
@@ -58,9 +58,8 @@ class DisplayLanguageManager {
    * 要素のテキストを現在の表示言語に応じて手動で変更します。
    */
   private changeElementTextManually = () => {
-    // 提出ボタンのテキストを変更
-    submitButton.text = this.t("submit.submitButton.text");
-    submitButton.tooltip = this.t("submit.submitButton.tooltip");
+    // 提出ボタンのテキストを更新
+    submitButton.updateElementText();
   };
 }
 

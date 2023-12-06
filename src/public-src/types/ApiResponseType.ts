@@ -309,3 +309,74 @@ export interface BookmarkSaveInfo {
   tag: string;
   createTime: number;
 }
+
+/**
+ * ユーザーがエントリーしているアリーナ情報
+ */
+export interface ArenaUserEntryInfo {
+  userId: string;
+  arenaId: string;
+  country: string;
+  affiliation: null | string;
+  entryDate: number;
+}
+
+/**
+ * アリーナ情報
+ */
+export interface ArenaInfo {
+  id: string;
+  no: number;
+  coordinator: string;
+  type: string;
+  judgeType: string;
+  policy: string;
+  penalty: number;
+  title: string;
+  startDate: number;
+  endDate: number;
+  serverTime: number;
+  comment: string;
+  infoLink: string;
+  visible: number;
+  state: string;
+  validState: string;
+  isCoordinator: boolean;
+  isManager: boolean;
+  isEntered: boolean;
+}
+
+/**
+ * アリーナ問題情報
+ */
+export interface ArenaProblemInfo {
+  id: string;
+  serial: number;
+  source: string;
+  problemId: string;
+  arenaId: string;
+  available: number;
+  name: string;
+  rate: number;
+  problemTimeLimit: number;
+  problemMemoryLimit: number;
+}
+
+/**
+ * アリーナ提出情報
+ */
+export interface ArenaSubmissionInfo {
+  judgeId: number;
+  source: string;
+  judgeType: number;
+  arenaId: string;
+  userId: string;
+  problemId: string;
+  submissionDate: number;
+  judgeDate: number;
+  language: string;
+  cpuTime: number;
+  memory: number;
+  status: number;
+  accuracy: string;
+}

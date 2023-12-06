@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import AOJViewProvider from "./AOJViewProvider";
-import { ApiErrorCode } from "../../public-src/constants/constant";
+import { ApiErrorCode, ProgrammingLanguage } from "../../public-src/constants/constant";
 
 /**
  * AOJのAPIクライアント
@@ -302,6 +302,62 @@ class AOJApiClient {
     };
 
     return this.judgeApiClient.delete("/bookmarks", { data: requestBody });
+  };
+
+  /**
+   * ユーザーがエントリーしているアリーナ一覧を取得します。
+   * @param userId - ユーザーID
+   * @returns レスポンス
+   */
+  findByUserIdEntries = async (userId: string) => {
+    return this.judgeApiClient.get(`/arenas/entries/users/${userId}`);
+  };
+
+  /**
+   * アリーナの情報を取得します。
+   * @param arenaId - アリーナID
+   * @returns レスポンス
+   */
+  findByIdArena = async (arenaId: string) => {
+    return this.judgeApiClient.get(`/arenas/${arenaId}`);
+  };
+
+  /**
+   * アリーナの問題一覧を取得します。
+   * @param arenaId - アリーナID
+   * @returns レスポンス
+   */
+  findByArenaIdProblems = async (arenaId: string) => {
+    return this.judgeApiClient.get(`/arenas/${arenaId}/problems`);
+  };
+
+  /**
+   * アリーナへの提出一覧を取得します。
+   * @param arenaId - アリーナID
+   * @param userId - ユーザーID
+   * @returns レスポンス
+   */
+  findByArenaIdAndUserIdSubmissions = async (arenaId: string, userId: string) => {
+    return this.judgeApiClient.get(`/arenas/${arenaId}/submissions/users/${userId}`);
+  };
+
+  /**
+   * アリーナへ提出を行います。
+   * @param arenaId - アリーナID
+   * @param arenaProblemId - アリーナ問題ID
+   * @param programmingLanguage - プログラミング言語
+   * @param sourceCode - ソースコード
+   * @returns レスポンス
+   */
+  submitArena = async (arenaId: string, arenaProblemId: string, programmingLanguage: string, sourceCode: string) => {
+    const requestBody = {
+      arenaId: arenaId,
+      id: arenaProblemId,
+      language: programmingLanguage,
+      sourceCode: sourceCode,
+    };
+
+    return this.judgeApiClient.post("/arenas/${arenaId}/submissions", requestBody);
   };
 }
 

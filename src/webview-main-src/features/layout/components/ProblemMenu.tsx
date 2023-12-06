@@ -49,7 +49,7 @@ const ProblemMenu: React.FC = () => {
   };
 
   // 現在表示中の問題の情報のstate
-  const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
+  const { problemInfo, setProblemInfo, arenaSelectInfo } = useContext(ProblemInfoContext);
 
   const problemId = problemInfo?.problem_id;
 
@@ -84,7 +84,14 @@ const ProblemMenu: React.FC = () => {
       }
       case Page.PROBLEM_DESCRIPTION: {
         // 問題説明ページに移動
-        navigate(`/problem/${problemId}/description`);
+        if (arenaSelectInfo.isArena) {
+          navigate(
+            `/problem/arena/${arenaSelectInfo.arenaId}/${arenaSelectInfo.arenaProblemId}/${problemId}/description`,
+          );
+        } else {
+          navigate(`/problem/${problemId}/description`);
+        }
+
         break;
       }
       case Page.POST_COMMENTARY: {
@@ -163,10 +170,8 @@ const ProblemMenu: React.FC = () => {
               <ListItemButton disabled={!hasPreCommentary} onClick={() => handlePageSelect(Page.PRE_COMMENTARY)}>
                 <ListItemIcon
                   className={
-                    currentPage === Page.PRE_COMMENTARY
-                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
-                        ? "text-challenge dark:text-challenge"
-                        : "text-course dark:text-course-dark"
+                    currentPage === Page.PRE_COMMENTARY && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
                       : "text-inherit dark:text-darkMode-text"
                   }
                 >
@@ -175,10 +180,8 @@ const ProblemMenu: React.FC = () => {
                 <ListItemText
                   primary={t("problemMenu.page.preCommentary")}
                   className={
-                    currentPage === Page.PRE_COMMENTARY
-                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
-                        ? "text-challenge dark:text-challenge"
-                        : "text-course dark:text-course-dark"
+                    currentPage === Page.PRE_COMMENTARY && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
                       : "text-inherit dark:text-darkMode-text"
                   }
                 />
@@ -188,10 +191,8 @@ const ProblemMenu: React.FC = () => {
               <ListItemButton onClick={() => handlePageSelect(Page.PROBLEM_DESCRIPTION)}>
                 <ListItemIcon
                   className={
-                    currentPage === Page.PROBLEM_DESCRIPTION
-                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
-                        ? "text-challenge dark:text-challenge"
-                        : "text-course dark:text-course-dark"
+                    currentPage === Page.PROBLEM_DESCRIPTION && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
                       : "text-inherit dark:text-darkMode-text"
                   }
                 >
@@ -200,10 +201,8 @@ const ProblemMenu: React.FC = () => {
                 <ListItemText
                   primary={t("problemMenu.page.problemDescription")}
                   className={
-                    currentPage === Page.PROBLEM_DESCRIPTION
-                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
-                        ? "text-challenge dark:text-challenge"
-                        : "text-course dark:text-course-dark"
+                    currentPage === Page.PROBLEM_DESCRIPTION && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
                       : "text-inherit dark:text-darkMode-text"
                   }
                 />
@@ -213,10 +212,8 @@ const ProblemMenu: React.FC = () => {
               <ListItemButton disabled={!hasPostCommentary} onClick={() => handlePageSelect(Page.POST_COMMENTARY)}>
                 <ListItemIcon
                   className={
-                    currentPage === Page.POST_COMMENTARY
-                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
-                        ? "text-challenge dark:text-challenge"
-                        : "text-course dark:text-course-dark"
+                    currentPage === Page.POST_COMMENTARY && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
                       : "text-inherit dark:text-darkMode-text"
                   }
                 >
@@ -225,10 +222,8 @@ const ProblemMenu: React.FC = () => {
                 <ListItemText
                   primary={t("problemMenu.page.postCommentary")}
                   className={
-                    currentPage === Page.POST_COMMENTARY
-                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
-                        ? "text-challenge dark:text-challenge"
-                        : "text-course dark:text-course-dark"
+                    currentPage === Page.POST_COMMENTARY && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
                       : "text-inherit dark:text-darkMode-text"
                   }
                 />
@@ -238,10 +233,8 @@ const ProblemMenu: React.FC = () => {
               <ListItemButton onClick={() => handlePageSelect(Page.SUBMISSION_RECORD)}>
                 <ListItemIcon
                   className={
-                    currentPage === Page.SUBMISSION_RECORD
-                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
-                        ? "text-challenge dark:text-challenge"
-                        : "text-course dark:text-course-dark"
+                    currentPage === Page.SUBMISSION_RECORD && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
                       : "text-inherit dark:text-darkMode-text"
                   }
                 >
@@ -250,10 +243,8 @@ const ProblemMenu: React.FC = () => {
                 <ListItemText
                   primary={t("problemMenu.page.submissionRecord")}
                   className={
-                    currentPage === Page.SUBMISSION_RECORD
-                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
-                        ? "text-challenge dark:text-challenge"
-                        : "text-course dark:text-course-dark"
+                    currentPage === Page.SUBMISSION_RECORD && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
                       : "text-inherit dark:text-darkMode-text"
                   }
                 />
@@ -263,10 +254,8 @@ const ProblemMenu: React.FC = () => {
               <ListItemButton onClick={() => handlePageSelect(Page.MODEL_ANSWER)}>
                 <ListItemIcon
                   className={
-                    currentPage === Page.MODEL_ANSWER
-                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
-                        ? "text-challenge dark:text-challenge"
-                        : "text-course dark:text-course-dark"
+                    currentPage === Page.MODEL_ANSWER && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
                       : "text-inherit dark:text-darkMode-text"
                   }
                 >
@@ -275,10 +264,8 @@ const ProblemMenu: React.FC = () => {
                 <ListItemText
                   primary={t("problemMenu.page.modelAnswer")}
                   className={
-                    currentPage === Page.MODEL_ANSWER
-                      ? problemInfo && isChallengeProblem(problemInfo.problem_id)
-                        ? "text-challenge dark:text-challenge"
-                        : "text-course dark:text-course-dark"
+                    currentPage === Page.MODEL_ANSWER && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
                       : "text-inherit dark:text-darkMode-text"
                   }
                 />
@@ -289,6 +276,22 @@ const ProblemMenu: React.FC = () => {
       </Drawer>
     </>
   );
+};
+
+/**
+ * 問題タイプからクラス名を取得します。
+ * @param problemId - 問題ID
+ * @param isArena - アリーナか
+ * @returns クラス名
+ */
+const getClassNameFromProblemType = (problemId: string, isArena: boolean) => {
+  if (isArena) {
+    return "text-arena dark:text-arena-dark";
+  } else if (isChallengeProblem(problemId)) {
+    return "text-challenge dark:text-challenge";
+  } else {
+    return "text-course dark:text-course-dark";
+  }
 };
 
 export default ProblemMenu;

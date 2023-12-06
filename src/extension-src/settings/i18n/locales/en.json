@@ -1,6 +1,8 @@
 {
-  "submit.submitButton.text": "AOJ: Submit",
-  "submit.submitButton.tooltip": "Submit answer to displayed problem",
+  "submit.submitButton.submit.text": "AOJ: Submit",
+  "submit.submitButton.submit.tooltip": "Submit answer to displayed problem",
+  "submit.submitButton.arenaSubmit.text": "AOJ: Arena Submit",
+  "submit.submitButton.arenaSubmit.tooltip": "Submit answer to displayed arena problem",
   "submit.submitCommand.selectLanguage": "Select Language",
   "submit.submitCommand.progress.title": "Submit",
   "submit.submitCommand.progress.message": "Running...",

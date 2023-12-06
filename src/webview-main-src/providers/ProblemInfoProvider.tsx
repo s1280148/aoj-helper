@@ -1,5 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "react";
 import { ProblemDescription } from "../../public-src/types/ApiResponseType";
+import { ArenaSelectInfo } from "../../public-src/types/Type";
 
 type Props = {
   children: React.ReactNode;
@@ -8,6 +9,8 @@ type Props = {
 type ProblemInfoContextType = {
   problemInfo: null | ProblemDescription;
   setProblemInfo: Dispatch<SetStateAction<null | ProblemDescription>>;
+  arenaSelectInfo: ArenaSelectInfo;
+  setArenaSelectInfo: Dispatch<SetStateAction<ArenaSelectInfo>>;
 };
 
 export const ProblemInfoContext = createContext({} as ProblemInfoContextType);
@@ -26,5 +29,16 @@ export const ProblemInfoProvider: React.FC<Props> = (props) => {
   // 現在表示中の問題情報のstate
   const [problemInfo, setProblemInfo] = useState<null | ProblemDescription>(null);
 
-  return <ProblemInfoContext.Provider value={{ problemInfo, setProblemInfo }}>{children}</ProblemInfoContext.Provider>;
+  // アリーナ選択情報のstate
+  const [arenaSelectInfo, setArenaSelectInfo] = useState<ArenaSelectInfo>({
+    isArena: false,
+    arenaId: "",
+    arenaProblemId: "",
+  });
+
+  return (
+    <ProblemInfoContext.Provider value={{ problemInfo, setProblemInfo, arenaSelectInfo, setArenaSelectInfo }}>
+      {children}
+    </ProblemInfoContext.Provider>
+  );
 };
