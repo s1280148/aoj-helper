@@ -15,7 +15,7 @@ import { isChallengeProblem } from "../../../../public-src/utils/ProblemInfoUtil
  */
 const ProblemInfoPanel: React.FC = () => {
   // 現在表示中の問題の情報のstate
-  const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
+  const { problemInfo, setProblemInfo, arenaSelectInfo } = useContext(ProblemInfoContext);
 
   // ブックマークしているかのstate
   const [isBookmark, setIsBookmark] = useState<boolean>(false);
@@ -85,11 +85,7 @@ const ProblemInfoPanel: React.FC = () => {
             items-center
             px-3
             py-1
-            ${
-              isChallengeProblem(problemInfo.problem_id)
-                ? "bg-challenge border-challenge dark:bg-challenge dark:border-challenge"
-                : "bg-course border-course dark:bg-course-dark dark:border-course-dark"
-            }
+            ${getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)}
           `}
           sx={{ borderRadius: "2rem" }}
         >
@@ -109,6 +105,22 @@ const ProblemInfoPanel: React.FC = () => {
       )}
     </>
   );
+};
+
+/**
+ * 問題タイプからクラス名を取得します。
+ * @param problemId - 問題ID
+ * @param isArena - アリーナか
+ * @returns クラス名
+ */
+const getClassNameFromProblemType = (problemId: string, isArena: boolean) => {
+  if (isArena) {
+    return "bg-arena border-arena dark:bg-arena-dark dark:border-arena-dark";
+  } else if (isChallengeProblem(problemId)) {
+    return "bg-challenge border-challenge dark:bg-challenge dark:border-challenge";
+  } else {
+    return "bg-course border-course dark:bg-course-dark dark:border-course-dark";
+  }
 };
 
 export default ProblemInfoPanel;

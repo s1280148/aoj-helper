@@ -38,10 +38,14 @@
   "problemList.tab.course": "コース",
   "problemList.tab.challenge": "チャレンジ",
   "problemList.tab.bookmark": "ブックマーク",
+  "problemList.tab.arena": "アリーナ",
   "courseList.title": "コースリスト",
   "courseList.description": "プログラムの基礎を学ぼう",
   "challengeList.title": "チャレンジリスト",
   "challengeList.description": "コンテストの過去問に挑戦",
   "bookmarkList.title": "ブックマークリスト",
-  "bookmarkList.description": "ブックマークに追加した問題に挑戦"
+  "bookmarkList.description": "ブックマークに追加した問題に挑戦",
+  "arenaList.title": "アリーナ",
+  "arenaList.description": "エントリー済みの一覧を表示",
+  "arenaList.pageOpenButton.text": "専用ページ"
 }

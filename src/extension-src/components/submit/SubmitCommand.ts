@@ -45,8 +45,11 @@ export const createSubmitCommand = () => {
       // TextEditorからソースコードを取得
       const sourceCode = textEditor.document.getText();
 
+      // アリーナの選択情報を取得
+      const arenaSelectInfo = aojViewProvider.getArenaSelectInfo();
+
       // 提出マネージャーを作成し提出を行う
-      const submissionManager = new SubmissionManager(currentProblemId, selectedLanguage, sourceCode);
+      const submissionManager = new SubmissionManager(currentProblemId, selectedLanguage, sourceCode, arenaSelectInfo!);
       await submissionManager.submit();
 
       // 提出が失敗した場合、return

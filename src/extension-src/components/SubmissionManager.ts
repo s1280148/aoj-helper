@@ -1,6 +1,7 @@
 import { WebSocket } from "ws";
 import aojApiClient from "./AOJApiClient";
 import { SubmissionStatus } from "../../public-src/constants/constant";
+import { ArenaSelectInfo } from "../../public-src/types/Type";
 
 /**
  * 提出マネージャー
@@ -17,6 +18,9 @@ class SubmissionManager {
 
   /** ソースコード */
   private sourceCode: string;
+
+  /** アリーナ選択情報 */
+  private arenaSelectInfo: ArenaSelectInfo;
 
   /** 提出が成功したかどうか */
   private submissionSuccess = false;
@@ -35,11 +39,13 @@ class SubmissionManager {
    * @param problemId - 問題ID
    * @param language - 言語
    * @param sourceCode - ソースコード
+   * @param arenaSelectInfo - アリーナ選択情報
    */
-  constructor(problemId: string, language: string, sourceCode: string) {
+  constructor(problemId: string, language: string, sourceCode: string, arenaSelectInfo: ArenaSelectInfo) {
     this.problemId = problemId;
     this.language = language;
     this.sourceCode = sourceCode;
+    this.arenaSelectInfo = arenaSelectInfo;
 
     // ウェブソケットのメッセージ受信イベントの定義
     this.webSocket.onmessage = (e) => {
@@ -57,7 +63,14 @@ class SubmissionManager {
    * 提出を行います。
    */
   async submit() {
-    const submitResponse = await aojApiClient.submit(this.problemId, this.language, this.sourceCode);
+    const submitResponse = this.arenaSelectInfo.isArena
+      ? await aojApiClient.submitArena(
+          this.arenaSelectInfo.arenaId,
+          this.arenaSelectInfo.arenaProblemId,
+          this.language,
+          this.sourceCode,
+        )
+      : await aojApiClient.submit(this.problemId, this.language, this.sourceCode);
 
     if (submitResponse) {
       this.submissionSuccess = true;

@@ -14,7 +14,7 @@ import { isChallengeProblem } from "../../../../public-src/utils/ProblemInfoUtil
  */
 const Header: React.FC = () => {
   // 現在表示中の問題の情報のstate
-  const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
+  const { problemInfo, setProblemInfo, arenaSelectInfo } = useContext(ProblemInfoContext);
 
   return (
     <Box>
@@ -24,11 +24,7 @@ const Header: React.FC = () => {
           border-b-4
           bg-white
           dark:bg-darkMode-bg
-          ${
-            problemInfo && isChallengeProblem(problemInfo!.problem_id)
-              ? "border-challenge dark:border-challenge"
-              : "border-course dark:border-course-dark"
-          }
+          ${problemInfo && getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)}
           `}
       >
         <Toolbar variant="dense" className="px-1">
@@ -51,6 +47,22 @@ const Header: React.FC = () => {
       </AppBar>
     </Box>
   );
+};
+
+/**
+ * 問題タイプからクラス名を取得します。
+ * @param problemId - 問題ID
+ * @param isArena - アリーナか
+ * @returns クラス名
+ */
+const getClassNameFromProblemType = (problemId: string, isArena: boolean) => {
+  if (isArena) {
+    return "border-arena dark:border-arena-dark";
+  } else if (isChallengeProblem(problemId)) {
+    return "border-challenge dark:border-challenge";
+  } else {
+    return "border-course dark:border-course-dark";
+  }
 };
 
 export default Header;

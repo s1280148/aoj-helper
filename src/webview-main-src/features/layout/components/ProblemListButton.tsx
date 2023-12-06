@@ -18,7 +18,7 @@ const ProblemListButton: React.FC = () => {
   const [isPageOpen, setIsPageOpen] = useState<boolean>(false);
 
   // 現在表示中の問題の情報のstate
-  const { problemInfo, setProblemInfo } = useContext(ProblemInfoContext);
+  const { problemInfo, setProblemInfo, arenaSelectInfo } = useContext(ProblemInfoContext);
 
   useEffect(() => {
     // locationに変更があった場合に、問題ページの表示状態をセット
@@ -41,10 +41,8 @@ const ProblemListButton: React.FC = () => {
     <Tooltip title={t("problemListButton.tooltip")}>
       <IconButton
         className={
-          isPageOpen
-            ? problemInfo && isChallengeProblem(problemInfo.problem_id)
-              ? "text-challenge dark:text-challenge"
-              : "text-course dark:text-course-dark"
+          isPageOpen && problemInfo
+            ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
             : "text-black dark:text-darkMode-text"
         }
         onClick={handleProblemListButton}
@@ -53,6 +51,22 @@ const ProblemListButton: React.FC = () => {
       </IconButton>
     </Tooltip>
   );
+};
+
+/**
+ * 問題タイプからクラス名を取得します。
+ * @param problemId - 問題ID
+ * @param isArena - アリーナか
+ * @returns クラス名
+ */
+const getClassNameFromProblemType = (problemId: string, isArena: boolean) => {
+  if (isArena) {
+    return "text-arena dark:text-arena-dark";
+  } else if (isChallengeProblem(problemId)) {
+    return "text-challenge dark:text-challenge";
+  } else {
+    return "text-course dark:text-course-dark";
+  }
 };
 
 export default ProblemListButton;

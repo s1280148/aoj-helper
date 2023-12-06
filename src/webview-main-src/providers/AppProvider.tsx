@@ -19,14 +19,22 @@ const AppProvider: React.FC<Props> = (props: Props) => {
 
   // 以前に表示していた問題の問題IDを指定
   // 以前に表示していた問題がなければ"ITP1_1_A"を指定
-  const problemId = vscode.getState()?.problemId ?? `ITP1_1_A`;
+  const vscodeState = vscode.getState();
+
+  const problemId = vscodeState?.problemId ?? `ITP1_1_A`;
+
+  const isArena = vscodeState?.isArena ?? false;
+
+  const initialEntry = isArena
+    ? `/problem/arena/${vscodeState!.arenaId}/${vscodeState.arenaProblemId}/${vscodeState.problemId}/description`
+    : `/problem/${problemId}/description`;
 
   return (
     <MathJaxContext config={mathJaxConfig}>
       <EnvironmentInfoProvider>
         <CustomMuiThemeProvider>
           <ProblemInfoProvider>
-            <MemoryRouter initialEntries={[`/problem/${problemId}/description`]} initialIndex={0}>
+            <MemoryRouter initialEntries={[initialEntry]} initialIndex={0}>
               {children}
             </MemoryRouter>
           </ProblemInfoProvider>

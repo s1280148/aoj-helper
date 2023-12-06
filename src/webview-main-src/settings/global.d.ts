@@ -3,6 +3,9 @@ declare type ProgrammingLanguage = import("./../../public-src/constants/constant
 
 interface VSCodeState {
   problemId: string;
+  isArena: boolean;
+  arenaId: string;
+  arenaProblemId: string;
   displayLanguage: DisplayLanguage;
   programmingLanguage: ProgrammingLanguage;
   isDarkMode: boolean;

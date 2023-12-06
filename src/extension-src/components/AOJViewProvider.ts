@@ -1,4 +1,5 @@
-import { submitButton } from "./submit/SubmitButton";
+import { ArenaSelectInfo } from "./../../public-src/types/Type";
+import { ArenaProblemInfo } from "./../../public-src/types/ApiResponseType";
 import * as path from "path";
 import * as vscode from "vscode";
 import AOJSessionManager from "./AOJSessionManager";
@@ -7,6 +8,7 @@ import { EXTENSION_SCHEME } from "../settings/extensionScheme";
 import SimpleDocumentContentProvider from "./SimpleTextDocumentContentProvider";
 import { DisplayLanguage } from "../../public-src/constants/constant";
 import { default as dlm } from "./DisplayLanguageManager";
+import submitButton from "./submit/SubmitButton";
 
 /**
  * AOJのViewProvider
@@ -23,6 +25,9 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
 
   /** 現在表示中の問題ID */
   private currentProblemId?: string;
+
+  /** アリーナの選択情報 */
+  private arenaSelectInfo?: ArenaSelectInfo;
 
   /** インスタンス */
   private static _instance: AOJViewProvider;
@@ -65,6 +70,14 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
   public getCurrentProblemId() {
     return this.currentProblemId;
   }
+
+  /**
+   * アリーナの選択情報を取得します。
+   * @returns アリーナの選択情報
+   */
+  public getArenaSelectInfo = () => {
+    return this.arenaSelectInfo;
+  };
 
   /**
    * Webviewのviewを解決します。
@@ -216,7 +229,7 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           break;
         }
         case "findByProblemIdDescription": {
-          const { lang, problemId } = message.parameters;
+          const { lang, problemId, isArena, arenaId, arenaProblemId } = message.parameters;
           const response = await aojApiClient.findByProblemIdDescription(lang, problemId);
 
           if (response) {
@@ -227,6 +240,13 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
             });
 
             this.currentProblemId = problemId;
+            this.arenaSelectInfo = {
+              isArena: isArena,
+              arenaId: arenaId,
+              arenaProblemId: arenaProblemId,
+            };
+
+            submitButton.updateElementText();
           } else {
             this._view?.webview.postMessage({
               type: "findByProblemIdDescription",
@@ -462,6 +482,82 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           } else {
             this._view?.webview.postMessage({
               type: "deleteBookmark",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByUserIdEntries": {
+          const { userId } = message.parameters;
+
+          const response = await aojApiClient.findByUserIdEntries(userId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByUserIdEntries",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByUserIdEntries",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByIdArena": {
+          const { arenaId } = message.parameters;
+
+          const response = await aojApiClient.findByIdArena(arenaId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByIdArena",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByIdArena",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByArenaIdProblems": {
+          const { arenaId } = message.parameters;
+
+          const response = await aojApiClient.findByArenaIdProblems(arenaId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByArenaIdProblems",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByArenaIdProblems",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByArenaIdAndUserIdSubmissions": {
+          const { arenaId, userId } = message.parameters;
+
+          const response = await aojApiClient.findByArenaIdAndUserIdSubmissions(arenaId, userId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByArenaIdAndUserIdSubmissions",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByArenaIdAndUserIdSubmissions",
               status: "error",
             });
           }

@@ -1,6 +1,8 @@
 {
-  "submit.submitButton.text": "AOJ: 提出",
-  "submit.submitButton.tooltip": "表示中の問題に回答を提出",
+  "submit.submitButton.submit.text": "AOJ: 提出",
+  "submit.submitButton.submit.tooltip": "表示中の問題に回答を提出",
+  "submit.submitButton.arenaSubmit.text": "AOJ: アリーナ提出",
+  "submit.submitButton.arenaSubmit.tooltip": "表示中のアリーナの問題に回答を提出",
   "submit.submitCommand.selectLanguage": "言語を選択",
   "submit.submitCommand.progress.title": "提出",
   "submit.submitCommand.progress.message": "実行中...",

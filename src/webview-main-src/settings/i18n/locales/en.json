@@ -38,10 +38,14 @@
   "problemList.tab.course": "Course",
   "problemList.tab.challenge": "Challenge",
   "problemList.tab.bookmark": "Bookmark",
+  "problemList.tab.arena": "Arena",
   "courseList.title": "Courses",
   "courseList.description": "Learn the basics of the program",
   "challengeList.title": "Challenges",
   "challengeList.description": "Challenge the past problem of the contest",
   "bookmarkList.title": "Bookmarks",
-  "bookmarkList.description": "Challenge the bookmarked problem"
+  "bookmarkList.description": "Challenge the bookmarked problem",
+  "arenaList.title": "Arenas",
+  "arenaList.description": "Show the lisf of entries",
+  "arenaList.pageOpenButton.text": "Alternative Page"
 }
