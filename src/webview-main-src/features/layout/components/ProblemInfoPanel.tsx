@@ -43,7 +43,7 @@ const ProblemInfoPanel: React.FC = () => {
     if (problemInfo?.bookmarks) {
       setIsBookmark(problemInfo.bookmarks.length !== 0);
     }
-  }, [problemInfo]);
+  }, [problemInfo?.bookmarks]);
 
   /**
    * ブックマークボタンの押下をハンドリングします。

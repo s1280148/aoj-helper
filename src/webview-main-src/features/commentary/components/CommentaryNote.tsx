@@ -54,7 +54,7 @@ const CommentaryNote: React.FC<Props> = (props: Props) => {
     };
 
     getCommentaryDetail();
-  }, [problemId, environmentInfo]);
+  }, [problemId, environmentInfo.programmingLanguage]);
 
   /**
    * 解説の言語タブの変更をハンドリングします。

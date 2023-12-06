@@ -66,7 +66,7 @@ const ProblemDescriptionPage: React.FC = () => {
     };
 
     getProblemInfo();
-  }, [problemId, environmentInfo]);
+  }, [problemId, environmentInfo.displayLanguage]);
 
   // 現在表示中の問題の情報のstate
   const { problemInfo, setProblemInfo, arenaSelectInfo, setArenaSelectInfo } = useContext(ProblemInfoContext);
