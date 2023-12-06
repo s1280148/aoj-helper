@@ -1,7 +1,7 @@
 {
   "name": "aoj-helper",
   "displayName": "AOJ Helper",
-  "description": "",
+  "description": "Aizu Online Judge for Visual Studio Code",
   "version": "0.0.6",
   "publisher": "s1280148",
   "engines": {
@@ -11,6 +11,10 @@
     "Education"
   ],
   "preview": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/s1280148/aoj-helper"
+  },
   "activationEvents": [
     "onView:AOJ.AOJView"
   ],
