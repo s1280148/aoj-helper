@@ -48,5 +48,15 @@
   "bookmarkList.description": "ブックマークに追加した問題に挑戦",
   "arenaList.title": "アリーナ",
   "arenaList.description": "エントリー済みの一覧を表示",
-  "arenaList.pageOpenButton.text": "専用ページ"
+  "arenaList.pageOpenButton.text": "専用ページ",
+  "review.openEntryList": "オープンエントリー",
+  "review.entryList.noData": "データなし",
+  "review.entryList.header.judgeId": "ジャッジID",
+  "review.entryList.header.status": "ステータス",
+  "review.entryList.header.programmingLanguage": "言語",
+  "review.entryList.header.instruction": "インストラクション",
+  "review.entryList.header.entryDate": "エントリー日時",
+  "review.reviewList.noData": "データなし",
+  "review.reviewList.header.reviewer": "レビュアー",
+  "review.reviewList.header.reviewDate": "レビュー日時"
 }
