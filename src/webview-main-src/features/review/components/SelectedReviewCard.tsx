@@ -13,8 +13,12 @@ import { formatReviewMessage } from "../../../../public-src/utils/StringUtil";
 import { useTranslation } from "react-i18next";
 import { callApi } from "../../../../webview-public-src/utils/ApiUtil";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ReviewEntry, SessionInfo } from "../../../../public-src/types/ApiResponseType";
 
 type Props = {
+  problemId: string;
+  setOpenEntryList: React.Dispatch<React.SetStateAction<null | ReviewEntry[]>>;
+  setCloseEntryList: React.Dispatch<React.SetStateAction<null | ReviewEntry[]>>;
   selectedReview: null | SelectedReviewInfo;
   setSelectedReview: React.Dispatch<React.SetStateAction<null | SelectedReviewInfo>>;
 };
@@ -25,7 +29,7 @@ type Props = {
  * @returns 選択中のレビューカード
  */
 const SelectedReviewCard: React.FC<Props> = (props: Props) => {
-  const { selectedReview, setSelectedReview } = props;
+  const { problemId, setOpenEntryList, setCloseEntryList, selectedReview, setSelectedReview } = props;
 
   /**
    * 閉じるボタンの押下をハンドリングします。
@@ -60,15 +64,52 @@ const SelectedReviewCard: React.FC<Props> = (props: Props) => {
    * 「エントリーをクローズ」ボタンの押下をハンドリングします。
    */
   const handleEntryCloseButtonClick = async () => {
-    const parameter = {
+    const parameterForEntryClose = {
       entryId: selectedReview!.review.entryId,
     };
 
-    await callApi("closeEntry", parameter);
+    await callApi("closeEntry", parameterForEntryClose);
 
     toast(<InfoToaster title={t("review.selectedReview.closeEntry.toast.title")} />);
 
     setSelectedReview(null);
+
+    refreshEntryList();
+  };
+
+  /**
+   * エントリー一覧を更新します。
+   */
+  const refreshEntryList = async () => {
+    setOpenEntryList(null);
+    setCloseEntryList(null);
+
+    // セッション情報を取得し、ユーザーIDを取得
+    const parameterForSession = {};
+    const sessionResponse = (await callApi("session", parameterForSession)) as SessionInfo;
+
+    const userId = sessionResponse.id;
+
+    // オープンエントリー一覧を取得し、stateにセット
+    const parameterForReviewEntry = {
+      userId: userId,
+      problemId: problemId,
+    };
+
+    const openEntryResponse = (await callApi(
+      "findByUserIdAndProblemIdOpenEntries",
+      parameterForReviewEntry,
+    )) as ReviewEntry[];
+
+    setOpenEntryList(openEntryResponse);
+
+    // クローズエントリー一覧を取得し、stateにセット
+    const closeEntryResponse = (await callApi(
+      "findByUserIdAndProblemIdCloseEntries",
+      parameterForReviewEntry,
+    )) as ReviewEntry[];
+
+    setCloseEntryList(closeEntryResponse);
   };
 
   return (
