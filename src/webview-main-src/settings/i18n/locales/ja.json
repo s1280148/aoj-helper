@@ -50,6 +50,7 @@
   "arenaList.description": "エントリー済みの一覧を表示",
   "arenaList.pageOpenButton.text": "専用ページ",
   "review.openEntryList": "オープンエントリー",
+  "review.closeEntryList": "クローズエントリー",
   "review.entryList.noData": "データなし",
   "review.entryList.header.judgeId": "ジャッジID",
   "review.entryList.header.status": "ステータス",

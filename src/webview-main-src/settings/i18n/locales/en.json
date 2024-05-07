@@ -50,6 +50,7 @@
   "arenaList.description": "Show the lisf of entries",
   "arenaList.pageOpenButton.text": "Alternative Page",
   "review.openEntryList": "Open Entries",
+  "review.closeEntryList": "Closed Entries",
   "review.entryList.noData": "No data.",
   "review.entryList.header.judgeId": "Judge ID",
   "review.entryList.header.status": "Status",

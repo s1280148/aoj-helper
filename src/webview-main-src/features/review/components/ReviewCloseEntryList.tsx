@@ -13,42 +13,45 @@ type Props = {
 };
 
 /**
- * レビューのオープンエントリー一覧
+ * レビューのクローズエントリー一覧
  * @param props - props
- * @returns レビューのオープンエントリー一覧
+ * @returns レビューのクローズエントリー一覧
  */
-const ReviewOpenEntryList: React.FC<Props> = (props: Props) => {
+const ReviewCloseEntryList: React.FC<Props> = (props: Props) => {
   const { problemId, setSelectedReview } = props;
 
-  // オープンエントリー一覧のstate
-  const [openEntryList, setOpenEntryList] = useState<null | ReviewEntry[]>(null);
+  // クローズエントリー一覧のstate
+  const [closeEntryList, setCloseEntryList] = useState<null | ReviewEntry[]>(null);
 
   useEffect(() => {
-    const findByUserIdAndProblemIdOpenEntries = async () => {
+    const findByUserIdAndProblemIdCloseEntries = async () => {
       // セッション情報を取得し、ユーザーIDを取得
       const parameterForSession = {};
       const sessionResponse = (await callApi("session", parameterForSession)) as SessionInfo;
 
       const userId = sessionResponse.id;
 
-      // オープンエントリー一覧を取得し、stateにセット
+      // クローズエントリー一覧を取得し、stateにセット
       const parameterForReviewEntry = {
         userId: userId,
         problemId: problemId,
       };
 
-      const response = (await callApi("findByUserIdAndProblemIdOpenEntries", parameterForReviewEntry)) as ReviewEntry[];
+      const response = (await callApi(
+        "findByUserIdAndProblemIdCloseEntries",
+        parameterForReviewEntry,
+      )) as ReviewEntry[];
 
-      setOpenEntryList(response);
+      setCloseEntryList(response);
     };
 
-    findByUserIdAndProblemIdOpenEntries();
+    findByUserIdAndProblemIdCloseEntries();
   }, [problemId]);
 
   const { t } = useTranslation();
 
   return (
-    openEntryList && (
+    closeEntryList && (
       <Box className="border-2 rounded border-gray-200 dark:border-darkMode-dark dark:bg-darkMode-darkest mb-7">
         <Box className="bg-gray-200 dark:bg-darkMode-dark">
           <Box className="flex p-3 border-b border-gray-300 dark:border-darkMode-darkest">
@@ -56,11 +59,11 @@ const ReviewOpenEntryList: React.FC<Props> = (props: Props) => {
               <span className="mr-2 dark:text-darkMode-text">
                 <SpeakerNotesIcon />
               </span>
-              <p className="text-base dark:text-darkMode-text">{t("review.openEntryList")}</p>
+              <p className="text-base dark:text-darkMode-text">{t("review.closeEntryList")}</p>
             </Box>
           </Box>
         </Box>
-        {openEntryList.length === 0 ? (
+        {closeEntryList.length === 0 ? (
           <Box className="px-4 py-3 dark:text-darkMode-text">{t("review.entryList.noData")}</Box>
         ) : (
           <>
@@ -71,7 +74,7 @@ const ReviewOpenEntryList: React.FC<Props> = (props: Props) => {
               <Box className="p-2 col-span-2 dark:text-darkMode-text">{t("review.entryList.header.instruction")}</Box>
               <Box className="p-2 col-span-2 dark:text-darkMode-text">{t("review.entryList.header.entryDate")}</Box>
             </Box>
-            {openEntryList.map((reviewEntry) => (
+            {closeEntryList.map((reviewEntry) => (
               <ReviewEntryRow reviewEntry={reviewEntry} setSelectedReview={setSelectedReview} />
             ))}
           </>
@@ -81,4 +84,4 @@ const ReviewOpenEntryList: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default ReviewOpenEntryList;
+export default ReviewCloseEntryList;

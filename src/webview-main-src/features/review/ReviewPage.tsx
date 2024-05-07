@@ -4,6 +4,7 @@ import { Review } from "../../../public-src/types/ApiResponseType";
 import { Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 import ReviewOpenEntryList from "./components/ReviewOpenEntryList";
+import ReviewCloseEntryList from "./components/ReviewCloseEntryList";
 
 /**
  * 選択中のレビューの情報
@@ -27,6 +28,8 @@ const ReviewPage: React.FC = () => {
   return (
     <Box>
       <ReviewOpenEntryList problemId={problemId!} setSelectedReview={setSelectedReview} />
+      <Box className="mb-6" />
+      <ReviewCloseEntryList problemId={problemId!} setSelectedReview={setSelectedReview} />
     </Box>
   );
 };

@@ -438,6 +438,17 @@ class AOJApiClient {
   };
 
   /**
+   * ユーザーIDと問題IDからクローズエントリー一覧を取得します。
+   * @param userId - ユーザーID
+   * @param problemId - 問題ID
+   * @returns レスポンス
+   */
+  findByUserIdAndProblemIdCloseEntries = async (userId: string, problemId: string) => {
+    console.log(this.reviewApiClient);
+    return this.reviewApiClient.get(`/review/close_entries/users/${userId}/problems/${problemId}`);
+  };
+
+  /**
    * レビューのエントリーIDからレビュー一覧を取得します。
    * @param entryId - レビューのエントリーID
    * @returns レスポンス

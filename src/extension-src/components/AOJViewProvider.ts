@@ -582,6 +582,25 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           }
           break;
         }
+        case "findByUserIdAndProblemIdCloseEntries": {
+          const { userId, problemId } = message.parameters;
+
+          const response = await aojApiClient.findByUserIdAndProblemIdCloseEntries(userId, problemId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByUserIdAndProblemIdCloseEntries",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByUserIdAndProblemIdCloseEntries",
+              status: "error",
+            });
+          }
+          break;
+        }
         case "findByEntryIdReviews": {
           const { entryId } = message.parameters;
 
