@@ -59,5 +59,11 @@
   "review.entryList.header.entryDate": "エントリー日時",
   "review.reviewList.noData": "データなし",
   "review.reviewList.header.reviewer": "レビュアー",
-  "review.reviewList.header.reviewDate": "レビュー日時"
+  "review.reviewList.header.reviewDate": "レビュー日時",
+  "review.selectedReview.review": "レビュー",
+  "review.selectedReview.byAI": "このレビューはAIが行いました。",
+  "review.selectedReview.closeEntry.button": "エントリーをクローズ",
+  "review.selectedReview.closeEntry.toast.title": "エントリーをクローズしました",
+  "review.selectedReview.evaluation.toast.title": "レビューの評価をしました",
+  "review.selectedReview.evaluation.toast.score": "スコア"
 }

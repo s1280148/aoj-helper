@@ -34,7 +34,6 @@ const ReviewEntryRow: React.FC<Props> = (props: Props) => {
         entryId: reviewEntry.entryId,
       };
 
-      console.log(reviewEntry.entryId);
       const response = (await callApi("findByEntryIdReviews", parameter)) as Review[];
 
       setReviewList(response);

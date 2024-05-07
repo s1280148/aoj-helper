@@ -59,5 +59,11 @@
   "review.entryList.header.entryDate": "Entry Date",
   "review.reviewList.noData": "No data.",
   "review.reviewList.header.reviewer": "Reviewer",
-  "review.reviewList.header.reviewDate": "Review Date"
+  "review.reviewList.header.reviewDate": "Review Date",
+  "review.selectedReview.review": "Review",
+  "review.selectedReview.byAI": "This review was performed by AI.",
+  "review.selectedReview.closeEntry.button": "Close Entry",
+  "review.selectedReview.closeEntry.toast.title": "Entry closed",
+  "review.selectedReview.evaluation.toast.title": "Evaluate the review",
+  "review.selectedReview.evaluation.toast.score": "Score"
 }

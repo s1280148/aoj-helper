@@ -19,14 +19,14 @@ const WarnToaster: React.FC<Props> = (props: Props) => {
       className={`
       grid
       grid-cols-6
-      ${content !== undefined && "gap-3"}
+      ${content === undefined ? "gap-x-3" : "gap-3"}
     `}
     >
       <Box className="flex items-center">
         <WarningIcon className="text-yellow-500 dark:text-yellow-600" />
       </Box>
       <Box className="col-span-5 flex items-center">
-        <p className="text-yellow-500 text-lg dark:text-yellow-600">{title}</p>
+        <p className="text-yellow-500 text-base dark:text-yellow-600">{title}</p>
       </Box>
       {content !== undefined && (
         <>

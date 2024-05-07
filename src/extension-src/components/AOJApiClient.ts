@@ -433,7 +433,6 @@ class AOJApiClient {
    * @returns レスポンス
    */
   findByUserIdAndProblemIdOpenEntries = async (userId: string, problemId: string) => {
-    console.log(this.reviewApiClient);
     return this.reviewApiClient.get(`/review/entries/users/${userId}/problems/${problemId}`);
   };
 
@@ -444,7 +443,6 @@ class AOJApiClient {
    * @returns レスポンス
    */
   findByUserIdAndProblemIdCloseEntries = async (userId: string, problemId: string) => {
-    console.log(this.reviewApiClient);
     return this.reviewApiClient.get(`/review/close_entries/users/${userId}/problems/${problemId}`);
   };
 
@@ -455,6 +453,37 @@ class AOJApiClient {
    */
   findByEntryIdReviews = async (entryId: string) => {
     return this.reviewApiClient.get(`/review/reviews/entries/${entryId}`);
+  };
+
+  /**
+   * レビューの評価を行います。
+   * @param reviewId - レビューID
+   * @param score - スコア
+   * @returns レスポンス
+   */
+  registerEvaluation = async (reviewId: string, score: number) => {
+    const requestBody = {
+      reviewId: reviewId,
+      score: score,
+      userId: "",
+    };
+
+    return this.judgeApiClient.post("/review_proxy/evaluation", requestBody);
+  };
+
+  /**
+   * レビューエントリーをクローズします。
+   * @param entryId - エントリーID
+   * @returns レスポンス
+   */
+  closeEntry = async (entryId: string) => {
+    const requestBody = {
+      apiKey: "",
+      entryId: entryId,
+      userId: "",
+    };
+
+    return this.judgeApiClient.post("/review_proxy/close", requestBody);
   };
 }
 

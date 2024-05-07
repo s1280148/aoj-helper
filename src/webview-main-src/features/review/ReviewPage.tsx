@@ -5,6 +5,7 @@ import { Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 import ReviewOpenEntryList from "./components/ReviewOpenEntryList";
 import ReviewCloseEntryList from "./components/ReviewCloseEntryList";
+import SelectedReviewCard from "./components/SelectedReviewCard";
 
 /**
  * 選択中のレビューの情報
@@ -26,7 +27,8 @@ const ReviewPage: React.FC = () => {
   const [selectedReview, setSelectedReview] = useState<null | SelectedReviewInfo>(null);
 
   return (
-    <Box>
+    <Box className="px-2 py-3">
+      <SelectedReviewCard selectedReview={selectedReview} setSelectedReview={setSelectedReview} />
       <ReviewOpenEntryList problemId={problemId!} setSelectedReview={setSelectedReview} />
       <Box className="mb-6" />
       <ReviewCloseEntryList problemId={problemId!} setSelectedReview={setSelectedReview} />

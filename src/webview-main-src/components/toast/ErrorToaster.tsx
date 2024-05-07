@@ -19,14 +19,14 @@ const ErrorToaster: React.FC<Props> = (props: Props) => {
       className={`
       grid
       grid-cols-6
-      ${content !== undefined && "gap-3"}
+      ${content === undefined ? "gap-x-3" : "gap-3"}
     `}
     >
       <Box className="flex items-center">
         <CancelIcon className="text-red-500 dark:text-red-600" />
       </Box>
       <Box className="col-span-5 flex items-center">
-        <p className="text-red-500 text-lg dark:text-red-600">{title}</p>
+        <p className="text-red-500 text-base dark:text-red-600">{title}</p>
       </Box>
       {content !== undefined && (
         <>
