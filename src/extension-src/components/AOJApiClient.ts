@@ -472,6 +472,24 @@ class AOJApiClient {
   };
 
   /**
+   * レビューエントリーを登録します。
+   * @param displayLanguage - 表示言語
+   * @param instruction - レビューのインストラクション
+   * @param judgeId - ジャッジID
+   * @returns レスポンス
+   */
+  registerEntry = async (displayLanguage: string, instruction: string, judgeId: string) => {
+    const requestBody = {
+      apiKey: "",
+      displayLanguage: displayLanguage,
+      instruction: instruction,
+      judgeId: judgeId,
+    };
+
+    return this.judgeApiClient.post("/review_proxy/entry", requestBody);
+  };
+
+  /**
    * レビューエントリーをクローズします。
    * @param entryId - エントリーID
    * @returns レスポンス

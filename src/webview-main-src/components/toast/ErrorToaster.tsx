@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import CancelIcon from "@mui/icons-material/Info";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 type Props = {
   title: string;

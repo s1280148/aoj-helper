@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/Info";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 type Props = {
   title: string;

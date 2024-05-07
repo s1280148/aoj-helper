@@ -639,6 +639,25 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           }
           break;
         }
+        case "registerEntry": {
+          const { displayLanguage, instruction, judgeId } = message.parameters;
+
+          const response = await aojApiClient.registerEntry(displayLanguage, instruction, judgeId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "registerEntry",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "registerEntry",
+              status: "error",
+            });
+          }
+          break;
+        }
         case "closeEntry": {
           const { entryId } = message.parameters;
 
