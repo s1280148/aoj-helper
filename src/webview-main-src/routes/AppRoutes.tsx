@@ -14,6 +14,7 @@ import ArenaListTab from "../features/problem-list/arena/ArenaListTab";
 import ArenaDetailTab from "../features/problem-list/arena/ArenaDetailTab";
 import ProblemDescriptionPage from "../features/problem-description/ProblemDescriptionPage";
 import ArenaProblemDescriptionPage from "../features/arena-problem-description/ArenaProblemDescriptionPage";
+import ReviewPage from "../features/review/ReviewPage";
 
 /**
  * アプリケーション全体のルーティング
@@ -41,6 +42,7 @@ export const AppRoutes = () => {
         <Route path="/problem/:problemId/commentary/post" element={<PostCommentaryPage />} />
         <Route path="/problem/:problemId/submission-record" element={<SubmissionRecordPage />} />
         <Route path="/problem/:problemId/model-answer" element={<ModelAnswerPage />} />
+        <Route path="/problem/:problemId/review" element={<ReviewPage />} />
       </Route>
     </Routes>
   );

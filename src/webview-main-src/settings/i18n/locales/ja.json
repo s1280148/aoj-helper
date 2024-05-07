@@ -23,6 +23,7 @@
   "problemMenu.page.postCommentary": "解説（後）",
   "problemMenu.page.submissionRecord": "提出履歴",
   "problemMenu.page.modelAnswer": "模範解答",
+  "problemMenu.page.review": "レビュー",
   "problemSearchBar.input.placeHolder": "問題IDを入力",
   "problemSearchBar.button.text": "検索",
   "problemSearchBar.alert.requireProblemId": "問題IDを入力してください",

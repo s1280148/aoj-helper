@@ -23,6 +23,7 @@
   "problemMenu.page.postCommentary": "Commentary（post）",
   "problemMenu.page.submissionRecord": "Submission Record",
   "problemMenu.page.modelAnswer": "Model Answer",
+  "problemMenu.page.review": "Review",
   "problemSearchBar.input.placeHolder": "Problem ID",
   "problemSearchBar.button.text": "Search",
   "problemSearchBar.alert.requireProblemId": "Input Problem ID",
