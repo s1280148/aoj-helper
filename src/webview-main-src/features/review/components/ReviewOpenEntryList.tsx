@@ -68,8 +68,8 @@ const ReviewOpenEntryList: React.FC<Props> = (props: Props) => {
               <Box className="pl-4 pr-2 py-2 dark:text-darkMode-text">{t("review.entryList.header.judgeId")}</Box>
               <Box className="p-2 dark:text-darkMode-text">{t("review.entryList.header.status")}</Box>
               <Box className="p-2 dark:text-darkMode-text">{t("review.entryList.header.programmingLanguage")}</Box>
-              <Box className="p-2 col-span-2 dark:text-darkMode-text">{t("review.entryList.header.instruction")}</Box>
-              <Box className="p-2 col-span-2 dark:text-darkMode-text">{t("review.entryList.header.entryDate")}</Box>
+              <Box className="p-2 dark:text-darkMode-text">{t("review.entryList.header.instruction")}</Box>
+              <Box className="p-2 col-span-3 dark:text-darkMode-text">{t("review.entryList.header.entryDate")}</Box>
             </Box>
             {openEntryList.map((reviewEntry) => (
               <ReviewEntryRow reviewEntry={reviewEntry} setSelectedReview={setSelectedReview} />

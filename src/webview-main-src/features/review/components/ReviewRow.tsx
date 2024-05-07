@@ -30,6 +30,9 @@ const ReviewRow: React.FC<Props> = (props: Props) => {
 
     // 選択したレビューの情報を選択中のレビューにセット
     setSelectedReview(selectedReview);
+
+    // ウィンドウの位置を一番上に変更
+    window.scrollTo(0, 0);
   };
 
   return (
