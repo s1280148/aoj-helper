@@ -1,4 +1,4 @@
-import { SubmissionProgress, SubmissionStatus } from "../constants/constant";
+import { SubmissionProgress, SubmissionStatus, SubmissionStatusShortName } from "../constants/constant";
 
 /**
  * 提出ステータスからクラス名を取得します。
@@ -100,6 +100,34 @@ export const getShortStatusNameFromSubmissionStatus = (submissionStatus: Submiss
       return "PE";
     default:
       return "？";
+  }
+};
+
+/**
+ * 提出ステータスの省略名から提出ステータスを取得します。
+ * @param submissionStatusShortNameStr - 提出ステータスの省略名
+ * @returns 提出ステータス
+ */
+export const getSubmissionStatusFromStatusShortName = (submissionStatusShortNameStr: string) => {
+  const submissionStatusShortName = submissionStatusShortNameStr as SubmissionStatusShortName;
+
+  switch (submissionStatusShortName) {
+    case SubmissionStatusShortName.STATE_COMPILEERROR:
+      return SubmissionStatus.STATE_COMPILEERROR;
+    case SubmissionStatusShortName.STATE_WRONGANSWER:
+      return SubmissionStatus.STATE_WRONGANSWER;
+    case SubmissionStatusShortName.STATE_TIMELIMIT:
+      return SubmissionStatus.STATE_TIMELIMIT;
+    case SubmissionStatusShortName.STATE_MEMORYLIMIT:
+      return SubmissionStatus.STATE_MEMORYLIMIT;
+    case SubmissionStatusShortName.STATE_ACCEPTED:
+      return SubmissionStatus.STATE_ACCEPTED;
+    case SubmissionStatusShortName.STATE_OUTPUTLIMIT:
+      return SubmissionStatus.STATE_OUTPUTLIMIT;
+    case SubmissionStatusShortName.STATE_RUNTIMEERROR:
+      return SubmissionStatus.STATE_RUNTIMEERROR;
+    case SubmissionStatusShortName.STATE_PRESENTATIONERROR:
+      return SubmissionStatus.STATE_PRESENTATIONERROR;
   }
 };
 
