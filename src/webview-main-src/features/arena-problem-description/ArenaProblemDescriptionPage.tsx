@@ -8,7 +8,6 @@ import { ProblemDescription } from "../../../public-src/types/ApiResponseType";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
 import { useTranslation } from "react-i18next";
-import { convertStringToBoolean } from "../../../public-src/utils/BooeanUtil";
 
 type ParamTypes = {
   arenaId: string;
