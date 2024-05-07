@@ -38,7 +38,7 @@ const ReviewCloseEntryList: React.FC<Props> = (props: Props) => {
         <Box className="px-4 py-3 dark:text-darkMode-text">{t("review.entryList.noData")}</Box>
       ) : (
         <>
-          <Box className="text-xs text-left grid grid-cols-7 bg-white border-gray-200 text-gray-600 border-b dark:bg-darkMode-dark dark:border-darkMode-dark">
+          <Box className="text-[0.65rem] text-left grid grid-cols-7 bg-white border-gray-200 text-gray-600 border-b dark:bg-darkMode-dark dark:border-darkMode-dark">
             <Box className="pl-4 pr-2 py-2 dark:text-darkMode-text">{t("review.entryList.header.judgeId")}</Box>
             <Box className="p-2 dark:text-darkMode-text">{t("review.entryList.header.status")}</Box>
             <Box className="p-2 dark:text-darkMode-text">{t("review.entryList.header.programmingLanguage")}</Box>

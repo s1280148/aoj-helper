@@ -70,11 +70,11 @@ const ReviewEntryRow: React.FC<Props> = (props: Props) => {
           <Box className="px-2 py-3 flex items-center">
             <span className="dark:text-darkMode-text">{reviewEntry.language}</span>
           </Box>
-          <Box className="flex items-center px-2 py-3">
+          <Box className="flex items-center col-span-2 px-2 py-3">
             <ReviewInstructionIcon reviewInstructionStr={reviewEntry.instruction} />
           </Box>
-          <Box className="px-2 py-3 col-span-3 flex items-center">
-            <span className="dark:text-darkMode-text">{timeStampToDate(reviewEntry.entryDate)}</span>
+          <Box className="px-2 py-3 col-span-2 flex items-center">
+            <span className="text-xs dark:text-darkMode-text">{timeStampToDate(reviewEntry.entryDate)}</span>
           </Box>
         </Box>
         <Collapse in={isReviewListOpen}>
