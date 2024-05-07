@@ -380,3 +380,37 @@ export interface ArenaSubmissionInfo {
   status: number;
   accuracy: string;
 }
+
+/**
+ * レビューエントリー
+ */
+export interface ReviewEntry {
+  entryId: string;
+  judgeId: number;
+  entryDate: number;
+  status: string;
+  instruction: string;
+  userId: string;
+  problemId: string;
+  language: string;
+  displayLanguage: string;
+  description: string;
+  sourceCode: string;
+  compileError: string;
+  runtimeError: string;
+  closeDate: number;
+  state: string;
+}
+
+/**
+ * レビュー
+ */
+export interface Review {
+  reviewId: string;
+  entryId: string;
+  reviewerId: string;
+  reviewDate: number;
+  message: string;
+  prompt: string;
+  revisedCode: string;
+}
