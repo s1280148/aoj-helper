@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import JudgeDetailModal from "../judge-detail/JudgeDetailModal";
 import LoginModal from "../login/LoginModal";
 import ScrollTop from "./components/ScrollTop";
+import CustomToaster from "../../components/toast/CustomToaster";
 
 /**
  * レイアウトの共通部分
@@ -19,6 +20,7 @@ const Layout: React.FC = () => {
         <Outlet />
       </Box>
       <ScrollTop />
+      <CustomToaster />
     </>
   );
 };
