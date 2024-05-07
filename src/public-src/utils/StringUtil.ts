@@ -1,6 +1,6 @@
 /**
  * レビューのメッセージをHTML形式の文字列にフォーマットします。
- * @param message レビューのメッセージ
+ * @param message - レビューのメッセージ
  * @returns HTML形式の文字列
  */
 export const formatReviewMessage = (message: string) => {
@@ -16,7 +16,7 @@ export const formatReviewMessage = (message: string) => {
 
 /**
  * HTML形式の文字列をエスケープします。
- * @param str HTML形式の文字列
+ * @param str - HTML形式の文字列
  * @returns エスケープ後のHTML形式の文字列
  */
 const escapeHTML = (str: string) => {
