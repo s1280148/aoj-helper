@@ -78,7 +78,7 @@ const ReviewEntryRow: React.FC<Props> = (props: Props) => {
           </Box>
         </Box>
         <Collapse in={isReviewListOpen}>
-          <Box className="w-full text-xs text-left flex bg-white border-gray-300 text-gray-600 border-b dark:bg-darkMode-dark dark:border-darkMode-dark">
+          <Box className="w-full text-[0.65rem] text-left flex bg-white border-gray-300 text-gray-600 border-b dark:bg-darkMode-dark dark:border-darkMode-dark">
             <Box className="px-2 py-2 w-12"></Box>
             <Box className="w-full grid grid-cols-3">
               <Box className="p-2 dark:text-darkMode-text">{t("review.reviewList.header.reviewer")}</Box>
