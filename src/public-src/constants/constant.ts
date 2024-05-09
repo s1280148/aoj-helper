@@ -131,7 +131,7 @@ export enum DisplayLanguage {
  */
 export enum AIReviewer {
   GPT_3_5_turbo = "gpt-3.5-turbo",
-  gemini_pro = "gemini-pro",
+  gemini_pro = "gemini_pro",
 }
 
 /**
