@@ -7,6 +7,8 @@ import { ProblemInfoContext } from "../../providers/ProblemInfoProvider";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
 import { ProblemDescription } from "../../../public-src/types/ApiResponseType";
+import toast from "react-hot-toast";
+import SuccessToaster from "../../components/toast/SuccessToaster";
 
 /**
  * ログインモーダル
@@ -171,6 +173,7 @@ const LoginModal = () => {
               closeLoginModal();
               cleanupLoginModal();
               resetSelectedProblem();
+              toast(<SuccessToaster title={t("login.toast.title")} />, { duration: 2000 })
               break;
           }
           break;
