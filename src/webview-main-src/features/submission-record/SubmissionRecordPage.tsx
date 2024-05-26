@@ -11,9 +11,17 @@ import { getMonacoEditorLanguageFromProgrammingLanguage } from "../../../public-
 import { timeStampToDate } from "../../../public-src/utils/DateUtil";
 import { editor } from "monaco-editor";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
-import { SubmissionStatus } from "../../../public-src/constants/constant";
+import { ReviewInstruction, SubmissionStatus } from "../../../public-src/constants/constant";
 import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
 import { useTranslation } from "react-i18next";
+import HikingIcon from "@mui/icons-material/Hiking";
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
+import toast from "react-hot-toast";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import CancelIcon from "@mui/icons-material/Cancel";
+import SuccessToaster from "../../components/toast/SuccessToaster";
+import ErrorToaster from "../../components/toast/ErrorToaster";
+import InfoToaster from "../../components/toast/InfoToaster";
 
 /**
  * 提出履歴ページ
@@ -134,28 +142,48 @@ const SubmissionRecordPage: React.FC = () => {
   };
 
   /**
-   * "閉じる"ボタンの押下をハンドリングします。
+   * 「ヒントレビューをリクエスト」ボタンの押下をハンドリングします。
    */
-  const handleCloseButtonClick = () => {
-    setSelectedJudgeInfo(null);
-    setTargetReviewInfo(null);
+  const handlePassiveReviewRequestButtonClick = () => {
+    const parameter = {
+      displayLanguage: environmentInfo.displayLanguage,
+      instruction: ReviewInstruction.PASSIVE,
+      judgeId: selectedJudgeInfo!.judgeId,
+    };
+
+    callApi("registerEntry", parameter)
+      .then((res) => toast(<SuccessToaster title={t("submissionRecord.review.request.toast.success")} />))
+      .catch((err) => toast(<ErrorToaster title={t("submissionRecord.review.request.toast.error")} />));
   };
 
-  // コピー完了トーストの表示状態のstates
-  const [isOpenCopyToast, setIsOpenCopyToast] = useState<boolean>(false);
+  /**
+   * 「直接的なレビューをリクエスト」ボタンの押下をハンドリングします。
+   */
+  const handleActiveReviewRequestButtonClick = () => {
+    const parameter = {
+      displayLanguage: environmentInfo.displayLanguage,
+      instruction: ReviewInstruction.ACTIVE,
+      judgeId: selectedJudgeInfo!.judgeId,
+    };
+
+    callApi("registerEntry", parameter)
+      .then((res) => toast(<SuccessToaster title={t("submissionRecord.review.request.toast.success")} />))
+      .catch((err) => toast(<ErrorToaster title={t("submissionRecord.review.request.toast.error")} />));
+  };
 
   /**
    * "コピー"ボタンの押下をハンドリングします。
    */
   const handleCopyButtonClick = () => {
-    setIsOpenCopyToast(true);
+    toast(<InfoToaster title={t("monacoEditor.alert.copied")} />);
   };
 
   /**
-   * コピー完了トーストを非表示にします。
+   * "閉じる"ボタンの押下をハンドリングします。
    */
-  const hideCopyToast = () => {
-    setIsOpenCopyToast(false);
+  const handleCloseButtonClick = () => {
+    setSelectedJudgeInfo(null);
+    setTargetReviewInfo(null);
   };
 
   // 環境情報のstate
@@ -227,63 +255,127 @@ const SubmissionRecordPage: React.FC = () => {
               theme={environmentInfo.isDarkMode ? "vs-dark" : "light"}
             />
           </Box>
-          <Box className="m-3 text-right">
-            <CopyToClipboard text={targetReviewInfo.sourceCode} onCopy={handleCopyButtonClick}>
-              <button
-                className="
-                items-center
-                border
-                rounded
-                w-16
-                transform
-                duration-150
-                mr-2
+          <Box className="border rounded-lg px-3 py-3 mx-3 border-red-400 bg-red-100 dark:border-red-900 dark:bg-red-900">
+            <p className="text-red-600 dark:text-darkMode-text">{t("submissionRecord.review.AIAlert")}</p>
+          </Box>
+          <Box className="flex justify-end mx-3 mt-5">
+            <Box
+              className="
+                border-2
+                rounded-full
+                flex
+                p-1
                 focus:outline-none
-                border-gray-400
-                text-gray-800
-                hover:border-gray-700
+                select-none 
+                hover:border-gray-600
+                hover:text-gray-600
+                border-gray-700
+                text-gray-700
                 dark:bg-darkMode
                 dark:border-darkMode
                 dark:text-darkMode-text
-                dark:hover:border-darkMode-lighter"
-                type="button"
-              >
-                {t("monacoEditor.copy")}
-              </button>
-            </CopyToClipboard>
-            <button
-              className="
-              items-center
-              border
-              rounded
-              w-16
-              transform
-              duration-150
-              focus:outline-none
-              border-gray-400
-              text-gray-800
-              hover:border-gray-700
-              dark:bg-darkMode
-              dark:border-darkMode
-              dark:text-darkMode-text
-              dark:hover:border-darkMode-lighter"
-              type="button"
-              onClick={handleCloseButtonClick}
+                dark:hover:border-darkMode-lightest
+                dark:hover:bg-darkMode-lightest
+                "
+              onClick={handlePassiveReviewRequestButtonClick}
             >
-              {t("monacoEditor.close")}
-            </button>
+              <Box className="flex items-center px-1">
+                <HikingIcon fontSize="small" />
+              </Box>
+              <Box>
+                <Box className="pr-2 my-auto">{t("submissionRecord.review.request.passive")}</Box>
+              </Box>
+            </Box>
           </Box>
-          <Snackbar
-            open={isOpenCopyToast}
-            anchorOrigin={{ vertical: "top", horizontal: "left" }}
-            autoHideDuration={2000}
-            onClose={hideCopyToast}
-            sx={{ right: "auto" }}
-          >
-            <Alert severity="success" className="dark:bg-teal-900 dark:text-darkMode-text">
-              {t("monacoEditor.alert.copied")}
-            </Alert>
-          </Snackbar>
+          <Box className="flex justify-end mx-3 mt-4">
+            <Box
+              className="
+                border-2
+                rounded-full
+                flex
+                p-1
+                focus:outline-none
+                select-none 
+                hover:border-gray-600
+                hover:text-gray-600
+                border-gray-700
+                text-gray-700
+                dark:bg-darkMode
+                dark:border-darkMode
+                dark:text-darkMode-text
+                dark:hover:border-darkMode-lightest
+                dark:hover:bg-darkMode-lightest
+                "
+              onClick={handleActiveReviewRequestButtonClick}
+            >
+              <Box className="flex items-center px-1">
+                <DirectionsRunIcon fontSize="small" />
+              </Box>
+              <Box>
+                <Box className="pr-2 my-auto">{t("submissionRecord.review.request.active")}</Box>
+              </Box>
+            </Box>
+          </Box>
+          <Box className="flex justify-end mx-3 my-4">
+            <Box className="flex">
+              <CopyToClipboard text={targetReviewInfo.sourceCode} onCopy={handleCopyButtonClick}>
+                <Box
+                  className="
+                    border-2
+                    rounded-full
+                    flex
+                    p-1
+                    mr-2
+                    focus:outline-none
+                    select-none 
+                    hover:border-gray-600
+                    hover:text-gray-600
+                    border-gray-700
+                    text-gray-700
+                    dark:bg-darkMode
+                    dark:border-darkMode
+                    dark:text-darkMode-text
+                    dark:hover:border-darkMode-lightest
+                    dark:hover:bg-darkMode-lightest
+                    "
+                >
+                  <Box className="flex items-center px-1">
+                    <ContentCopyIcon fontSize="small" />
+                  </Box>
+                  <Box>
+                    <Box className="pr-2 my-auto">{t("monacoEditor.copy")}</Box>
+                  </Box>
+                </Box>
+              </CopyToClipboard>
+              <Box
+                className="
+                  border-2
+                  rounded-full
+                  flex
+                  p-1
+                  focus:outline-none
+                  select-none 
+                  hover:border-gray-600
+                  hover:text-gray-600
+                  border-gray-700
+                  text-gray-700
+                  dark:bg-darkMode
+                  dark:border-darkMode
+                  dark:text-darkMode-text
+                  dark:hover:border-darkMode-lightest
+                  dark:hover:bg-darkMode-lightest
+                  "
+                onClick={handleCloseButtonClick}
+              >
+                <Box className="flex items-center px-1">
+                  <CancelIcon fontSize="small" />
+                </Box>
+                <Box>
+                  <Box className="pr-2 my-auto">{t("monacoEditor.close")}</Box>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
         </Box>
       )}
       {displayingSubmissionRecordList && (

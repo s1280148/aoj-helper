@@ -29,6 +29,20 @@ export const enum SubmissionStatus {
 }
 
 /**
+ * 提出ステータスの省略名
+ */
+export const enum SubmissionStatusShortName {
+  STATE_COMPILEERROR = "CE",
+  STATE_WRONGANSWER = "WA",
+  STATE_TIMELIMIT = "TLE",
+  STATE_MEMORYLIMIT = "MLE",
+  STATE_ACCEPTED = "AC",
+  STATE_OUTPUTLIMIT = "OLE",
+  STATE_RUNTIMEERROR = "RE",
+  STATE_PRESENTATIONERROR = "PE",
+}
+
+/**
  * 選択可能なプログラミング言語
  */
 export enum ProgrammingLanguage {
@@ -110,4 +124,28 @@ export const enum ApiErrorCode {
 export enum DisplayLanguage {
   Japanese = "ja",
   English = "en",
+}
+
+/**
+ * AIのレビュワーID
+ */
+export enum AIReviewer {
+  GPT_3_5_turbo = "gpt-3.5-turbo",
+  gemini_pro = "gemini_pro",
+}
+
+/**
+ * レビューのインストラクション
+ */
+export enum ReviewInstruction {
+  ACTIVE = "active",
+  PASSIVE = "passive",
+}
+
+/**
+ * レビューのエントリー状態
+ */
+export enum ReviewEntryState {
+  OPEN = "open",
+  CLOSE = "close",
 }

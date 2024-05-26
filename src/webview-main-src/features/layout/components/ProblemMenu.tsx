@@ -8,6 +8,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import HistoryIcon from "@mui/icons-material/History";
 import GroupIcon from "@mui/icons-material/Group";
+import ReviewsIcon from "@mui/icons-material/Reviews";
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { ProblemInfoContext } from "../../../providers/ProblemInfoProvider";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -23,6 +24,7 @@ const enum Page {
   POST_COMMENTARY,
   SUBMISSION_RECORD,
   MODEL_ANSWER,
+  REVIEW,
   OTHER,
 }
 
@@ -107,6 +109,11 @@ const ProblemMenu: React.FC = () => {
       case Page.MODEL_ANSWER: {
         // 模範解答ページに移動
         navigate(`/problem/${problemId}/model-answer`);
+        break;
+      }
+      case Page.REVIEW: {
+        // レビューページに移動
+        navigate(`/problem/${problemId}/review`);
       }
     }
 
@@ -138,6 +145,10 @@ const ProblemMenu: React.FC = () => {
       }
       case /^\/problem\/.*\/model-answer$/.test(pathname): {
         setCurrentPage(Page.MODEL_ANSWER);
+        break;
+      }
+      case /^\/problem\/.*\/review$/.test(pathname): {
+        setCurrentPage(Page.REVIEW);
         break;
       }
       default: {
@@ -265,6 +276,27 @@ const ProblemMenu: React.FC = () => {
                   primary={t("problemMenu.page.modelAnswer")}
                   className={
                     currentPage === Page.MODEL_ANSWER && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
+                      : "text-inherit dark:text-darkMode-text"
+                  }
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => handlePageSelect(Page.REVIEW)}>
+                <ListItemIcon
+                  className={
+                    currentPage === Page.REVIEW && problemInfo
+                      ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
+                      : "text-inherit dark:text-darkMode-text"
+                  }
+                >
+                  <ReviewsIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={t("problemMenu.page.review")}
+                  className={
+                    currentPage === Page.REVIEW && problemInfo
                       ? getClassNameFromProblemType(problemInfo.problem_id, arenaSelectInfo.isArena)
                       : "text-inherit dark:text-darkMode-text"
                   }

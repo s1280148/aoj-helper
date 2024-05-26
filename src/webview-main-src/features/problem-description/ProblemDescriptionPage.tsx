@@ -1,4 +1,4 @@
-import { Alert, Box, Snackbar } from "@mui/material";
+import { Alert, Box, Snackbar, duration } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { ScrollRestoration, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { MathJaxContext, MathJax } from "better-react-mathjax";
@@ -8,7 +8,8 @@ import { ProblemDescription } from "../../../public-src/types/ApiResponseType";
 import { callApi } from "../../../webview-public-src/utils/ApiUtil";
 import { EnvironmentInfoContext } from "../../providers/EnvironmentInfoProvider";
 import { useTranslation } from "react-i18next";
-import { convertStringToBoolean } from "../../../public-src/utils/BooeanUtil";
+import ErrorToaster from "../../components/toast/ErrorToaster";
+import toast from "react-hot-toast";
 
 /**
  * 問題説明ページ
@@ -57,7 +58,7 @@ const ProblemDescriptionPage: React.FC = () => {
         });
       } catch (e) {
         // エラーが発生した場合、エラートーストを表示し、前の問題を表示
-        showErrorToast();
+        toast(<ErrorToaster title={t("problemDescription.alert.notFound")} />, { duration: 2000 })
 
         const beforeProblemId = problemInfo?.problem_id;
 
@@ -70,23 +71,6 @@ const ProblemDescriptionPage: React.FC = () => {
 
   // 現在表示中の問題の情報のstate
   const { problemInfo, setProblemInfo, arenaSelectInfo, setArenaSelectInfo } = useContext(ProblemInfoContext);
-
-  // エラートーストの表示状態のstate
-  const [errorToastOpen, setErrorToastOpen] = useState<boolean>(false);
-
-  /**
-   * エラートーストを表示します。
-   */
-  const showErrorToast = () => {
-    setErrorToastOpen(true);
-  };
-
-  /**
-   * エラートーストを非表示にします。
-   */
-  const hideErrorToast = () => {
-    setErrorToastOpen(false);
-  };
 
   const { t } = useTranslation();
 
@@ -111,15 +95,6 @@ const ProblemDescriptionPage: React.FC = () => {
           </MathJax>
         </>
       )}
-      <Snackbar
-        open={errorToastOpen}
-        anchorOrigin={{ vertical: "top", horizontal: "left" }}
-        autoHideDuration={2000}
-        onClose={hideErrorToast}
-        sx={{ right: "auto" }}
-      >
-        <Alert severity="error">{t("problemDescription.alert.notFound")}</Alert>
-      </Snackbar>
     </>
   );
 };

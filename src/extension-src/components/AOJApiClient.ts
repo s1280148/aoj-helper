@@ -9,11 +9,15 @@ class AOJApiClient {
   /** judgeApiのクライアント */
   private readonly judgeApiClient: AxiosInstance;
 
+  /** reviewApiのクライアント */
+  private readonly reviewApiClient: AxiosInstance;
+
   /**
    * コンストラクタ
    */
   constructor() {
     this.judgeApiClient = this.createJudgeApiClient();
+    this.reviewApiClient = this.createReviewApiClient();
   }
 
   /**
@@ -65,6 +69,54 @@ class AOJApiClient {
   }
 
   /**
+   * reviewApiのクライアントを作成します。
+   * @returns reviewApiのクライアント
+   */
+  private createReviewApiClient(): AxiosInstance {
+    const config: AxiosRequestConfig = {
+      baseURL: "https://rose.u-aizu.ac.jp",
+      headers: {
+        Cookie: "",
+      },
+    };
+
+    const reviewApiClient = axios.create(config);
+
+    // インターセプターを定義
+    reviewApiClient.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        // エラーコードを取得
+        const code: number = error.response.data[0].id;
+
+        const aojViewProvider = AOJViewProvider.getInstance();
+
+        // エラーコードによって処理を分岐する
+        switch (code) {
+          case ApiErrorCode.USER_NOT_FOUND_ERROR:
+            // 入力内容に該当するユーザーが見つからなかった場合、ログイン画面にエラーを表示
+            aojViewProvider.showLoginError();
+            break;
+
+          case ApiErrorCode.INVALID_ACCESS_TOKEN_ERROR:
+            // 無効なアクセストークンが送信された場合、ログイン画面を表示
+            aojViewProvider.showLoginView();
+            break;
+
+          case ApiErrorCode.INVALID_REFRESH_TOKEN_ERROR:
+            // 無効なリフレッシュトークンが送信された場合、ログイン画面を表示
+            aojViewProvider.showLoginView();
+            break;
+        }
+      },
+    );
+
+    return reviewApiClient;
+  }
+
+  /**
    * セッション情報を適用します。
    * @param cookie - cookieの値
    */
@@ -72,6 +124,13 @@ class AOJApiClient {
     // judgeApiのクライアントにセッション情報を適用
     this.judgeApiClient.interceptors.request.clear();
     this.judgeApiClient.interceptors.request.use((config) => {
+      config.headers!["Cookie"] = cookie;
+      return config;
+    });
+
+    // reviewApiのクライアントにセッション情報を適用
+    this.reviewApiClient.interceptors.request.clear();
+    this.reviewApiClient.interceptors.request.use((config) => {
       config.headers!["Cookie"] = cookie;
       return config;
     });
@@ -84,6 +143,13 @@ class AOJApiClient {
     // judgeApiのクライアントからセッション情報を削除
     this.judgeApiClient.interceptors.request.clear();
     this.judgeApiClient.interceptors.request.use((config) => {
+      config.headers!["Cookie"] = "";
+      return config;
+    });
+
+    // reviewApiのクライアントからセッション情報を削除
+    this.reviewApiClient.interceptors.request.clear();
+    this.reviewApiClient.interceptors.request.use((config) => {
       config.headers!["Cookie"] = "";
       return config;
     });
@@ -358,6 +424,84 @@ class AOJApiClient {
     };
 
     return this.judgeApiClient.post("/arenas/${arenaId}/submissions", requestBody);
+  };
+
+  /**
+   * ユーザーIDと問題IDからオープンエントリー一覧を取得します。
+   * @param userId - ユーザーID
+   * @param problemId - 問題ID
+   * @returns レスポンス
+   */
+  findByUserIdAndProblemIdOpenEntries = async (userId: string, problemId: string) => {
+    return this.reviewApiClient.get(`/review/entries/users/${userId}/problems/${problemId}`);
+  };
+
+  /**
+   * ユーザーIDと問題IDからクローズエントリー一覧を取得します。
+   * @param userId - ユーザーID
+   * @param problemId - 問題ID
+   * @returns レスポンス
+   */
+  findByUserIdAndProblemIdCloseEntries = async (userId: string, problemId: string) => {
+    return this.reviewApiClient.get(`/review/close_entries/users/${userId}/problems/${problemId}`);
+  };
+
+  /**
+   * レビューのエントリーIDからレビュー一覧を取得します。
+   * @param entryId - レビューのエントリーID
+   * @returns レスポンス
+   */
+  findByEntryIdReviews = async (entryId: string) => {
+    return this.reviewApiClient.get(`/review/reviews/entries/${entryId}`);
+  };
+
+  /**
+   * レビューの評価を行います。
+   * @param reviewId - レビューID
+   * @param score - スコア
+   * @returns レスポンス
+   */
+  registerEvaluation = async (reviewId: string, score: number) => {
+    const requestBody = {
+      reviewId: reviewId,
+      score: score,
+      userId: "",
+    };
+
+    return this.judgeApiClient.post("/review_proxy/evaluation", requestBody);
+  };
+
+  /**
+   * レビューエントリーを登録します。
+   * @param displayLanguage - 表示言語
+   * @param instruction - レビューのインストラクション
+   * @param judgeId - ジャッジID
+   * @returns レスポンス
+   */
+  registerEntry = async (displayLanguage: string, instruction: string, judgeId: string) => {
+    const requestBody = {
+      apiKey: "",
+      displayLanguage: displayLanguage,
+      instruction: instruction,
+      judgeId: judgeId,
+    };
+
+    return this.judgeApiClient.post("/review_proxy/entry", requestBody);
+  };
+
+  /**
+   * レビューエントリーをクローズします。
+   * @param entryId - エントリーID
+   * @returns レスポンス
+   */
+  closeEntry = async (entryId: string) => {
+    const requestBody = {
+      apiKey: "",
+      entryId: entryId,
+      userId: "",
+    };
+
+    return this.judgeApiClient.post("/review_proxy/close", requestBody);
   };
 }
 

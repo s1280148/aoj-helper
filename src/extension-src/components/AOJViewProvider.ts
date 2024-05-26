@@ -563,6 +563,120 @@ class AOJViewProvider implements vscode.WebviewViewProvider {
           }
           break;
         }
+        case "findByUserIdAndProblemIdOpenEntries": {
+          const { userId, problemId } = message.parameters;
+
+          const response = await aojApiClient.findByUserIdAndProblemIdOpenEntries(userId, problemId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByUserIdAndProblemIdOpenEntries",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByUserIdAndProblemIdOpenEntries",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByUserIdAndProblemIdCloseEntries": {
+          const { userId, problemId } = message.parameters;
+
+          const response = await aojApiClient.findByUserIdAndProblemIdCloseEntries(userId, problemId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByUserIdAndProblemIdCloseEntries",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByUserIdAndProblemIdCloseEntries",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "findByEntryIdReviews": {
+          const { entryId } = message.parameters;
+
+          const response = await aojApiClient.findByEntryIdReviews(entryId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "findByEntryIdReviews",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "findByEntryIdReviews",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "registerEvaluation": {
+          const { reviewId, score } = message.parameters;
+
+          const response = await aojApiClient.registerEvaluation(reviewId, score);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "registerEvaluation",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "registerEvaluation",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "registerEntry": {
+          const { displayLanguage, instruction, judgeId } = message.parameters;
+
+          const response = await aojApiClient.registerEntry(displayLanguage, instruction, judgeId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "registerEntry",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "registerEntry",
+              status: "error",
+            });
+          }
+          break;
+        }
+        case "closeEntry": {
+          const { entryId } = message.parameters;
+
+          const response = await aojApiClient.closeEntry(entryId);
+
+          if (response) {
+            this._view?.webview.postMessage({
+              type: "closeEntry",
+              status: "success",
+              response: response.data,
+            });
+          } else {
+            this._view?.webview.postMessage({
+              type: "closeEntry",
+              status: "error",
+            });
+          }
+          break;
+        }
       }
     });
   }
